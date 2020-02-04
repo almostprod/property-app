@@ -19,6 +19,7 @@ sqlalchemy-utils = {version = "^0.36.1", extras = ["arrow"]}
 structlog = "^20.1.0"
 python-dotenv = "^0.10.5"
 gunicorn = {version = "^20.0.4", extras = ["gthread"]}
+pandas = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 flask-shell-ipython = "^0.4.1"
