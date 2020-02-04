@@ -1,7 +1,3 @@
-from datetime import date
-from typing import Type
-
-import click
 from flask.cli import AppGroup
 
 

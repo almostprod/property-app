@@ -14,17 +14,13 @@ def create_app(app_config=None):
     from . import models  # noqa
 
     from .database import db
-    from .jobs import rq
     from .logging import get_logger
-    from .cache import cache
 
     app = Flask(__name__)
     app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
     config.init_app(app, app_config=app_config)
-
     db.init_app(app)
-    cache.init_app(app)
 
     Migrate().init_app(app, db)
 
@@ -34,9 +30,9 @@ def create_app(app_config=None):
 
         def _show_toolbar(self):
             from flask import request
-
-            if "/slack" in request.path:
-                return False
+            for route_path in app.config["TOOLBAR_EXCLUDE_ROUTES"]:
+                if route_path in request.path:
+                    return False
 
             return self._actual_show_toolbar()
 

@@ -1,8 +1,7 @@
 from functools import partial
-from typing import Any, Callable, Dict, List, Optional, Union
+from typing import Any, Callable, Dict, Optional
 
 import arrow
-from furl import furl
 
 
 def get_value(dict_obj: Dict, key, default=None, coerce: Callable = None) -> Optional[Any]:
@@ -51,15 +50,3 @@ def get_utc_datetime(dict_obj: dict, key, dt_format, timezone=None, default=None
         dt = dt.to(timezone)
 
     return dt.to("utc")
-
-
-def to_url(base_url: Union[furl, str], path: Optional[Union[str, List[str]]] = None) -> furl:
-    if isinstance(base_url, str):
-        base_url = furl(base_url)
-
-    new_url = base_url.copy()
-
-    if path:
-        new_url.add(path=path)
-
-    return new_url

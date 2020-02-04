@@ -1,14 +1,10 @@
 from __future__ import annotations
 
-import base64
 import os
 from distutils.util import strtobool
-from json import JSONDecodeError
-from urllib.parse import quote
 
-import boto3
 import structlog
-from flask import Flask, json
+from flask import Flask
 
 
 def env_bool(envar, default=False) -> bool:
@@ -23,41 +19,6 @@ def env_str(envar, default="") -> str:
     return os.environ.get(envar, str(default))
 
 
-def get_secret(secret_name: str, is_binary: bool = False, region: str = "us-east-1", profile=None):
-
-    session = boto3.session.Session(profile_name=profile)
-    client = session.client(service_name="secretsmanager", region_name=region)
-
-    secret_values = client.get_secret_value(SecretId=secret_name)
-
-    if is_binary:
-        return base64.b64decode(secret_values["SecretString"])
-
-    secret_string = secret_values["SecretString"]
-
-    try:
-        return json.loads(secret_string)
-    except JSONDecodeError:
-        return secret_string
-
-
-def aws_database_uri(secrets: dict = None):
-    if env_str("FLASK_ENV") == "production" or secrets:
-        secret_name = env_str("DATABASE_SECRET")
-        if not secrets:
-            secrets = get_secret(secret_name)
-
-        username = quote(secrets["username"])
-        host = secrets["host"]
-        port = secrets["port"]
-        db_name = quote(secrets["dbname"])
-        password = quote(secrets["password"])
-
-        return f"postgresql://{username}:{password}@{host}:{port}/{db_name}?options=-csearch_path=public"
-
-    return None
-
-
 def _config_by_environment(flask_environment: str):
     environments = dict(development=DevelopmentConfig, testing=TestingConfig, production=ProductionConfig)
 
@@ -65,11 +26,10 @@ def _config_by_environment(flask_environment: str):
 
 
 def _suppress_warnings():
-    import warnings
-    from arrow.factory import ArrowParseWarning
-
-    # TODO (amcclosky): Figure out what to upgrade or change to eliminate this warning
-    warnings.filterwarnings("ignore", category=ArrowParseWarning)
+    # import warnings
+    #
+    # warnings.filterwarnings("ignore", category=SomeWarning)
+    pass
 
 
 def init_app(app: Flask, app_config: Config = None):
@@ -94,6 +54,7 @@ class Config:
 
     SECRET_KEY = env_str("SECRET_KEY", "iqahRzJWhRdnonK9TybtvzTL")
     ENABLE_DEBUG_TOOLBAR = env_bool("DEBUG_TOOLBAR", False)
+    TOOLBAR_EXCLUDE_ROUTES =["/slack"]
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
     SQLALCHEMY_TRACK_MODIFICATIONS = env_bool("SQLALCHEMY_TRACK_MODIFICATIONS", False)
@@ -111,7 +72,6 @@ class Config:
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = aws_database_uri()
 
     @staticmethod
     def init_app(app: Flask):
