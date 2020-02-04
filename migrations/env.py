@@ -52,9 +52,9 @@ exclude_fkeys = exclude_foreign_keys_from_config(config.get_section("alembic:exc
 exclude_indexes = exclude_indexes_from_config(config.get_section("alembic:exclude"))
 
 
-def include_object(object, name, type_, reflected, compare_to):
-    skip = object.info.get("skip_autogenerate", False)
-    if (type_ == "table" and (name in exclude_tables or object.schema in exclude_schemas)) or skip:
+def include_object(object_, name, type_, _reflected, _compare_to):
+    skip = object_.info.get("skip_autogenerate", False)
+    if (type_ == "table" and (name in exclude_tables or object_.schema in exclude_schemas)) or skip:
         return False
     elif type_ == "foreign_key_constraint" and name in exclude_fkeys:
         return False
