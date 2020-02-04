@@ -118,17 +118,6 @@ def shell(c):
 
 
 @task
-def requirements(c):
-    c.run("pip-compile requirements/all.in")
-
-
-@task
-def install(c):
-    c.run("pip install -r requirements/all.txt")
-    c.run("pip install -e .")
-
-
-@task
 def ecr_login(c):
     login_result = c.run(f"aws --profile {AWS_PROFILE} ecr get-login --no-include-email", hide="stdout")
     if login_result:
@@ -136,7 +125,7 @@ def ecr_login(c):
         c.run(login_command)
 
 
-@task(requirements, ecr_login)
+@task(ecr_login)
 def docker_build(c):
     repos = {"PROXY_REPO": f"{AWS_ECR_BASE}/{PROXY_REPO}", "APP_REPO": f"{AWS_ECR_BASE}/{APP_REPO}"}
     base_cmd = "docker-compose -f docker-compose.yml -f docker-compose.build.yml"
@@ -201,18 +190,3 @@ def ssl_renew(c):
 
     c.run(f'certbot renew {" ".join(certbot_opts)}')
     c.run("cp nginx/.letsencrypt/live/**/*.pem nginx/")
-
-
-@task
-def database_uri(c):
-    import json
-    from property_app.config import aws_database_uri
-
-    secret_raw = c.run(
-        f"aws --profile {AWS_PROFILE} secretsmanager get-secret-value --secret-id {AWS_DATABASE_SECRET}", hide="stdout"
-    )
-
-    secret = json.loads(secret_raw.stdout)
-    secret_values = json.loads(secret["SecretString"])
-
-    print(aws_database_uri(secrets=secret_values))
