@@ -1,0 +1,3 @@
+-r common.in
+-r tests.in
+-r tools.in

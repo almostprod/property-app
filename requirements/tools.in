@@ -1,0 +1,8 @@
+awscli
+certbot
+colorama
+invoke
+fabric
+patchwork
+pre-commit
+tox

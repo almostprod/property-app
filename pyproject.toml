@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=40.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.black]
+line-length = 120
+target-version = ["py37"]
+
+[tool.isort]
+atomic = true
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 120
+
+known_first_party = ["property_app"]
+known_third_party = [
+     "alembic",
+     "arrow",
+     "boto3",
+     "click",
+     "fabric",
+     "flask",
+     "flask_redis",
+     "flask_sqlalchemy",
+     "furl",
+     "invoke",
+     "lxml",
+     "patchwork",
+     "requests",
+     "setuptools",
+     "sqlalchemy",
+     "sqlalchemy_utils",
+     "structlog"
+]

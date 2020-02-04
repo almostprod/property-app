@@ -1,0 +1,10 @@
+FLASK_APP=property_app
+FLASK_ENV=development
+
+LOG_MODE=local
+LOG_LEVEL=ERROR
+APP_LOG_LEVEL=DEBUG
+GUNICORN_LOG_LEVEL=INFO
+
+DATABASE_URI=sqlite:///data/main.db
+DEBUG_TOOLBAR=True
