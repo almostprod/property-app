@@ -5,22 +5,13 @@
     <title>{% block title %}/property-app{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='base.css', _external=True, _scheme='https') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     {% endblock %}
+
+    <script type="module" src="{{ url_for('.static', filename='pages/index.js') }}"></script>
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="/">{% block nav_title %}/property-app{% endblock %}</a>
-    </nav>
-    <main role="main" class="container-fluid">
-        {% block content %}
-        <p>Content goes here.</p>
-        {% endblock %}
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Copyright 2020</span>
-        </div>
-    </footer>
+    <div id="app"></div>
 </body>
