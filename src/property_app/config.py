@@ -24,7 +24,11 @@ def env_str(envar, default="") -> str:
 
 
 def _config_by_environment(app_environment: str):
-    environments = dict(development=DevelopmentConfig, testing=TestingConfig, production=ProductionConfig)
+    environments = dict(
+        development=DevelopmentConfig,
+        testing=TestingConfig,
+        production=ProductionConfig,
+    )
 
     return environments.get(app_environment, DevelopmentConfig)
 

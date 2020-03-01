@@ -36,7 +36,11 @@ def upgrade():
             nullable=True,
         ),
         sa.Column("deleted_at", sa.DateTime(), nullable=True),
-        sa.Column("extra", property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()), nullable=True),
+        sa.Column(
+            "extra",
+            property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()),
+            nullable=True,
+        ),
         sa.Column("username", sa.Text(), nullable=False),
         sa.Column("first_name", sa.Text(), nullable=False),
         sa.Column("last_name", sa.Text(), nullable=False),
@@ -60,15 +64,33 @@ def upgrade():
             nullable=True,
         ),
         sa.Column("deleted_at", sa.DateTime(), nullable=True),
-        sa.Column("extra", property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()), nullable=True),
+        sa.Column(
+            "extra",
+            property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()),
+            nullable=True,
+        ),
         sa.Column("user_id", sa.BigInteger(), nullable=False),
         sa.Column("account_key", sa.Text(), nullable=False),
-        sa.ForeignKeyConstraint(["user_id"], ["app_user.id"], name=op.f("fk_app_auth_account_user_id_app_user")),
+        sa.ForeignKeyConstraint(
+            ["user_id"],
+            ["app_user.id"],
+            name=op.f("fk_app_auth_account_user_id_app_user"),
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_app_auth_account")),
     )
 
-    op.create_index(op.f("ix_app_auth_account_account_key"), "app_auth_account", ["account_key"], unique=False)
-    op.create_index(op.f("ix_app_auth_account_user_id"), "app_auth_account", ["user_id"], unique=False)
+    op.create_index(
+        op.f("ix_app_auth_account_account_key"),
+        "app_auth_account",
+        ["account_key"],
+        unique=False,
+    )
+    op.create_index(
+        op.f("ix_app_auth_account_user_id"),
+        "app_auth_account",
+        ["user_id"],
+        unique=False,
+    )
 
     op.create_table(
         "app_user_email",
@@ -86,15 +108,27 @@ def upgrade():
             nullable=True,
         ),
         sa.Column("deleted_at", sa.DateTime(), nullable=True),
-        sa.Column("extra", property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()), nullable=True),
+        sa.Column(
+            "extra",
+            property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()),
+            nullable=True,
+        ),
         sa.Column("user_id", sa.BigInteger(), nullable=False),
-        sa.Column("email", sqlalchemy_utils.types.email.EmailType(length=255), nullable=False),
+        sa.Column(
+            "email", sqlalchemy_utils.types.email.EmailType(length=255), nullable=False
+        ),
         sa.Column("is_primary", sa.Boolean(), nullable=False),
-        sa.ForeignKeyConstraint(["user_id"], ["app_user.id"], name=op.f("fk_app_user_email_user_id_app_user")),
+        sa.ForeignKeyConstraint(
+            ["user_id"],
+            ["app_user.id"],
+            name=op.f("fk_app_user_email_user_id_app_user"),
+        ),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_app_user_email")),
     )
 
-    op.create_index(op.f("ix_app_user_email_user_id"), "app_user_email", ["user_id"], unique=False)
+    op.create_index(
+        op.f("ix_app_user_email_user_id"), "app_user_email", ["user_id"], unique=False
+    )
 
     op.create_table(
         "app_auth_credential",
@@ -112,7 +146,11 @@ def upgrade():
             nullable=True,
         ),
         sa.Column("deleted_at", sa.DateTime(), nullable=True),
-        sa.Column("extra", property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()), nullable=True),
+        sa.Column(
+            "extra",
+            property_app.database.types.JSON(none_as_null=True, astext_type=sa.Text()),
+            nullable=True,
+        ),
         sa.Column("auth_account_id", sa.BigInteger(), nullable=False),
         sa.Column("type", property_app.database.types.Enum("PASSWORD"), nullable=False),
         sa.Column("credential", sa.Text(), nullable=False),
@@ -125,16 +163,23 @@ def upgrade():
     )
 
     op.create_index(
-        op.f("ix_app_auth_credential_auth_account_id"), "app_auth_credential", ["auth_account_id"], unique=False
+        op.f("ix_app_auth_credential_auth_account_id"),
+        "app_auth_credential",
+        ["auth_account_id"],
+        unique=False,
     )
 
 
 def downgrade():
-    op.drop_index(op.f("ix_app_auth_credential_auth_account_id"), table_name="app_auth_credential")
+    op.drop_index(
+        op.f("ix_app_auth_credential_auth_account_id"), table_name="app_auth_credential"
+    )
     op.drop_table("app_auth_credential")
     op.drop_index(op.f("ix_app_user_email_user_id"), table_name="app_user_email")
     op.drop_table("app_user_email")
     op.drop_index(op.f("ix_app_auth_account_user_id"), table_name="app_auth_account")
-    op.drop_index(op.f("ix_app_auth_account_account_key"), table_name="app_auth_account")
+    op.drop_index(
+        op.f("ix_app_auth_account_account_key"), table_name="app_auth_account"
+    )
     op.drop_table("app_auth_account")
     op.drop_table("app_user")

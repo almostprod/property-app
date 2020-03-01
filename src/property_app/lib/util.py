@@ -1,10 +1,13 @@
 from functools import partial
-from typing import Any, Callable, Dict, Optional
-
-import arrow
+from typing import Any, Callable, Dict, Optional, Union
 
 
-def get_value(dict_obj: Dict, key, default=None, coerce: Callable = None) -> Optional[Any]:
+def _get_value(
+    dict_obj: Dict,
+    key,
+    default: Optional[Callable[..., Any]] = None,
+    coerce: Optional[Callable[..., Any]] = None,
+) -> Optional[Any]:
 
     if default is not None and not callable(default):
 
@@ -30,23 +33,13 @@ def get_value(dict_obj: Dict, key, default=None, coerce: Callable = None) -> Opt
     return default() if default else None
 
 
-get_int = partial(get_value, coerce=int)
-get_str = partial(get_value, coerce=str)
+def get_int(
+    dict_obj: Dict, key: Any, default: Union[int, Callable[..., int], None] = None,
+) -> Optional[int]:
+    return _get_value(dict_obj, key, default=default, coerce=int)
 
 
-def get_utc_datetime(dict_obj: dict, key, dt_format, timezone=None, default=None):
-
-    value = get_value(dict_obj, key, default=default)
-
-    if value is None:
-        return None
-
-    dt = arrow.get(value, dt_format)
-
-    if dt is None:
-        dt = arrow.get(value)
-
-    if timezone:
-        dt = dt.to(timezone)
-
-    return dt.to("utc")
+def get_str(
+    dict_obj: Dict, key: Any, default: Union[str, Callable[..., str], None] = None,
+) -> Optional[int]:
+    return _get_value(dict_obj, key, default=default, coerce=str)

@@ -35,7 +35,7 @@ ipython = "^7.13.0"
 aiofiles = "^0.4.0"
 
 [tool.black]
-line-length = 120
+line-length = 88
 target-version = ["py37"]
 
 [tool.isort]

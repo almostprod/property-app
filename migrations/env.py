@@ -53,7 +53,10 @@ exclude_indexes = exclude_indexes_from_config(config.get_section("alembic:exclud
 
 def include_object(object_, name, type_, _reflected, _compare_to):
     skip = object_.info.get("skip_autogenerate", False)
-    if (type_ == "table" and (name in exclude_tables or object_.schema in exclude_schemas)) or skip:
+    if (
+        type_ == "table"
+        and (name in exclude_tables or object_.schema in exclude_schemas)
+    ) or skip:
         return False
     elif type_ == "foreign_key_constraint" and name in exclude_fkeys:
         return False
@@ -82,7 +85,9 @@ def run_migrations_online():
     config.set_main_option("sqlalchemy.url", str(app_config.DATABASE_URI))
 
     engine = engine_from_config(
-        config.get_section(config.config_ini_section), prefix="sqlalchemy.", poolclass=pool.NullPool
+        config.get_section(config.config_ini_section),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
     )
 
     import warnings
@@ -90,7 +95,9 @@ def run_migrations_online():
 
     with warnings.catch_warnings():
         warnings.filterwarnings(
-            "ignore", category=sa_exc.SAWarning, message="Skipped unsupported reflection of expression-based index*."
+            "ignore",
+            category=sa_exc.SAWarning,
+            message="Skipped unsupported reflection of expression-based index*.",
         )
 
         connection = engine.connect()

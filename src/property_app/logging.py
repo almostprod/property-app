@@ -129,7 +129,11 @@ def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
                 },
             },
             "handlers": {
-                "console": {"class": "logging.StreamHandler", "formatter": log_mode, "stream": "ext://sys.stdout"},
+                "console": {
+                    "class": "logging.StreamHandler",
+                    "formatter": log_mode,
+                    "stream": "ext://sys.stdout",
+                },
                 "console_error": {
                     "class": "logging.StreamHandler",
                     "formatter": log_mode,
@@ -139,7 +143,9 @@ def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
         }
     )
 
-    chain = log_processor_chain + [structlog.stdlib.ProcessorFormatter.wrap_for_formatter]
+    chain = log_processor_chain + [
+        structlog.stdlib.ProcessorFormatter.wrap_for_formatter
+    ]
 
     structlog.configure_once(
         processors=chain,

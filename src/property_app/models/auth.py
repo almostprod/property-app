@@ -29,7 +29,10 @@ class AppUserEmail(AppBase):
 
     user_id = sa.Column(sa.ForeignKey("app_user.id"), index=True, nullable=False)
     user = orm.relationship(
-        "AppUser", foreign_keys=[user_id], backref=orm.backref("user_emails", lazy="joined"), uselist=False
+        "AppUser",
+        foreign_keys=[user_id],
+        backref=orm.backref("user_emails", lazy="joined"),
+        uselist=False,
     )
 
     email = sa.Column(EmailType, nullable=False)
@@ -41,7 +44,10 @@ class AppAuthAccount(AppBase):
 
     user_id = sa.Column(sa.ForeignKey("app_user.id"), index=True, nullable=False)
     user = orm.relationship(
-        "AppUser", foreign_keys=[user_id], backref=orm.backref("auth_accounts", lazy="joined"), uselist=False
+        "AppUser",
+        foreign_keys=[user_id],
+        backref=orm.backref("auth_accounts", lazy="joined"),
+        uselist=False,
     )
 
     account_key = sa.Column(sa.Text, nullable=False, index=True)
@@ -50,7 +56,9 @@ class AppAuthAccount(AppBase):
 class AppAuthCredential(AppBase):
     __tablename__ = "app_auth_credential"
 
-    auth_account_id = sa.Column(sa.ForeignKey("app_auth_account.id"), index=True, nullable=False)
+    auth_account_id = sa.Column(
+        sa.ForeignKey("app_auth_account.id"), index=True, nullable=False
+    )
     auth_account = orm.relationship(
         "AppAuthAccount",
         foreign_keys=[auth_account_id],

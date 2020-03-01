@@ -20,8 +20,12 @@ class AppBase(Base, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
 
     id = sa.Column(sa.BigInteger, primary_key=True)
 
-    created_at = sa.Column(PendulumType, server_default=sa.text("(now() at time zone 'utc')"))
-    updated_at = sa.Column(PendulumType, server_default=sa.text("(now() at time zone 'utc')"))
+    created_at = sa.Column(
+        PendulumType, server_default=sa.text("(now() at time zone 'utc')")
+    )
+    updated_at = sa.Column(
+        PendulumType, server_default=sa.text("(now() at time zone 'utc')")
+    )
 
     deleted_at = sa.Column(sa.DateTime)
 
@@ -45,7 +49,9 @@ class AppBase(Base, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
 
         stmt = postgresql.insert(cls).values(**values)
         if index_elements:
-            stmt = stmt.on_conflict_do_update(index_elements=index_elements, set_=values)
+            stmt = stmt.on_conflict_do_update(
+                index_elements=index_elements, set_=values
+            )
         elif unique_constraint:
             stmt = stmt.on_conflict_do_update(constraint=unique_constraint, set_=values)
 
@@ -57,7 +63,11 @@ class AppBase(Base, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
         if ignore_list is None:
             ignore_list = self.__to_dict_ignore__
 
-        results = {column: getattr(self, column) for column in self.columns if column not in ignore_list}
+        results = {
+            column: getattr(self, column)
+            for column in self.columns
+            if column not in ignore_list
+        }
 
         return results
 
