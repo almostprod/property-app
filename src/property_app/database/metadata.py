@@ -1,8 +1,7 @@
 import sqlalchemy as sa
 from sqlalchemy import orm
-from sqlalchemy.ext.declarative import declarative_base
 
-meta = sa.MetaData(
+app_metadata = sa.MetaData(
     naming_convention={
         "ix": "ix_%(column_0_label)s",
         "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -29,6 +28,3 @@ def create_session(engine=None, session_options=None) -> orm.scoped_session:
         session_options = dict()
 
     return orm.scoped_session(orm.sessionmaker(bind=engine, **session_options))
-
-
-Base = declarative_base(metadata=meta)

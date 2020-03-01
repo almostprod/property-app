@@ -1,20 +1,23 @@
 from datetime import datetime
-from typing import Callable, List, Optional
+import typing as t
 
 import sqlalchemy as sa
 
 from sqlalchemy.event import listens_for
 from sqlalchemy.dialects import postgresql
+from sqlalchemy.ext.declarative import as_declarative
 
 from sqlalchemy_mixins import ActiveRecordMixin, ReprMixin, SmartQueryMixin
 from sqlalchemy_utils.listeners import force_auto_coercion, force_instant_defaults
 
 
-from .base import Base
 from .types import JSON, PendulumType
 
+from .metadata import app_metadata
 
-class AppBase(Base, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
+
+@as_declarative(metadata=app_metadata)
+class AppBase(ActiveRecordMixin, ReprMixin, SmartQueryMixin):
     __abstract__ = True
     __to_dict_ignore__ = ("id", "created_at", "updated_at")
 
@@ -34,10 +37,10 @@ class AppBase(Base, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
     @classmethod
     def upsert(
         cls,
-        map_func: Callable,
-        query_func: Optional[Callable] = None,
-        index_elements: Optional[List] = None,
-        unique_constraint: Optional[str] = None,
+        map_func: t.Callable,
+        query_func: t.Callable = None,
+        index_elements: t.Optional[t.List] = None,
+        unique_constraint: t.Optional[str] = None,
         **kwargs,
     ):
         if not index_elements:
@@ -57,16 +60,19 @@ class AppBase(Base, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
 
         cls.session.execute(stmt)
 
+        if query_func is None:
+            query_func = lambda i: i  # noqa
+
         return cls.query.filter(query_func(item)).first()  # noqa
 
-    def to_dict(self, ignore_list=None):
-        if ignore_list is None:
-            ignore_list = self.__to_dict_ignore__
+    def to_dict(self, ignore_cols: t.Optional[t.Sequence] = None):
+        if ignore_cols is None:
+            ignore_cols = ("id", "created_at", "updated_at")
 
         results = {
             column: getattr(self, column)
             for column in self.columns
-            if column not in ignore_list
+            if column not in ignore_cols
         }
 
         return results

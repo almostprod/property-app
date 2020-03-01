@@ -42,10 +42,8 @@ def init_app(app, app_config: Config = None):
 
         initialize_logging()
 
-    app_config.init_app(app)
 
-
-class Config:
+class AppConfig:
     ASGI_APP = config("ASGI_APP", default="app")
     APP_BUILD_HASH = config("APP_BUILD_HASH", default="dev")
 
@@ -62,7 +60,7 @@ class Config:
     LOG_MODE = config("LOG_MODE", default="local")
 
 
-class ProductionConfig(Config):
+class ProductionConfig(AppConfig):
     @staticmethod
     def init_app(app):
         import logging
@@ -73,7 +71,7 @@ class ProductionConfig(Config):
             handler.setLevel(app.config["APP_LOG_LEVEL"])
 
 
-class DevelopmentConfig(Config):
+class DevelopmentConfig(AppConfig):
     DEBUG = True
 
     @staticmethod
@@ -86,7 +84,7 @@ class DevelopmentConfig(Config):
             handler.setLevel(app.config["APP_LOG_LEVEL"])
 
 
-class TestingConfig(Config):
+class TestingConfig(AppConfig):
     TESTING = True
 
     @staticmethod
@@ -99,7 +97,7 @@ class TestingConfig(Config):
             handler.setLevel(app.config["APP_LOG_LEVEL"])
 
 
-def get_config(app_env: typing.Optional[str] = None) -> Config:
+def get_config(app_env: typing.Optional[str] = None) -> AppConfig:
 
     if app_env is None:
         app_env = config("APP_ENV")

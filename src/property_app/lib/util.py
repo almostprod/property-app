@@ -1,12 +1,10 @@
-from functools import partial
-from typing import Any, Callable, Dict, Optional, Union
+from typing import Any, Callable, Dict, Optional, Union, TypeVar
+
+DefaultType = TypeVar("DefaultType")
 
 
 def _get_value(
-    dict_obj: Dict,
-    key,
-    default: Optional[Callable[..., Any]] = None,
-    coerce: Optional[Callable[..., Any]] = None,
+    dict_obj: Dict, key, default: Any = None, coerce: Any = None,
 ) -> Optional[Any]:
 
     if default is not None and not callable(default):
@@ -26,7 +24,7 @@ def _get_value(
 
     if result is not None:
         try:
-            return coerce(result)
+            return coerce(result)  # type: ignore
         except ValueError:
             pass
 
@@ -34,12 +32,12 @@ def _get_value(
 
 
 def get_int(
-    dict_obj: Dict, key: Any, default: Union[int, Callable[..., int], None] = None,
+    dict_obj: Dict, key: Any, default: Union[int, Callable[..., int]] = None,
 ) -> Optional[int]:
     return _get_value(dict_obj, key, default=default, coerce=int)
 
 
 def get_str(
-    dict_obj: Dict, key: Any, default: Union[str, Callable[..., str], None] = None,
+    dict_obj: Dict, key: Any, default: Union[str, Callable[..., str]] = None,
 ) -> Optional[int]:
     return _get_value(dict_obj, key, default=default, coerce=str)
