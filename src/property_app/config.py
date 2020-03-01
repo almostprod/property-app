@@ -4,7 +4,18 @@ import os
 from distutils.util import strtobool
 
 import structlog
-from flask import Flask
+from starlette.config import Config
+from starlette.datastructures import URL, Secret
+
+config = Config(".env")
+
+# DEBUG = config('DEBUG', cast=bool, default=False)
+# TESTING = config('TESTING', cast=bool, default=False)
+# SECRET_KEY = config('SECRET_KEY', cast=Secret)
+#
+# DATABASE_URL = config('DATABASE_URL', cast=URL)
+# if TESTING:
+#     DATABASE_URL = DATABASE_URL.replace(database='test_' + DATABASE_URL.database)
 
 
 def env_bool(envar, default=False) -> bool:
@@ -26,13 +37,11 @@ def _config_by_environment(flask_environment: str):
 
 
 def _suppress_warnings():
-    # import warnings
-    #
     # warnings.filterwarnings("ignore", category=SomeWarning)
     pass
 
 
-def init_app(app: Flask, app_config: Config = None):
+def init_app(app, app_config: Config = None):
     _suppress_warnings()
 
     if app_config is None:
@@ -48,32 +57,22 @@ def init_app(app: Flask, app_config: Config = None):
 
 
 class Config:
-    DEBUG = False
-    TESTING = False
-    PREFERRED_URL_SCHEME = "https"
+    DEBUG = config('DEBUG', cast=bool, default=False)
+    TESTING = config('TESTING', cast=bool, default=False)
 
-    SECRET_KEY = env_str("SECRET_KEY", "iqahRzJWhRdnonK9TybtvzTL")
-    ENABLE_DEBUG_TOOLBAR = env_bool("DEBUG_TOOLBAR", False)
-    TOOLBAR_EXCLUDE_ROUTES = ["/slack"]
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
+    SECRET_KEY = config("SECRET_KEY", cast=Secret, default="asecretkey")
 
-    SQLALCHEMY_TRACK_MODIFICATIONS = env_bool("SQLALCHEMY_TRACK_MODIFICATIONS", False)
-    SQLALCHEMY_DATABASE_URI = env_str("DATABASE_URI")
-    SQLALCHEMY_BATCH_MODE = env_bool("DATABASE_BATCH_MODE", True)
+    SQLALCHEMY_DATABASE_URI = config("DATABASE_URI")
 
-    REDIS_URL = env_str("REDIS_URL", "redis://redis:6379/0")
-    RQ_REDIS_URL = env_str("RQ_REDIS_URL", REDIS_URL)
-    RQ_DASHBOARD_REDIS_URL = env_str("RQ_REDIS_URL", "redis://redis:6379/0")
-    RQ_DASHBOARD_POLL_INTERVAL = 2500
-    RQ_QUEUES = ["high", "normal", "low"]
-    RQ_SCHEDULER_QUEUE = ["scheduled"]
+    REDIS_URL = config("REDIS_URL", default="redis://redis:6379/0")
 
-    APP_LOG_LEVEL = env_str("APP_LOG_LEVEL", "DEBUG")
+    APP_LOG_LEVEL = config("APP_LOG_LEVEL", default="DEBUG")
 
 
 class ProductionConfig(Config):
+
     @staticmethod
-    def init_app(app: Flask):
+    def init_app(app):
         import logging
 
         app_logger = logging.getLogger(app.name)
@@ -86,7 +85,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
     @staticmethod
-    def init_app(app: Flask):
+    def init_app(app):
         import logging
 
         app_logger = logging.getLogger(app.name)
@@ -99,7 +98,7 @@ class TestingConfig(Config):
     TESTING = True
 
     @staticmethod
-    def init_app(app: Flask):
+    def init_app(app):
         import logging
 
         app_logger = logging.getLogger(app.name)

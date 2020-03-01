@@ -15,11 +15,14 @@ starlette = "^0.13.2"
 sqlalchemy = "^1.3.13"
 alembic = "^1.4.0"
 sqlalchemy-utils = "^0.36.1"
-sqlalchemy-mixins = "^1.1"
+sqlalchemy-mixins = { git = "git@github.com:absent1706/sqlalchemy-mixins.git", rev = "43c0a12" }
 structlog = "^20.1.0"
 pandas = "^1.0.1"
 gunicorn = "^20.0.4"
 decorator = "^4.4.2"
+starlette-context = "^0.2.0"
+ujson = "^1.35"
+jinja2 = "^2.11.1"
 
 [tool.poetry.dev-dependencies]
 
@@ -27,6 +30,7 @@ invoke = "^1.4.1"
 black = "^19.10b0"
 pytest = "^5.3.5"
 ipython = "^7.13.0"
+aiofiles = "^0.4.0"
 
 [tool.black]
 line-length = 120

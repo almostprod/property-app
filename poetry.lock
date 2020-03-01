@@ -1,4 +1,12 @@
 [[package]]
+category = "dev"
+description = "File support for asyncio."
+name = "aiofiles"
+optional = false
+python-versions = "*"
+version = "0.4.0"
+
+[[package]]
 category = "main"
 description = "A database migration tool for SQLAlchemy."
 name = "alembic"
@@ -200,6 +208,20 @@ parso = ">=0.5.2"
 [package.extras]
 qa = ["flake8 (3.7.9)"]
 testing = ["colorama (0.4.1)", "docopt", "pytest (>=3.9.0,<5.0.0)"]
+
+[[package]]
+category = "main"
+description = "A very fast and expressive template engine."
+name = "jinja2"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "2.11.1"
+
+[package.dependencies]
+MarkupSafe = ">=0.23"
+
+[package.extras]
+i18n = ["Babel (>=0.8)"]
 
 [[package]]
 category = "main"
@@ -462,12 +484,16 @@ description = "Active Record, Django-like queries, nested eager load and beauty 
 name = "sqlalchemy-mixins"
 optional = false
 python-versions = "*"
-version = "1.1"
+version = "1.0"
 
 [package.dependencies]
 SQLAlchemy = ">=1.0"
 six = "*"
-typing = "*"
+
+[package.source]
+reference = "43c0a12c686a7baa727bf47b819f9d796914fa4f"
+type = "git"
+url = "git@github.com:absent1706/sqlalchemy-mixins.git"
 
 [[package]]
 category = "main"
@@ -507,6 +533,17 @@ version = "0.13.2"
 
 [package.extras]
 full = ["aiofiles", "graphene", "itsdangerous", "jinja2", "python-multipart", "pyyaml", "requests", "ujson"]
+
+[[package]]
+category = "main"
+description = "Access context in Starlette"
+name = "starlette-context"
+optional = false
+python-versions = ">=3.7"
+version = "0.2.0"
+
+[package.dependencies]
+starlette = "*"
 
 [[package]]
 category = "main"
@@ -559,11 +596,11 @@ version = "1.4.1"
 
 [[package]]
 category = "main"
-description = "Type Hints for Python"
-name = "typing"
+description = "Ultra fast JSON encoder and decoder for Python"
+name = "ujson"
 optional = false
 python-versions = "*"
-version = "3.7.4.1"
+version = "1.35"
 
 [[package]]
 category = "dev"
@@ -587,10 +624,14 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "e95f938ed3e8f274471a6f709a6b6fb33a38a4f92ca1cbddb17db1c3d7706a4d"
+content-hash = "430b64186f2c76013f9945712fe58c31a393a10160f4c3bf16542c045b93afc6"
 python-versions = "^3.7"
 
 [metadata.files]
+aiofiles = [
+    {file = "aiofiles-0.4.0-py3-none-any.whl", hash = "sha256:1e644c2573f953664368de28d2aa4c89dfd64550429d0c27c4680ccd3aa4985d"},
+    {file = "aiofiles-0.4.0.tar.gz", hash = "sha256:021ea0ba314a86027c166ecc4b4c07f2d40fc0f4b3a950d1868a0f2571c2bbee"},
+]
 alembic = [
     {file = "alembic-1.4.0.tar.gz", hash = "sha256:2df2519a5b002f881517693b95626905a39c5faf4b5a1f94de4f1441095d1d26"},
 ]
@@ -654,6 +695,10 @@ ipython-genutils = [
 jedi = [
     {file = "jedi-0.16.0-py2.py3-none-any.whl", hash = "sha256:b4f4052551025c6b0b0b193b29a6ff7bdb74c52450631206c262aef9f7159ad2"},
     {file = "jedi-0.16.0.tar.gz", hash = "sha256:d5c871cb9360b414f981e7072c52c33258d598305280fef91c6cae34739d65d5"},
+]
+jinja2 = [
+    {file = "Jinja2-2.11.1-py2.py3-none-any.whl", hash = "sha256:b0eaf100007721b5c16c1fc1eecb87409464edc10469ddc9a22a27a99123be49"},
+    {file = "Jinja2-2.11.1.tar.gz", hash = "sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"},
 ]
 mako = [
     {file = "Mako-1.1.1.tar.gz", hash = "sha256:2984a6733e1d472796ceef37ad48c26f4a984bb18119bb2dbc37a44d8f6e75a4"},
@@ -829,15 +874,16 @@ six = [
 sqlalchemy = [
     {file = "SQLAlchemy-1.3.13.tar.gz", hash = "sha256:64a7b71846db6423807e96820993fa12a03b89127d278290ca25c0b11ed7b4fb"},
 ]
-sqlalchemy-mixins = [
-    {file = "sqlalchemy_mixins-1.1.tar.gz", hash = "sha256:e2f5c6f552925084668841deb0d7c633b7523d5ae072b1f1ddf1a285da73cb14"},
-]
+sqlalchemy-mixins = []
 sqlalchemy-utils = [
     {file = "SQLAlchemy-Utils-0.36.1.tar.gz", hash = "sha256:4e637c88bf3ac5f99b7d72342092a1f636bea1287b2e3e17d441b0413771f86e"},
 ]
 starlette = [
     {file = "starlette-0.13.2-py3-none-any.whl", hash = "sha256:6169ee78ded501095d1dda7b141a1dc9f9934d37ad23196e180150ace2c6449b"},
     {file = "starlette-0.13.2.tar.gz", hash = "sha256:a9bb130fa7aa736eda8a814b6ceb85ccf7a209ed53843d0d61e246b380afa10f"},
+]
+starlette-context = [
+    {file = "starlette_context-0.2.0.tar.gz", hash = "sha256:ad0d034ae296b2af3dea6cc2a1773514a1c515761ca562a53ee7fef3b1109e66"},
 ]
 structlog = [
     {file = "structlog-20.1.0-py2.py3-none-any.whl", hash = "sha256:8a672be150547a93d90a7d74229a29e765be05bd156a35cdcc527ebf68e9af92"},
@@ -875,10 +921,8 @@ typed-ast = [
     {file = "typed_ast-1.4.1-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:d43943ef777f9a1c42bf4e552ba23ac77a6351de620aa9acf64ad54933ad4d34"},
     {file = "typed_ast-1.4.1.tar.gz", hash = "sha256:8c8aaad94455178e3187ab22c8b01a3837f8ee50e09cf31f1ba129eb293ec30b"},
 ]
-typing = [
-    {file = "typing-3.7.4.1-py2-none-any.whl", hash = "sha256:c8cabb5ab8945cd2f54917be357d134db9cc1eb039e59d1606dc1e60cb1d9d36"},
-    {file = "typing-3.7.4.1-py3-none-any.whl", hash = "sha256:f38d83c5a7a7086543a0f649564d661859c5146a85775ab90c0d2f93ffaa9714"},
-    {file = "typing-3.7.4.1.tar.gz", hash = "sha256:91dfe6f3f706ee8cc32d38edbbf304e9b7583fb37108fef38229617f8b3eba23"},
+ujson = [
+    {file = "ujson-1.35.tar.gz", hash = "sha256:f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"},
 ]
 wcwidth = [
     {file = "wcwidth-0.1.8-py2.py3-none-any.whl", hash = "sha256:8fd29383f539be45b20bd4df0dc29c20ba48654a41e661925e612311e9f3c603"},

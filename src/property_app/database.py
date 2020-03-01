@@ -1,10 +1,14 @@
 from typing import Callable, List, Optional
 
 import sqlalchemy as sa
-from flask_sqlalchemy import SignallingSession, SQLAlchemy
+from sqlalchemy import orm
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.dialects.postgresql import JSONB, insert
-from sqlalchemy_utils import generic_repr, get_columns
+from sqlalchemy_utils import get_columns
+from sqlalchemy_mixins import (ActiveRecordMixin, ReprMixin, TimestampsMixin, SmartQueryMixin)
+
+JSON = JSONB(none_as_null=True)
 
 meta = sa.MetaData(
     naming_convention={
@@ -16,45 +20,37 @@ meta = sa.MetaData(
     }
 )
 
-
-class AppSQLAlchemy(SQLAlchemy):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.session: SignallingSession = self.session
-
-    def apply_driver_hacks(self, app, info, options):
-        options["use_batch_mode"] = app.config["SQLALCHEMY_BATCH_MODE"]
-        super().apply_driver_hacks(app, info, options)
+default_session_options = {
+    "autocommit": False,
+    "autoflush": False,
+}
 
 
-db = AppSQLAlchemy(metadata=meta, session_options={"autoflush": False})
+def create_engine(data_base_uri):
+    return sa.create_engine(data_base_uri, pool_pre_ping=True, use_batch_mode=True)
 
 
-class ToDictMixin:
-    __to_dict_ignore__ = ("id", "created_at", "updated_at")
+def create_session(engine=None, session_options=None) -> orm.scoped_session:
+    if engine is None:
+        engine = create_engine("")
+    if session_options is None:
+        session_options = dict()
 
-    def to_dict(self, ignore_list=None):
-        if ignore_list is None:
-            ignore_list = self.__to_dict_ignore__
-
-        columns = get_columns(self).keys()
-        results = {column: getattr(self, column) for column in columns if column not in ignore_list}
-
-        return results
+    return orm.scoped_session(orm.sessionmaker(bind=engine, **session_options))
 
 
-@generic_repr
-class AppBase(db.Model, ToDictMixin):
+Base = declarative_base(metadata=meta)
+
+
+class AppBase(Base, TimestampsMixin, ActiveRecordMixin, ReprMixin, SmartQueryMixin):
     __abstract__ = True
+    __to_dict_ignore__ = ("id", "created_at", "updated_at")
 
     id = sa.Column(sa.BigInteger, primary_key=True)
 
-    created_at = sa.Column(sa.DateTime, server_default=sa.text("(now() at time zone 'utc')"))
-    updated_at = sa.Column(sa.DateTime, server_default=sa.text("(now() at time zone 'utc')"))
-
     deleted_at = sa.Column(sa.DateTime)
 
-    _extra = sa.Column(JSONB(none_as_null=True))
+    _extra = sa.Column(JSON)
 
     @classmethod
     def upsert(
@@ -68,7 +64,7 @@ class AppBase(db.Model, ToDictMixin):
         if not index_elements:
             index_elements = [cls.id]
 
-        item = map_func(kwargs, cls())
+        item = map_func(kwargs, cls())  # noqa
 
         values = item.to_dict()
 
@@ -78,9 +74,17 @@ class AppBase(db.Model, ToDictMixin):
         elif unique_constraint:
             stmt = stmt.on_conflict_do_update(constraint=unique_constraint, set_=values)
 
-        db.session.execute(stmt)
+        cls.session.execute(stmt)
 
-        return cls.query.filter(query_func(item)).first()
+        return cls.query.filter(query_func(item)).first()  # noqa
+
+    def to_dict(self, ignore_list=None):
+        if ignore_list is None:
+            ignore_list = self.__to_dict_ignore__
+
+        results = {column: getattr(self, column) for column in self.columns if column not in ignore_list}
+
+        return results
 
 
 class CSVImportMixin:
