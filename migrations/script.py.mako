@@ -7,6 +7,12 @@ Create Date: ${create_date}
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy import Text
+
+import sqlalchemy_utils
+
+import property_app
+
 ${imports if imports else ""}
 
 revision = ${repr(up_revision)}

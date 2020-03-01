@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import typing
 from distutils.util import strtobool
 
 import structlog
@@ -8,14 +9,6 @@ from starlette.config import Config
 from starlette.datastructures import URL, Secret
 
 config = Config(".env")
-
-# DEBUG = config('DEBUG', cast=bool, default=False)
-# TESTING = config('TESTING', cast=bool, default=False)
-# SECRET_KEY = config('SECRET_KEY', cast=Secret)
-#
-# DATABASE_URL = config('DATABASE_URL', cast=URL)
-# if TESTING:
-#     DATABASE_URL = DATABASE_URL.replace(database='test_' + DATABASE_URL.database)
 
 
 def env_bool(envar, default=False) -> bool:
@@ -30,10 +23,10 @@ def env_str(envar, default="") -> str:
     return os.environ.get(envar, str(default))
 
 
-def _config_by_environment(flask_environment: str):
+def _config_by_environment(app_environment: str):
     environments = dict(development=DevelopmentConfig, testing=TestingConfig, production=ProductionConfig)
 
-    return environments.get(flask_environment, DevelopmentConfig)
+    return environments.get(app_environment, DevelopmentConfig)
 
 
 def _suppress_warnings():
@@ -57,20 +50,19 @@ def init_app(app, app_config: Config = None):
 
 
 class Config:
-    DEBUG = config('DEBUG', cast=bool, default=False)
-    TESTING = config('TESTING', cast=bool, default=False)
+    DEBUG = config("DEBUG", cast=bool, default=False)
+    TESTING = config("TESTING", cast=bool, default=False)
 
     SECRET_KEY = config("SECRET_KEY", cast=Secret, default="asecretkey")
 
-    SQLALCHEMY_DATABASE_URI = config("DATABASE_URI")
+    DATABASE_URI = config("DATABASE_URI", cast=URL)
 
-    REDIS_URL = config("REDIS_URL", default="redis://redis:6379/0")
+    REDIS_URL = config("REDIS_URL", cast=URL, default="redis://redis:6379/0")
 
     APP_LOG_LEVEL = config("APP_LOG_LEVEL", default="DEBUG")
 
 
 class ProductionConfig(Config):
-
     @staticmethod
     def init_app(app):
         import logging
@@ -105,3 +97,11 @@ class TestingConfig(Config):
 
         for handler in app_logger.handlers[:]:
             handler.setLevel(app.config["APP_LOG_LEVEL"])
+
+
+def get_config(app_env: typing.Optional[str] = None) -> Config:
+
+    if app_env is None:
+        app_env = config("APP_ENV")
+
+    return _config_by_environment(app_env)

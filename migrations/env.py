@@ -2,16 +2,15 @@ import logging
 from logging.config import fileConfig
 
 from alembic import context
-from flask import current_app
 from sqlalchemy import engine_from_config, pool
+
+from property_app.config import get_config
+from property_app.database import AppBase
 
 config = context.config
 
 fileConfig(config.config_file_name)
 logger = logging.getLogger("alembic.env")
-
-config.set_main_option("sqlalchemy.url", current_app.config.get("SQLALCHEMY_DATABASE_URI").replace("%", "%%"))
-target_metadata = current_app.extensions["migrate"].db.metadata
 
 
 def exclude_schemas_from_config(config_):
@@ -79,6 +78,9 @@ def run_migrations_online():
                 directives[:] = []
                 logger.info("No changes in schema detected.")
 
+    app_config = get_config()
+    config.set_main_option("sqlalchemy.url", str(app_config.DATABASE_URI))
+
     engine = engine_from_config(
         config.get_section(config.config_ini_section), prefix="sqlalchemy.", poolclass=pool.NullPool
     )
@@ -94,7 +96,7 @@ def run_migrations_online():
         connection = engine.connect()
         context.configure(
             connection=connection,
-            target_metadata=target_metadata,
+            target_metadata=AppBase.metadata,
             process_revision_directives=process_revision_directives,
             include_object=include_object,
             include_schemas=True,  # Added so alembic introspects all schemas on autogenerate.
