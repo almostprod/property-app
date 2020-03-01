@@ -10,13 +10,12 @@ from typing import Optional
 import structlog
 
 from .app_info import AppInfo
-from .config import env_str
 
 
 def loggers():
     """ get list of all loggers """
     root = logging.root
-    existing = root.manager.loggerDict.keys()
+    existing = root.manager.loggerDict.keys()  # noqa
     return [logging.getLogger(name) for name in existing]
 
 
@@ -79,6 +78,7 @@ class LogEntryProcessor:
 
 def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
     import logging.config
+    from property_app.config import env_str
 
     if log_mode is None:
         log_mode = env_str("LOG_MODE", "local")

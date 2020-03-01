@@ -2,25 +2,17 @@ from __future__ import annotations
 
 import os
 import typing
-from distutils.util import strtobool
 
 import structlog
 from starlette.config import Config
 from starlette.datastructures import URL, Secret
 
-config = Config(".env")
-
-
-def env_bool(envar, default=False) -> bool:
-    return strtobool(os.environ.get(envar, str(default)))
-
-
-def env_int(envar, default=0) -> int:
-    return int(os.environ.get(envar, int(default)))
-
 
 def env_str(envar, default="") -> str:
     return os.environ.get(envar, str(default))
+
+
+config = Config(env_str("ENV_FILE", default=".env"))
 
 
 def _config_by_environment(app_environment: str):
@@ -55,7 +47,7 @@ def init_app(app, app_config: Config = None):
 
 class Config:
     ASGI_APP = config("ASGI_APP", default="app")
-    APP_BUILD_HASH = env_str("APP_BUILD_HASH", default="dev")
+    APP_BUILD_HASH = config("APP_BUILD_HASH", default="dev")
 
     DEBUG = config("DEBUG", cast=bool, default=False)
     TESTING = config("TESTING", cast=bool, default=False)
@@ -67,6 +59,7 @@ class Config:
     REDIS_URL = config("REDIS_URL", cast=URL, default="redis://redis:6379/0")
 
     APP_LOG_LEVEL = config("APP_LOG_LEVEL", default="DEBUG")
+    LOG_MODE = config("LOG_MODE", default="local")
 
 
 class ProductionConfig(Config):
