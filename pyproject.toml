@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "property_app"
-version = "0.1.0"
+version = "0.0.1"
 description = ""
 authors = ["Anthony <anthony@mcclosky.dev>"]
 
@@ -10,27 +10,23 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
+
+starlette = "^0.13.2"
 sqlalchemy = "^1.3.13"
-flask-migrate = "^2.5.2"
-flask = "^1.1.1"
-flask-sqlalchemy = "^2.4.1"
-flask-debugtoolbar = "^0.10.1"
-sqlalchemy-utils = {version = "^0.36.1", extras = ["arrow"]}
+alembic = "^1.4.0"
+sqlalchemy-utils = "^0.36.1"
+sqlalchemy-mixins = "^1.1"
 structlog = "^20.1.0"
-python-dotenv = "^0.10.5"
-gunicorn = {version = "^20.0.4", extras = ["gthread"]}
-pandas = "^1.0.0"
-Flask-Static-Digest = "^0.1.3"
+pandas = "^1.0.1"
+gunicorn = "^20.0.4"
+decorator = "^4.4.2"
 
 [tool.poetry.dev-dependencies]
-flask-shell-ipython = "^0.4.1"
-pytest = "^5.3.5"
+
 invoke = "^1.4.1"
-fabric = "^2.5.0"
-patchwork = "^1.0.1"
-tox = "^3.14.3"
-awscli = "^1.17.9"
 black = "^19.10b0"
+pytest = "^5.3.5"
+ipython = "^7.13.0"
 
 [tool.black]
 line-length = 120
@@ -45,25 +41,6 @@ use_parentheses = true
 line_length = 120
 
 known_first_party = ["property_app"]
-known_third_party = [
-     "alembic",
-     "arrow",
-     "boto3",
-     "click",
-     "fabric",
-     "flask",
-     "flask_redis",
-     "flask_sqlalchemy",
-     "furl",
-     "invoke",
-     "lxml",
-     "patchwork",
-     "requests",
-     "setuptools",
-     "sqlalchemy",
-     "sqlalchemy_utils",
-     "structlog"
-]
 
 [build-system]
 requires = ["poetry>=0.12"]

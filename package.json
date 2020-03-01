@@ -1,11 +1,10 @@
 {
   "name": "property-app",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "property search tool",
   "main": "index.js",
   "repository": "https://github.com/amcclosky/property-app",
-  "author": "Anthony McClosky <property-app@mcclosky.dev>",
-  "license": "MIT",
+  "author": "Anthony McClosky <property.app@mcclosky.dev>",
   "private": true,
   "scripts": {
     "nf": "nf"
