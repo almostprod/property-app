@@ -54,6 +54,9 @@ def init_app(app, app_config: Config = None):
 
 
 class Config:
+    ASGI_APP = config("ASGI_APP", default="app")
+    APP_BUILD_HASH = env_str("APP_BUILD_HASH", default="dev")
+
     DEBUG = config("DEBUG", cast=bool, default=False)
     TESTING = config("TESTING", cast=bool, default=False)
 
