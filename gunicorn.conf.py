@@ -2,7 +2,7 @@ import multiprocessing
 import os
 
 logger_class = "property_app.logging.GunicornLogger"
-flask_env = os.environ.get("FLASK_ENV")
+flask_env = os.environ.get("APP_ENV")
 workers = 2
 worker_class = "gthread"
 threads = multiprocessing.cpu_count() * 2
