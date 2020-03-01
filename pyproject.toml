@@ -30,6 +30,7 @@ fabric = "^2.5.0"
 patchwork = "^1.0.1"
 tox = "^3.14.3"
 awscli = "^1.17.9"
+black = "^19.10b0"
 
 [tool.black]
 line-length = 120
@@ -63,6 +64,7 @@ known_third_party = [
      "sqlalchemy_utils",
      "structlog"
 ]
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

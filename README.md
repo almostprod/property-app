@@ -1,1 +1,6 @@
-# property_app
+# Property Search
+
+```shell script
+$ poetry shell
+$ inv dev
+```

@@ -54,7 +54,7 @@ class Config:
 
     SECRET_KEY = env_str("SECRET_KEY", "iqahRzJWhRdnonK9TybtvzTL")
     ENABLE_DEBUG_TOOLBAR = env_bool("DEBUG_TOOLBAR", False)
-    TOOLBAR_EXCLUDE_ROUTES =["/slack"]
+    TOOLBAR_EXCLUDE_ROUTES = ["/slack"]
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
     SQLALCHEMY_TRACK_MODIFICATIONS = env_bool("SQLALCHEMY_TRACK_MODIFICATIONS", False)
@@ -72,7 +72,6 @@ class Config:
 
 
 class ProductionConfig(Config):
-
     @staticmethod
     def init_app(app: Flask):
         import logging

@@ -30,6 +30,7 @@ def create_app(app_config=None):
 
         def _show_toolbar(self):
             from flask import request
+
             for route_path in app.config["TOOLBAR_EXCLUDE_ROUTES"]:
                 if route_path in request.path:
                     return False
@@ -43,10 +44,6 @@ def create_app(app_config=None):
     from . import main
 
     app.register_blueprint(main.bp)
-
-    from . import cli
-
-    cli.init_cli(app)
 
     app.log = get_logger(app.name)
 

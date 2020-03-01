@@ -1,37 +1,17 @@
-version: '3.6'
-
-x-flask:
-  &default-flask
-  restart: always
-  build:
-    args:
-      - "APP_REQUIREMENTS_ENV=dev"
-    context: .
-    target: app
-  volumes:
-    - .:/app
-    - ~/.aws:/root/.aws
-  env_file:
-    - .flaskenv
-  logging:
-    driver: "json-file"
-    options:
-      max-size: "1m"
-      max-file: "10"
+version: '3.7'
 
 services:
   proxy:
-    restart: always
+    env_file: .env
     build:
       context: ./nginx
     ports:
       - "80:80"
       - "443:443"
-
+    
   db:
     image: postgres:11
-    container_name: property_app_db
-    restart: always
+    env_file: .env      
     ports:
       - "5432:5432"
     volumes:
@@ -39,54 +19,18 @@ services:
 
   redis:
     image: redis:5.0-alpine
+    env_file: .env
     ports:
-      - "6379"
+      - "6379:6379"
     volumes:
       - redis_data:/data
     command: ["redis-server", "--appendonly", "yes"]
 
-  app:
-    <<: *default-flask
-    ports:
-      - "5000"
-    depends_on:
-      - redis
-      - db
-      - proxy
-    tty: true
-    command: ["flask", "run", "--host=0.0.0.0"]
-
-  worker:
-    <<: *default-flask
-    depends_on:
-      - redis
-      - db
-    tty: true
-    command: ["flask", "rq", "worker"]
-
-  scheduler:
-    <<: *default-flask
-    depends_on:
-      - redis
-    tty: true
-    command: ["flask", "rq", "scheduler"]
-
-  tests:
-    <<: *default-flask
-    restart: "no"
-    build:
-      args:
-        - "APP_REQUIREMENTS_ENV=dev"
-      context: .
-      target: tests
-    volumes:
-      - .:/app
-      - tox_data:/app/.tox
-      - ~/.aws:/root/.aws
-    tty: true
-    command: ["bash"]
-
 volumes:
   db_data:
   redis_data:
-  tox_data:
+    
+networks:
+  default:
+    external:
+      name: property-app-net

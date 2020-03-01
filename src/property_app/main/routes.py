@@ -31,5 +31,3 @@ def index():
 13. "render" from view handles the logic of if it will return html or json and add headers etc.
 14. Some sort of integration with formik?
 """
-
-
