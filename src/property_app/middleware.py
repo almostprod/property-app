@@ -1,12 +1,12 @@
 from contextvars import ContextVar
 
-from sqlalchemy_mixins.session import NoSessionError
+from sqlalchemy_mixins.session import NoSessionError  # type: ignore
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import Response
 
-from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
-from structlog.contextvars import bind_contextvars
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware  # type: ignore
+from structlog.contextvars import bind_contextvars  # type: ignore
 
 
 def init_app(app: Starlette):

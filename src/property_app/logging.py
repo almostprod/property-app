@@ -48,7 +48,7 @@ class LogEntryProcessor:
 
 def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
     import logging.config
-    from structlog.contextvars import merge_contextvars
+    from structlog.contextvars import merge_contextvars  # type: ignore
     from property_app.config import env_str
 
     if log_mode is None:
@@ -69,9 +69,6 @@ def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
         structlog.processors.format_exc_info,
         LogEntryProcessor.add_app_info,
     ]
-
-    if log_mode != "local":
-        log_processor_chain += [LogEntryProcessor.redact_pii]
 
     logging.config.dictConfig(
         {
