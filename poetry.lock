@@ -12,7 +12,7 @@ description = "A database migration tool for SQLAlchemy."
 name = "alembic"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.4.0"
+version = "1.4.1"
 
 [package.dependencies]
 Mako = "*"
@@ -99,7 +99,6 @@ version = "7.0"
 [[package]]
 category = "dev"
 description = "Cross-platform colored terminal text."
-marker = "sys_platform == \"win32\""
 name = "colorama"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
@@ -249,7 +248,7 @@ description = "A super-fast templating language that borrows the  best ideas fro
 name = "mako"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.1.1"
+version = "1.1.2"
 
 [package.dependencies]
 MarkupSafe = ">=0.9.2"
@@ -566,7 +565,6 @@ six = "*"
 reference = "43c0a12c686a7baa727bf47b819f9d796914fa4f"
 type = "git"
 url = "git@github.com:absent1706/sqlalchemy-mixins.git"
-
 [[package]]
 category = "dev"
 description = "SQLAlchemy stubs and mypy plugin"
@@ -748,7 +746,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "9e25d639d9cbee9801960a0eba5bf3830d6db872b3bf0a717787f85bb0f77d58"
+content-hash = "0c9870f3acfe796840d947142d8ad7cda78accf460161aa826659b06277147a9"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -757,7 +755,7 @@ aiofiles = [
     {file = "aiofiles-0.4.0.tar.gz", hash = "sha256:021ea0ba314a86027c166ecc4b4c07f2d40fc0f4b3a950d1868a0f2571c2bbee"},
 ]
 alembic = [
-    {file = "alembic-1.4.0.tar.gz", hash = "sha256:2df2519a5b002f881517693b95626905a39c5faf4b5a1f94de4f1441095d1d26"},
+    {file = "alembic-1.4.1.tar.gz", hash = "sha256:791a5686953c4b366d3228c5377196db2f534475bb38d26f70eb69668efd9028"},
 ]
 appdirs = [
     {file = "appdirs-1.4.3-py2.py3-none-any.whl", hash = "sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e"},
@@ -843,7 +841,8 @@ jinja2 = [
     {file = "Jinja2-2.11.1.tar.gz", hash = "sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"},
 ]
 mako = [
-    {file = "Mako-1.1.1.tar.gz", hash = "sha256:2984a6733e1d472796ceef37ad48c26f4a984bb18119bb2dbc37a44d8f6e75a4"},
+    {file = "Mako-1.1.2-py2.py3-none-any.whl", hash = "sha256:8e8b53c71c7e59f3de716b6832c4e401d903af574f6962edbbbf6ecc2a5fe6c9"},
+    {file = "Mako-1.1.2.tar.gz", hash = "sha256:3139c5d64aa5d175dbafb95027057128b5fbd05a40c53999f3905ceb53366d9d"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},

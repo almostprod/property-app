@@ -16,20 +16,29 @@ def init_app(app: Starlette):
     from property_app.database.session import Session
     from property_app.database import AppBase
 
-    app.add_middleware(ProxyHeadersMiddleware)
+    @app.middleware("http")
+    async def clear_structlog_context(request: Request, call_next) -> Response:
+        from structlog.contextvars import clear_contextvars
+
+        clear_contextvars()
+
+        return await call_next(request)
 
     @app.middleware("http")
     async def inject_request_id(request: Request, call_next) -> Response:
         import uuid
+        from structlog.contextvars import bind_contextvars
 
         request_id = str(uuid.uuid4())
 
         _request_id_ctx_var.set(request_id)
         request.state.request_id = request_id
 
-        response = await call_next(request)
+        bind_contextvars(request_id=request_id)
 
-        return response
+        return await call_next(request)
+
+    app.add_middleware(ProxyHeadersMiddleware)
 
     @app.middleware("http")
     async def setup_database_session(request: Request, call_next) -> Response:
