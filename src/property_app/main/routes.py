@@ -1,17 +1,21 @@
-from flask import render_template
+from starlette.requests import Request
+from starlette.responses import UJSONResponse
+from property_app.models.auth import AppUser
 
-from property_app.logging import get_logger
-from property_app.main import bp as main
-
-
-log = get_logger("property_app.main")
+from .router import main
 
 
-@main.route("/")
-def index():
-    log.info("index route")
+@main.route("/", ["GET"], name="index")
+def index(request: Request):
+    name = request.query_params.get("username")
 
-    return render_template("index.html")
+    if name is not None:
+        AppUser.create(username=name)
+        AppUser.session.commit()
+
+    users = AppUser.all()
+
+    return UJSONResponse({"users": [u.to_dict() for u in users]})
 
 
 """
