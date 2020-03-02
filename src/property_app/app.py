@@ -9,7 +9,6 @@ log = get_logger("property_app")
 
 
 def index(request: Request):
-    log.info("testing index", test_id=request.state.request_id)
     name = request.query_params.get("username")
     if name is not None:
         AppUser.create(username=name)
@@ -33,7 +32,6 @@ def create_app(app_config=None):
     logging.initialize_logging(log_mode=app_config.LOG_MODE)
 
     starlette_app = Starlette(debug=app_config.DEBUG, routes=routes,)
-
     middleware.init_app(starlette_app)
 
     return starlette_app

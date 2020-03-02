@@ -45,18 +45,6 @@ class LogEntryProcessor:
 
         return event_dict
 
-    @staticmethod
-    def redact_pii(_, __, event_dict: dict) -> dict:
-        """
-        Hide any pii that appear in log entries
-        """
-        sensitive_keys = ["password", "phone"]
-        for key in sensitive_keys:
-            if event_dict.get(key):
-                event_dict[key] = "*******"
-
-        return event_dict
-
 
 def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
     import logging.config
@@ -128,10 +116,10 @@ def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
     )
 
     chain = log_processor_chain + [
-        structlog.stdlib.ProcessorFormatter.wrap_for_formatter
+        structlog.stdlib.ProcessorFormatter.wrap_for_formatter,
     ]
 
-    structlog.configure_once(
+    structlog.configure(
         processors=chain,
         context_class=dict,
         logger_factory=structlog.stdlib.LoggerFactory(),

@@ -6,6 +6,7 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
+from structlog.contextvars import bind_contextvars
 
 
 def init_app(app: Starlette):
@@ -17,28 +18,17 @@ def init_app(app: Starlette):
     from property_app.database import AppBase
 
     @app.middleware("http")
-    async def clear_structlog_context(request: Request, call_next) -> Response:
-        from structlog.contextvars import clear_contextvars
+    async def canonical_log(request: Request, call_next) -> Response:
+        from property_app.logging import get_logger
 
-        clear_contextvars()
+        log = get_logger("property_app")
+        log.info("request start")
 
-        return await call_next(request)
+        response = await call_next(request)
 
-    @app.middleware("http")
-    async def inject_request_id(request: Request, call_next) -> Response:
-        import uuid
-        from structlog.contextvars import bind_contextvars
+        log.info("request end")
 
-        request_id = str(uuid.uuid4())
-
-        _request_id_ctx_var.set(request_id)
-        request.state.request_id = request_id
-
-        bind_contextvars(request_id=request_id)
-
-        return await call_next(request)
-
-    app.add_middleware(ProxyHeadersMiddleware)
+        return response
 
     @app.middleware("http")
     async def setup_database_session(request: Request, call_next) -> Response:
@@ -53,6 +43,31 @@ def init_app(app: Starlette):
         Session.remove()
 
         return response
+
+    @app.middleware("http")
+    async def inject_request_meta(request: Request, call_next) -> Response:
+        import uuid
+
+        request_id = str(uuid.uuid4())
+
+        _request_id_ctx_var.set(request_id)
+        request.state.request_id = request_id
+
+        bind_contextvars(
+            request_id=request_id, url=request.url.path, method=request.method
+        )
+
+        return await call_next(request)
+
+    @app.middleware("http")
+    async def clear_structlog_context(request: Request, call_next) -> Response:
+        from structlog.contextvars import clear_contextvars
+
+        clear_contextvars()
+
+        return await call_next(request)
+
+    app.add_middleware(ProxyHeadersMiddleware)
 
 
 _request_id_ctx_var: ContextVar[str] = ContextVar(
