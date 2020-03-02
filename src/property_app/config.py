@@ -59,6 +59,9 @@ class AppConfig:
     APP_LOG_LEVEL = config("APP_LOG_LEVEL", default="DEBUG")
     LOG_MODE = config("LOG_MODE", default="local")
 
+    APP_PORT = config("APP_PORT", cast=int, default=5000)
+    APP_HOST = config("APP_HOST", cast=str, default="0.0.0.0")
+
 
 class ProductionConfig(AppConfig):
     @staticmethod

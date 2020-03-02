@@ -18,8 +18,8 @@ class AppUser(AppBase):
 
     username = sa.Column(sa.Text, nullable=False)
 
-    first_name = sa.Column(sa.Text, nullable=False)
-    last_name = sa.Column(sa.Text, nullable=False)
+    first_name = sa.Column(sa.Text, nullable=False, default="")
+    last_name = sa.Column(sa.Text, nullable=False, default="")
 
     display_name = sa.Column(sa.Text)
 

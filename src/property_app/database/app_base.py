@@ -13,7 +13,7 @@ from sqlalchemy_utils.listeners import force_auto_coercion, force_instant_defaul
 
 from .types import JSON, PendulumType
 
-from .metadata import app_metadata
+from .session import app_metadata
 
 
 @as_declarative(metadata=app_metadata)

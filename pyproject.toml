@@ -8,6 +8,9 @@ packages = [
     { include = "property_app", from = "src" }
 ]
 
+[tool.poetry.scripts]
+property = 'property_app.app:start'
+
 [tool.poetry.dependencies]
 python = "^3.7"
 
