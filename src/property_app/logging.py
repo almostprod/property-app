@@ -57,8 +57,6 @@ def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
     level = env_str("LOG_LEVEL", "INFO")
     app_log_level = env_str("APP_LOG_LEVEL", level)
 
-    gunicorn_level = env_str("GUNICORN_LOG_LEVEL", "INFO")
-
     log_processor_chain = [
         merge_contextvars,
         structlog.stdlib.add_log_level,
@@ -76,10 +74,11 @@ def initialize_logging(colors: bool = True, log_mode: str = None) -> None:
             "disable_existing_loggers": True,
             "root": {"level": level, "handlers": ["console"]},
             "loggers": {
-                "gunicorn.error": {
-                    "level": gunicorn_level,
-                    "qualname": "gunicorn.error",
+                "uvicorn.error": {
+                    "level": app_log_level,
+                    "qualname": "uvicorn.error",
                     "handlers": ["console_error"],
+                    "propagate": False,
                 },
                 "property_app": {"level": app_log_level, "qualname": "property_app"},
                 "rq.worker": {"level": app_log_level, "qualname": "rq.worker"},

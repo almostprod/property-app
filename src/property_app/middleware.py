@@ -1,3 +1,5 @@
+import time
+
 from contextvars import ContextVar
 
 from sqlalchemy_mixins.session import NoSessionError  # type: ignore
@@ -22,11 +24,13 @@ def init_app(app: Starlette):
         from property_app.logging import get_logger
 
         log = get_logger("property_app")
+        request_start = time.perf_counter()
         log.info("request start")
 
         response = await call_next(request)
 
-        log.info("request end")
+        request_time = time.perf_counter() - request_start
+        log.info("request end", total_time=f"{request_time:.3f}")
 
         return response
 
