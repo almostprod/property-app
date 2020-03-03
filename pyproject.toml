@@ -8,6 +8,8 @@ packages = [
     { include = "property_app", from = "src" }
 ]
 
+include = ["**/templates/*.html", "**/static/*.css"]
+
 [tool.poetry.scripts]
 property = 'property_app.app:start'
 

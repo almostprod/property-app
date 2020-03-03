@@ -1,21 +1,15 @@
 from starlette.requests import Request
-from starlette.responses import UJSONResponse
-from property_app.models.auth import AppUser
 
-from .router import main
+from .router import main, templates
+from ..logging import get_logger
+
+log = get_logger("property_app")
 
 
 @main.route("/", ["GET"], name="index")
 def index(request: Request):
-    name = request.query_params.get("username")
 
-    if name is not None:
-        AppUser.create(username=name)
-        AppUser.session.commit()
-
-    users = AppUser.all()
-
-    return UJSONResponse({"users": [u.to_dict() for u in users]})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 """
