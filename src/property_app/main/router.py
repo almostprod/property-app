@@ -11,7 +11,9 @@ templates = Jinja2Templates(directory=os.path.join(local_dir, "templates"))
 main = Router()
 
 main.mount(
-    "/js", app=StaticFiles(directory=os.path.join(local_dir, "js")), name="main:js"
+    "/main/public",
+    app=StaticFiles(directory=os.path.join(local_dir, "public")),
+    name="main:public",
 )
 
 
