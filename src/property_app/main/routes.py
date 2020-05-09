@@ -24,8 +24,10 @@ def index(request: Request):
 
 9. show bundle size on build like next.js
 10. use dataclasses or WTForms to specify page props?
-11. could generate proptype or jsonschema from python classes to help with alignment?
+11. could generate proptype or jsonschema
+    from python classes to help with alignment?
 12. interop between flask-assets and rollup
-13. "render" from view handles the logic of if it will return html or json and add headers etc.
+13. "render" from view handles the logic of if it will return
+    html or json and add headers etc.
 14. Some sort of integration with formik?
 """

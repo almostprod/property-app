@@ -492,6 +492,14 @@ version = "2.5.2"
 
 [[package]]
 category = "dev"
+description = ""
+name = "pyinvoke"
+optional = false
+python-versions = "*"
+version = "1.0.4"
+
+[[package]]
+category = "dev"
 description = "Python parsing module"
 name = "pyparsing"
 optional = false
@@ -793,7 +801,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "d06572d2e051b73edd5b6d86ba4dc598a27ecedcf9bc243ed15154524b5dce00"
+content-hash = "c83dc14f54a6e1c7625859b5a62c7c197d5bebbbda034992e8dcb5a6106bcdf4"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1090,6 +1098,9 @@ pyflakes = [
 pygments = [
     {file = "Pygments-2.5.2-py2.py3-none-any.whl", hash = "sha256:2a3fe295e54a20164a9df49c75fa58526d3be48e14aceba6d6b1e8ac0bfd6f1b"},
     {file = "Pygments-2.5.2.tar.gz", hash = "sha256:98c8aa5a9f778fcd1026a17361ddaf7330d1b7c62ae97c3bb0ae73e0b9b6b0fe"},
+]
+pyinvoke = [
+    {file = "pyinvoke-1.0.4.tar.gz", hash = "sha256:0b96de9e8ed5b6d681bc761ed6758087998b1a84f84b09811f7d5401d64dea7e"},
 ]
 pyparsing = [
     {file = "pyparsing-2.4.6-py2.py3-none-any.whl", hash = "sha256:c342dccb5250c08d45fd6f8b4a559613ca603b57498511740e65cd11a2e7dcec"},
