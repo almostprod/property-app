@@ -43,6 +43,7 @@ aiofiles = "^0.4.0"
 mypy = "^0.761"
 sqlalchemy-stubs = "^0.3"
 colorama = "^0.4.3"
+flake8 = "^3.7.9"
 
 [tool.black]
 line-length = 88
