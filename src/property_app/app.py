@@ -25,6 +25,7 @@ def create_app(app_config=None):
         app=StaticFiles(directory=os.path.join(local_dir, "static")),
         name="static",
     )
+
     middleware.init_app(starlette_app)
     main.init_app(starlette_app)
 

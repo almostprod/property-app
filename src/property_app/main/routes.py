@@ -8,7 +8,6 @@ log = get_logger("property_app")
 
 @main.route("/", ["GET"], name="index")
 def index(request: Request):
-
     return templates.TemplateResponse("index.html", {"request": request})
 
 

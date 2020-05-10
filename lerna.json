@@ -1,0 +1,10 @@
+{
+  "useWorkspaces": true,
+  "packages": ["src/property_client"],
+  "version": "1.0.0",
+  "command": {
+    "run": {
+      "npmClient": "yarn"
+    }
+  }
+}

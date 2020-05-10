@@ -1,5 +1,5 @@
 {
-  "name": "property-app",
+  "name": "property-app-root",
   "version": "0.0.1",
   "description": "property search tool",
   "main": "index.js",
@@ -9,7 +9,16 @@
   "scripts": {
     "nf": "nf"
   },
+  "workspaces": [
+    "src/*"
+  ],
+  "nohoist": [
+    "src/**/webpack-dev-server",
+    "**/babel-loader",
+    "**/babel-jest"
+  ],
   "devDependencies": {
-    "foreman": "^3.0.1"
+    "foreman": "^3.0.1",
+    "lerna": "^3.20.2"
   }
 }

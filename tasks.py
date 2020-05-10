@@ -1,4 +1,11 @@
+import os
+
 from invoke import task  # type: ignore
+from dotenv import load_dotenv
+
+load_dotenv()
+
+env = os.environ
 
 
 @task
@@ -33,11 +40,26 @@ def db_upgrade(c, target="head"):
 
 
 @task
-def dev(c):
+def dev_services(c):
     c.run("docker network create property-app-net || true", hide=True)
-    c.run("yarn nf start --showenvs redis=0,db=1,web=1,proxy=1", pty=True)
+    c.run("docker-compose -f docker-compose.yml up -d", pty=True)
+    c.run("pg_isready")
+
+
+@task(dev_services)
+def dev_app(c):
+    c.run("poetry run property")
+
+
+@task(dev_app)
+def dev_client(c):
+    c.run("yarn lerna exec -- yarn start")
 
 
 @task
 def pg_web(c):
-    c.run("yarn nf start --showenvs pgweb=1", pty=True)
+    c.run(
+        "pgweb --url=${DATABASE_URI} --listen=8081 --bind=0.0.0.0 --prefix=pgweb",
+        env=env,
+        pty=True,
+    )

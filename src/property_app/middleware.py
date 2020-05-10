@@ -8,7 +8,6 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware  # type: ignore
-from structlog.contextvars import bind_contextvars  # type: ignore
 
 
 def init_app(app: Starlette):
@@ -24,13 +23,15 @@ def init_app(app: Starlette):
         from property_app.logging import get_logger
 
         log = get_logger("property_app")
+
         request_start = time.perf_counter()
+
         log.info("request start")
 
         response = await call_next(request)
 
         request_time = time.perf_counter() - request_start
-        log.info("request end", total_time=f"{request_time:.3f}")
+        log.info(f"request end {request_time}")
 
         return response
 
@@ -57,19 +58,19 @@ def init_app(app: Starlette):
         _request_id_ctx_var.set(request_id)
         request.state.request_id = request_id
 
-        bind_contextvars(
-            request_id=request_id, url=request.url.path, method=request.method
-        )
+        # bind_contextvars(
+        #     request_id=request_id, url=request.url.path, method=request.method
+        # )
 
         return await call_next(request)
 
-    @app.middleware("http")
-    async def clear_structlog_context(request: Request, call_next) -> Response:
-        from structlog.contextvars import clear_contextvars
+    # @app.middleware("http")
+    # async def clear_structlog_context(request: Request, call_next) -> Response:
+    #     from structlog.contextvars import clear_contextvars
 
-        clear_contextvars()
+    #     clear_contextvars()
 
-        return await call_next(request)
+    #     return await call_next(request)
 
     app.add_middleware(ProxyHeadersMiddleware)
 

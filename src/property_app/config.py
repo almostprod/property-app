@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import typing
 
-import structlog
 from starlette.config import Config
 from starlette.datastructures import URL, Secret
 
@@ -37,10 +36,10 @@ def init_app(app, app_config: Config = None):
         app_config = _config_by_environment(app.env)
 
     app.config.from_object(app_config)
-    if not structlog.is_configured():
-        from property_app.logging import initialize_logging
+    # if not structlog.is_configured():
+    #     from property_app.logging import initialize_logging
 
-        initialize_logging()
+    #     initialize_logging()
 
 
 class AppConfig:
