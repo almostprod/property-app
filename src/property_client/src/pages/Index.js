@@ -1,13 +1,8 @@
 import React from "react";
 import { InertiaLink as Link } from "@inertiajs/inertia-react";
 
-const Index = ({ pageContent }) => (
-  <div>
-    <div>{pageContent || "Index"}</div>
-    <div>
-      <Link href="/users">Users</Link>
-    </div>
-  </div>
-);
+import DefaultLayout from "../components/layout/DefaultLayout";
+
+const Index = ({ pageContent }) => <DefaultLayout />;
 
 export default Index;
