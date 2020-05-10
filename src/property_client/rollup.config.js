@@ -9,7 +9,7 @@ const config = {
   input: ["src/entry.js", "src/pages/Index.js"],
   output: {
     dir: "../property_app/static/dist/",
-    entryFileNames: "entry-[name].js",
+    entryFileNames: "entry-[name].[hash].js",
   },
   plugins: [
     babel({

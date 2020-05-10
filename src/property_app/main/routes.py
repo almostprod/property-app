@@ -1,5 +1,5 @@
 from .router import main
-from .pages.index import Index
+from .views.index import Index
 
 main.add_route("/", Index)
 

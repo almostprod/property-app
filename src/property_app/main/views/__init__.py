@@ -80,13 +80,3 @@ class InertiaHTTPEndpoint:
             raise HTTPException(status_code=405)
 
         return PlainTextResponse("Method Not Allowed", status_code=405)
-
-
-class Index(InertiaHTTPEndpoint):
-    def get(self, request: Request):
-        content = request.query_params["content"]
-        return {"pageContent": content}
-
-
-# def Index(InertiaEndpoint):
-#     __component__ = "Index"
