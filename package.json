@@ -6,19 +6,8 @@
   "repository": "https://github.com/amcclosky/property-app",
   "author": "Anthony McClosky <property.app@mcclosky.dev>",
   "private": true,
-  "scripts": {
-    "nf": "nf"
-  },
-  "workspaces": [
-    "src/*"
-  ],
-  "nohoist": [
-    "src/**/webpack-dev-server",
-    "**/babel-loader",
-    "**/babel-jest"
-  ],
+  "scripts": {},
   "devDependencies": {
-    "foreman": "^3.0.1",
     "lerna": "^3.20.2"
   }
 }

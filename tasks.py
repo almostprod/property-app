@@ -51,9 +51,9 @@ def dev_app(c):
     c.run("poetry run property")
 
 
-@task(dev_app)
+@task
 def dev_client(c):
-    c.run("yarn lerna exec -- yarn start")
+    c.run("cd src/property_client && yarn dev", pty=True)
 
 
 @task
