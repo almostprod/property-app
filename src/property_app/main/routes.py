@@ -7,12 +7,13 @@ from starlette.responses import RedirectResponse
 
 from .router import main
 from .views.index import Index
-from .views.user import UserList
+from .views.user import UserList, UserDetail
 
 _LOCAL_DIR = os.path.dirname(os.path.abspath(__file__))
 
 main.add_route("/", Index)
 main.add_route("/users", UserList)
+main.add_route("/users/{id:int}", UserDetail)
 
 
 @main.route("/pages/{page_path:path}")

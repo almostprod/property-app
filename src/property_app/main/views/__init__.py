@@ -43,7 +43,7 @@ class InertiaHTTPEndpoint:
         )
 
     async def _handle_inertia(self, request, context):
-        return JSONResponse(context)
+        return JSONResponse(context, headers={"X-Inertia": "true"})
 
     def _handle(self, request) -> typing.Awaitable[dict]:
         handler_name = "get" if request.method == "HEAD" else request.method.lower()
