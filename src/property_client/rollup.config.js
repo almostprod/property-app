@@ -5,8 +5,10 @@ import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import outputManifest from "rollup-plugin-output-manifest";
 
+import matched from "matched";
+
 const config = {
-  input: ["src/entry.js", "src/pages/Index.js"],
+  input: matched.sync(["src/entry.js", "src/pages/*.js"]),
   output: {
     dir: "../property_app/static/dist/",
     entryFileNames: "entry-[name].[hash].js",

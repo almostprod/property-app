@@ -19,7 +19,9 @@ def create_app(app_config=None):
     logging.initialize_logging(log_mode=app_config.LOG_MODE)
 
     starlette_app = Starlette(debug=app_config.DEBUG,)
+
     local_dir = os.path.dirname(os.path.abspath(__file__))
+
     starlette_app.mount(
         "/static",
         app=StaticFiles(directory=os.path.join(local_dir, "static")),
