@@ -5,9 +5,15 @@
     <title>{% block title %}/property-app{% endblock %}</title>
     {% endblock %}
 
-    <script defer src="{{ url_for('static', path='dist/index.js') }}"></script>
+    <script
+        defer
+        type="module"
+        src="{{ url_for('static', path='dist/entry-entry.js') }}"
+    ></script>
 </head>
 
 <body>
-    <div id="app">{% block content %}{% endblock %}</div>
+    <div id="app" data-page="{{inertia_context}}">
+        {% block content %}{% endblock %}
+    </div>
 </body>

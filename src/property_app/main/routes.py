@@ -1,14 +1,7 @@
-from starlette.requests import Request
+from .router import main
+from .pages.index import Index
 
-from .router import main, templates
-from ..logging import get_logger
-
-log = get_logger("property_app")
-
-
-@main.route("/", ["GET"], name="index")
-def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+main.add_route("/", Index)
 
 
 """
