@@ -1,22 +1,16 @@
 import React from "react";
-import { InertiaLink as Link } from "@inertiajs/inertia-react";
+import AppLayout from "components/layout/AppLayout";
+import Table from "components/Table";
 
-import DefaultLayout from "../components/layout/DefaultLayout";
+const UserList = ({ users }) => {
+  return (
+    <Table
+      columnLabels={["Name", "Title", "Email", "Role"]}
+      data={users.map((user) => [user.name, "Owner", "test@testuser.com", "Admin"])}
+    />
+  );
+};
 
-const UserList = ({ users }) => (
-  <div>
-    <ul>
-      {users.map((user) => (
-        <li key={user.id}>
-          <Link href={`/users/${user.id}`}>{user.name}</Link>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-UserList.layout = (page) => (
-  <DefaultLayout children={page} title="Users" section="users" />
-);
+UserList.layout = (page) => <AppLayout children={page} title="Users" section="users" />;
 
 export default UserList;
