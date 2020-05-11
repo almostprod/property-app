@@ -9,7 +9,7 @@ from starlette.responses import PlainTextResponse
 from starlette.types import Receive, Scope, Send
 from starlette.responses import Response, JSONResponse
 
-from property_app.main.router import templates
+from property_app.app import templates
 
 
 class InertiaRequest(Request):

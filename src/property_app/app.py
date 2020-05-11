@@ -4,6 +4,7 @@ from starlette.applications import Starlette
 from starlette.staticfiles import StaticFiles
 
 from property_app.logging import get_logger
+from property_app.lib.jinja import get_templates
 
 log = get_logger("property_app")
 
@@ -11,7 +12,7 @@ log = get_logger("property_app")
 def create_app(app_config=None):
     from property_app.config import get_config
     from property_app import middleware, logging
-    from property_app.main import router as main
+    from property_app import routes
 
     if app_config is None:
         app_config = get_config()
@@ -29,13 +30,11 @@ def create_app(app_config=None):
     )
 
     starlette_app.mount(
-        "/assets",
-        app=StaticFiles(directory="dist/assets/"),
-        name="assets",
+        "/assets", app=StaticFiles(directory="dist/assets/"), name="assets",
     )
 
     middleware.init_app(starlette_app)
-    main.init_app(starlette_app)
+    routes.init_app(starlette_app)
 
     return starlette_app
 
@@ -63,4 +62,5 @@ def start(reload=None):
     )
 
 
+templates = get_templates()
 app = create_app()

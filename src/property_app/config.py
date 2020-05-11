@@ -7,6 +7,9 @@ from starlette.config import Config
 from starlette.datastructures import URL, Secret
 
 
+_LOCAL_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def env_str(envar, default="") -> str:
     return os.environ.get(envar, str(default))
 
@@ -62,6 +65,7 @@ class AppConfig:
     APP_HOST = config("APP_HOST", cast=str, default="0.0.0.0")
 
     DIST_ROOT = config("APP_DIST_ROOT", cast=str, default="dist/")
+    TEMPLATE_ROOT = config("APP_TEMPLATE_ROOT", cast=str, default=_LOCAL_DIR)
 
 
 class ProductionConfig(AppConfig):
