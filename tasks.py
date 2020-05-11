@@ -53,7 +53,7 @@ def dev_app(c):
 
 @task
 def dev_client(c):
-    c.run("cd src/property_client && yarn dev", pty=True)
+    c.run("yarn dev", pty=True)
 
 
 @task

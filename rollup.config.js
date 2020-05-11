@@ -11,11 +11,14 @@ import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 import matched from "matched";
 
+const SRC_ROOT = "./src/property_app/js/src";
+const DIST_ROOT = "./dist";
+
 const config = {
-  input: matched.sync(["src/entry.js", "src/pages/*.js"]),
+  input: matched.sync([`${SRC_ROOT}/entry.js`, `${SRC_ROOT}/pages/*.js`]),
   output: {
-    dir: "../property_app/static/dist/",
-    entryFileNames: "entry-[name].[hash].js",
+    dir: `${DIST_ROOT}/assets/`,
+    entryFileNames: "[name].[hash].js",
   },
   plugins: [
     babel({

@@ -28,6 +28,12 @@ def create_app(app_config=None):
         name="static",
     )
 
+    starlette_app.mount(
+        "/assets",
+        app=StaticFiles(directory="dist/assets/"),
+        name="assets",
+    )
+
     middleware.init_app(starlette_app)
     main.init_app(starlette_app)
 
