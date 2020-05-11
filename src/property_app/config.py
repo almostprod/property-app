@@ -61,6 +61,8 @@ class AppConfig:
     APP_PORT = config("APP_PORT", cast=int, default=5000)
     APP_HOST = config("APP_HOST", cast=str, default="0.0.0.0")
 
+    DIST_ROOT = config("APP_DIST_ROOT", cast=str, default="dist/")
+
 
 class ProductionConfig(AppConfig):
     @staticmethod

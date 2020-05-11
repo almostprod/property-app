@@ -12,7 +12,13 @@ _LOCAL_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 @jinja2.contextfunction
-def asset_url(context: dict, name: str, dist_root="dist/"):
+def asset_url(context: dict, name: str, dist_root=None):
+    if dist_root is None:
+        from property_app.config import get_config
+
+        config = get_config()
+        dist_root = config.DIST_ROOT
+
     manifest = None
     dist_path = pathlib.Path(dist_root)
     manifest_path = dist_path / pathlib.Path("assets/manifest.json")

@@ -18,20 +18,21 @@ main.add_route("/users/{id:int}", UserDetail)
 
 @main.route("/pages/{page_path:path}")
 def page_assets(request: Request):
+    from property_app.config import get_config
+
+    config = get_config()
+    dist_root = config.DIST_ROOT
+
     page_path = request.path_params["page_path"]
 
     manifest = None
-    app_dir = pathlib.Path(_LOCAL_DIR).parent
-    manifest_path = app_dir / pathlib.Path("static/dist/manifest.json")
+    dist_dir = pathlib.Path(dist_root)
+    manifest_path = dist_dir / pathlib.Path("assets/manifest.json")
     with open(manifest_path, "rb") as manifest_file:
         manifest = json.load(manifest_file)
 
-    dist_dir = pathlib.Path("dist")
     asset_name = pathlib.Path(manifest[page_path])
-
-    asset_path = dist_dir / asset_name
-
-    asset_url = request.url_for("static", path=asset_path.as_posix())
+    asset_url = request.url_for("assets", path=asset_name.as_posix())
 
     return RedirectResponse(asset_url)
 

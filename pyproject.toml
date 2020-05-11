@@ -11,7 +11,7 @@ packages = [
 include = [
     "**/templates/*.html", 
     "**/static/*.css",
-    "dist/assets/**/*,
+    "dist/assets/**/*",
     ]
 
 [tool.poetry.scripts]
