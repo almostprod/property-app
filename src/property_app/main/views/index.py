@@ -1,4 +1,4 @@
-from . import InertiaRequest, InertiaHTTPEndpoint
+from property_app.lib.inertia import InertiaRequest, InertiaHTTPEndpoint
 
 
 class Index(InertiaHTTPEndpoint):

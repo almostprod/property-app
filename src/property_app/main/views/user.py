@@ -1,4 +1,4 @@
-from . import InertiaRequest, InertiaHTTPEndpoint
+from property_app.lib.inertia import InertiaRequest, InertiaHTTPEndpoint
 
 _USERS = [{"id": 1, "name": "Anthony"}, {"id": 2, "name": "Nolan"}]
 _USERS_INDEX = {user["id"]: user for user in _USERS}
