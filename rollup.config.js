@@ -5,13 +5,14 @@ import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import outputManifest from "rollup-plugin-output-manifest";
 import includePaths from "rollup-plugin-includepaths";
-
 import postcss from "rollup-plugin-postcss";
+import del from "rollup-plugin-delete";
+
 import tailwindcss from "tailwindcss";
 import autoprefixer from "autoprefixer";
 import matched from "matched";
 
-const SRC_ROOT = "./src/property_app/js/src";
+const SRC_ROOT = "./src/property_app/js";
 const DIST_ROOT = "./dist";
 
 const config = {
@@ -21,6 +22,10 @@ const config = {
     entryFileNames: "[name].[hash].js",
   },
   plugins: [
+    del({
+      targets: "dist/*",
+      runOnce: true,
+    }),
     babel({
       exclude: "node_modules/**",
       babelHelpers: "bundled",
@@ -29,7 +34,7 @@ const config = {
     }),
     resolve({ browser: true }),
     includePaths({
-      paths: ["src"],
+      paths: [`${SRC_ROOT}`],
       extensions: [".js", ".css"],
     }),
     commonjs({

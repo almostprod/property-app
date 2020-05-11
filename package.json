@@ -30,6 +30,7 @@
     "autoprefixer": "^9.7.6",
     "matched": "^5.0.0",
     "rollup": "^2.8.2",
+    "rollup-plugin-delete": "^1.2.0",
     "rollup-plugin-includepaths": "^0.2.3",
     "rollup-plugin-output-manifest": "^1.0.2",
     "rollup-plugin-postcss": "^3.1.1"
