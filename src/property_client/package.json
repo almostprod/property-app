@@ -8,6 +8,7 @@
     "@tailwindcss/ui": "^0.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-transition-group": "^4.4.1",
     "tailwindcss": "^1.4.6"
   },
   "scripts": {

@@ -1,6 +1,8 @@
 import React from "react";
 import { InertiaLink as Link } from "@inertiajs/inertia-react";
 
+import DefaultLayout from "../components/layout/DefaultLayout";
+
 const UserList = ({ users }) => (
   <div>
     <ul>
@@ -11,6 +13,10 @@ const UserList = ({ users }) => (
       ))}
     </ul>
   </div>
+);
+
+UserList.layout = (page) => (
+  <DefaultLayout children={page} title="Users" section="users" />
 );
 
 export default UserList;

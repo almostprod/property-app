@@ -1,8 +1,11 @@
 import React from "react";
-import { InertiaLink as Link } from "@inertiajs/inertia-react";
 
 import DefaultLayout from "../components/layout/DefaultLayout";
 
-const Index = ({ pageContent }) => <DefaultLayout />;
+const Index = ({ pageContent }) => <div>{pageContent}</div>;
+
+Index.layout = (page) => (
+  <DefaultLayout children={page} title="Index" section="dashboard" />
+);
 
 export default Index;
