@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { InertiaLink as Link } from "@inertiajs/inertia-react";
 
-import TailwindTransition from "./TailwindTransition";
-import useComponentVisible from "../hooks/use-component-visible";
+import TailwindTransition from "components/TailwindTransition.js";
+import useComponentVisible from "hooks/use-component-visible.js";
 
 const MobileMenuButton = ({ isOpen, onClick }) => (
   <button

@@ -2834,6 +2834,11 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
+rollup-plugin-includepaths@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-includepaths/-/rollup-plugin-includepaths-0.2.3.tgz#244d21b9669a0debe476d825e4a02ed08c06b258"
+  integrity sha512-4QbSIZPDT+FL4SViEVCRi4cGCA64zQJu7u5qmCkO3ecHy+l9EQBsue15KfCpddfb6Br0q47V/v2+E2YUiqts9g==
+
 rollup-plugin-output-manifest@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/rollup-plugin-output-manifest/-/rollup-plugin-output-manifest-1.0.2.tgz#fcaf19378212d1c5caa42974147f3319b2604aaa"

@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultLayout from "../components/layout/DefaultLayout";
+import AppLayout from "components/layout/AppLayout";
 
 const UserDetail = ({ user }) => (
   <div>
@@ -9,7 +9,7 @@ const UserDetail = ({ user }) => (
 );
 
 UserDetail.layout = (page) => (
-  <DefaultLayout children={page} title="User Profile" section="users" />
+  <AppLayout children={page} title="User Profile" section="users" />
 );
 
 export default UserDetail;

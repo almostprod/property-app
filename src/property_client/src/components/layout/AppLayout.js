@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 
-import NavBar from "../NavBar.js";
+import NavBar from "components/NavBar.js";
 
-const DefaultLayout = ({ title, section, children }) => {
+const AppLayout = ({ title, section, children }) => {
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -16,10 +16,12 @@ const DefaultLayout = ({ title, section, children }) => {
             <h1 className="text-3xl font-bold leading-tight text-gray-900">{title}</h1>
           </div>
         </header>
-        <main>{children}</main>
+        <main>
+          <div className="max-w-7xl mx-auto mt-4 px-4 sm:px-6 lg:px-8">{children}</div>
+        </main>
       </div>
     </div>
   );
 };
 
-export default DefaultLayout;
+export default AppLayout;

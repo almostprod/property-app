@@ -4,6 +4,7 @@ import babel from "@rollup/plugin-babel";
 import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import outputManifest from "rollup-plugin-output-manifest";
+import includePaths from "rollup-plugin-includepaths";
 
 import postcss from "rollup-plugin-postcss";
 import tailwindcss from "tailwindcss";
@@ -24,6 +25,10 @@ const config = {
       plugins: ["@babel/plugin-syntax-dynamic-import"],
     }),
     resolve({ browser: true }),
+    includePaths({
+      paths: ["src"],
+      extensions: [".js", ".css"],
+    }),
     commonjs({
       namedExports: {
         "node_modules/react/index.js": [
