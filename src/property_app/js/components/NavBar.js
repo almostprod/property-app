@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { InertiaLink as Link } from "@inertiajs/inertia-react"
 
 import TailwindTransition from "components/TailwindTransition.js"
+import PlaceholderIcon from "components/PlaceholderIcon.js"
 import useComponentVisible from "hooks/use-component-visible.js"
 
 const MobileMenuButton = ({ isOpen, onClick }) => (
@@ -53,7 +54,7 @@ const ProfileDropdown = ({}) => {
           aria-haspopup="true"
           onClick={() => setIsComponentVisible(!isComponentVisible)}
         >
-          <img className="h-8 w-8 rounded-full" src="/static/user-solid.svg" alt="" />
+          <PlaceholderIcon />
         </button>
       </div>
       <ProfileDropdownPanel ref={ref} showPanel={isComponentVisible} />
