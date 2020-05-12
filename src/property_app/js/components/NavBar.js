@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { InertiaLink as Link } from "@inertiajs/inertia-react";
+import React, { useState } from "react"
+import { InertiaLink as Link } from "@inertiajs/inertia-react"
 
-import TailwindTransition from "components/TailwindTransition.js";
-import useComponentVisible from "hooks/use-component-visible.js";
+import TailwindTransition from "components/TailwindTransition.js"
+import useComponentVisible from "hooks/use-component-visible.js"
 
 const MobileMenuButton = ({ isOpen, onClick }) => (
   <button
@@ -38,10 +38,10 @@ const MobileMenuButton = ({ isOpen, onClick }) => (
       />
     </svg>
   </button>
-);
+)
 
 const ProfileDropdown = ({}) => {
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
 
   return (
     <div className="ml-3 relative">
@@ -58,8 +58,8 @@ const ProfileDropdown = ({}) => {
       </div>
       <ProfileDropdownPanel ref={ref} showPanel={isComponentVisible} />
     </div>
-  );
-};
+  )
+}
 
 const ProfileDropdownPanel = React.forwardRef(({ showPanel }, ref) => (
   <TailwindTransition
@@ -112,7 +112,7 @@ const ProfileDropdownPanel = React.forwardRef(({ showPanel }, ref) => (
       </div>
     </div>
   </TailwindTransition>
-));
+))
 
 const Menu = ({ section }) => {
   const classNames = {
@@ -139,16 +139,16 @@ const Menu = ({ section }) => {
       "focus:text-gray-700",
       "focus:border-gray-300",
     ],
-  };
+  }
 
-  const dashboardActive = section === "dashboard";
-  const usersActive = section === "users";
+  const dashboardActive = section === "dashboard"
+  const usersActive = section === "users"
 
   const activeClasses =
-    classNames.common.join(" ") + " " + classNames.onlyActive.join(" ");
+    classNames.common.join(" ") + " " + classNames.onlyActive.join(" ")
 
   const normalClasses =
-    classNames.common.join(" ") + " " + classNames.onlyNormal.join(" ");
+    classNames.common.join(" ") + " " + classNames.onlyNormal.join(" ")
 
   return (
     <div className="hidden sm:ml-6 sm:flex">
@@ -162,8 +162,8 @@ const Menu = ({ section }) => {
         Users
       </Link>
     </div>
-  );
-};
+  )
+}
 
 const MobileMenu = ({ isOpen, section }) => {
   const classNames = {
@@ -198,18 +198,18 @@ const MobileMenu = ({ isOpen, section }) => {
       "focus:bg-gray-50",
       "focus:border-gray-300",
     ],
-  };
+  }
 
-  const dashboardActive = section === "dashboard";
-  const usersActive = section === "users";
+  const dashboardActive = section === "dashboard"
+  const usersActive = section === "users"
 
   const activeClasses =
-    classNames.common.join(" ") + " " + classNames.onlyActive.join(" ");
+    classNames.common.join(" ") + " " + classNames.onlyActive.join(" ")
 
   const normalClasses =
-    classNames.common.join(" ") + " " + classNames.onlyNormal.join(" ");
+    classNames.common.join(" ") + " " + classNames.onlyNormal.join(" ")
 
-  const toggleClass = isOpen ? "block" : "hidden";
+  const toggleClass = isOpen ? "block" : "hidden"
 
   return (
     <div className={`${toggleClass} sm:hidden`}>
@@ -225,11 +225,11 @@ const MobileMenu = ({ isOpen, section }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const NavBar = ({ section }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <>
@@ -284,7 +284,7 @@ const NavBar = ({ section }) => {
         <MobileMenu isOpen={isMenuOpen} section={section} />
       </nav>
     </>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

@@ -1,11 +1,11 @@
-import "style/tailwind.css";
+import "style/tailwind.css"
 
-import React from "react";
-import ReactDOM from "react-dom";
+import React from "react"
+import ReactDOM from "react-dom"
 
-import { InertiaApp } from "@inertiajs/inertia-react";
+import { InertiaApp } from "@inertiajs/inertia-react"
 
-const app = document.getElementById("app");
+const app = document.getElementById("app")
 
 ReactDOM.render(
   <InertiaApp
@@ -15,4 +15,4 @@ ReactDOM.render(
     }
   />,
   app
-);
+)

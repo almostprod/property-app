@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
 
-import NavBar from "components/NavBar.js";
+import NavBar from "components/NavBar.js"
 
 const AppLayout = ({ title, section, children }) => {
   useEffect(() => {
-    document.title = title;
-  }, [title]);
+    document.title = title
+  }, [title])
 
   return (
     <div className="min-h-screen bg-white">
@@ -21,7 +21,7 @@ const AppLayout = ({ title, section, children }) => {
         </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AppLayout;
+export default AppLayout

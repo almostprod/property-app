@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const TableHeader = ({ columnLabels }) => {
   return (
@@ -15,8 +15,8 @@ const TableHeader = ({ columnLabels }) => {
         <th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
       </tr>
     </thead>
-  );
-};
+  )
+}
 
 const TableRow = ({ actionUrl, data }) => {
   return (
@@ -35,8 +35,8 @@ const TableRow = ({ actionUrl, data }) => {
         </a>
       </td>
     </tr>
-  );
-};
+  )
+}
 
 const Table = ({ columnLabels, data }) => {
   return (
@@ -54,7 +54,7 @@ const Table = ({ columnLabels, data }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table
