@@ -28,7 +28,9 @@ def db_migrate(c, message="replace this message"):
     """
     Create a new alembic migration.
     """
-    c.run(f"poetry run alembic revision --autogenerate -m '{message}'", pty=True)
+    c.run(
+        f"poetry run alembic revision --autogenerate -m '{message}'", pty=True, env=env
+    )
 
 
 @task(help={"target": "Target alembic revision."})
@@ -36,14 +38,14 @@ def db_upgrade(c, target="head"):
     """
     Upgrade the db to the target alembic revision.
     """
-    c.run(f"poetry run alembic upgrade {target}", pty=True)
+    c.run(f"poetry run alembic upgrade {target}", pty=True, env=env)
 
 
 @task
 def dev_services(c):
     c.run("docker network create property-app-net || true", hide=True)
-    c.run("docker-compose -f docker-compose.yml up -d", pty=True)
-    c.run("pg_isready")
+    c.run("docker-compose -f docker-compose.yml up -d", pty=True, env=env)
+    c.run("pg_isready", env=env)
 
 
 @task(dev_services)

@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   proxy:
@@ -8,14 +8,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    
-  db:
-    image: postgres:11
-    env_file: .env      
-    ports:
-      - "5432:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
 
   redis:
     image: redis:5.0-alpine
@@ -27,9 +19,8 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
 
 volumes:
-  db_data:
   redis_data:
-    
+
 networks:
   default:
     external:
