@@ -7,6 +7,7 @@ from starlette.routing import Router
 from starlette.responses import RedirectResponse
 
 from .views.index import Index
+from .views.dashboard import Dashboard
 from .views.user import UserList, UserDetail
 
 routes = Router()
@@ -18,6 +19,7 @@ def init_app(app: Starlette, path="/", name=None):
 
 
 routes.add_route("/", Index)
+routes.add_route("/dashboard", Dashboard)
 routes.add_route("/users", UserList)
 routes.add_route("/users/{id:int}", UserDetail)
 
