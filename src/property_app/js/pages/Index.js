@@ -1,6 +1,8 @@
 import React from "react"
 
-const Index = () => (
+import { InertiaLink as Link } from "@inertiajs/inertia-react"
+
+const Index = ({ signUpUrl }) => (
   <div className="min-h-screen bg-white flex">
     <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
       <div className="mx-auto w-full max-w-sm">
@@ -11,12 +13,12 @@ const Index = () => (
           </h2>
           <p className="mt-2 text-sm leading-5 text-gray-600 max-w">
             Or&nbsp;
-            <a
-              href="#"
+            <Link
+              href={signUpUrl}
               className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
             >
               get started with a new account
-            </a>
+            </Link>
           </p>
         </div>
         <div className="mt-8">
