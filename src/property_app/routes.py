@@ -8,7 +8,7 @@ from starlette.responses import RedirectResponse
 
 from .views.index import Index
 from .views.dashboard import Dashboard
-from .views.signup import SignUp
+from .views.signup import SignUp, SignOut
 from .views.user import UserList, UserDetail
 
 routes = Router()
@@ -21,6 +21,7 @@ def init_app(app: Starlette, path="/", name=None):
 
 routes.add_route("/", Index)
 routes.add_route("/signup", SignUp)
+routes.add_route("/signout", SignOut)
 routes.add_route("/dashboard", Dashboard)
 routes.add_route("/users", UserList)
 routes.add_route("/users/{id:int}", UserDetail)

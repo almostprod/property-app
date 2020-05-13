@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { InertiaLink as Link } from "@inertiajs/inertia-react"
+import { InertiaLink as Link, usePage } from "@inertiajs/inertia-react"
 
 import TailwindTransition from "components/TailwindTransition.js"
 import PlaceholderIcon from "components/PlaceholderIcon.js"
@@ -62,21 +62,24 @@ const ProfileDropdown = ({}) => {
   )
 }
 
-const ProfileDropdownPanel = React.forwardRef(({ showPanel }, ref) => (
-  <TailwindTransition
-    show={showPanel}
-    enter="transition ease-out duration-200"
-    enterFrom="transform opacity-0 scale-95"
-    enterTo="transform opacity-100 scale-100"
-    leave="transition ease-in duration-75"
-    leaveFrom="transform opacity-100 scale-100"
-    leaveTo="transform opacity-0 scale-95"
-  >
-    <div
-      ref={ref}
-      className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+const ProfileDropdownPanel = React.forwardRef(({ showPanel }, ref) => {
+  const { signOutUrl } = usePage()
+
+  return (
+    <TailwindTransition
+      show={showPanel}
+      enter="transition ease-out duration-200"
+      enterFrom="transform opacity-0 scale-95"
+      enterTo="transform opacity-100 scale-100"
+      leave="transition ease-in duration-75"
+      leaveFrom="transform opacity-100 scale-100"
+      leaveTo="transform opacity-0 scale-95"
     >
-      {/* <!--
+      <div
+        ref={ref}
+        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+      >
+        {/* <!--
             Profile dropdown panel, show/hide based on dropdown state.
 
             Entering: "transition ease-out duration-200"
@@ -86,36 +89,40 @@ const ProfileDropdownPanel = React.forwardRef(({ showPanel }, ref) => (
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
           --> */}
-      <div
-        className="py-1 rounded-md bg-white shadow-xs"
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="user-menu"
-      >
-        <a
-          href="#"
-          className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+        <div
+          className="py-1 rounded-md bg-white shadow-xs"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="user-menu"
         >
-          Your Profile
-        </a>
-        <a
-          href="#"
-          className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-        >
-          Settings
-        </a>
-        <a
-          href="#"
-          className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-        >
-          Sign out
-        </a>
+          <a
+            href="#"
+            className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+          >
+            Your Profile
+          </a>
+          <a
+            href="#"
+            className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+          >
+            Settings
+          </a>
+          <Link
+            href={signOutUrl}
+            className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+            method="POST"
+          >
+            Sign out
+          </Link>
+        </div>
       </div>
-    </div>
-  </TailwindTransition>
-))
+    </TailwindTransition>
+  )
+})
 
 const Menu = ({ section }) => {
+  const { dashboardUrl, usersUrl } = usePage()
+
   const classNames = {
     common: [
       "inline-flex",
@@ -153,11 +160,14 @@ const Menu = ({ section }) => {
 
   return (
     <div className="hidden sm:ml-6 sm:flex">
-      <Link href="/" className={`${dashboardActive ? activeClasses : normalClasses}`}>
+      <Link
+        href={dashboardUrl}
+        className={`${dashboardActive ? activeClasses : normalClasses}`}
+      >
         Dashboard
       </Link>
       <Link
-        href="/users"
+        href={usersUrl}
         className={`${usersActive ? activeClasses : normalClasses} ml-8`}
       >
         Users
@@ -167,6 +177,8 @@ const Menu = ({ section }) => {
 }
 
 const MobileMenu = ({ isOpen, section }) => {
+  const { dashboardUrl, usersUrl } = usePage()
+
   const classNames = {
     common: [
       "block",
@@ -215,11 +227,14 @@ const MobileMenu = ({ isOpen, section }) => {
   return (
     <div className={`${toggleClass} sm:hidden`}>
       <div className="pt-2 pb-4">
-        <Link href="/" className={dashboardActive ? activeClasses : normalClasses}>
+        <Link
+          href={dashboardUrl}
+          className={dashboardActive ? activeClasses : normalClasses}
+        >
           Dashboard
         </Link>
         <Link
-          href="/users"
+          href={usersUrl}
           className={`${usersActive ? activeClasses : normalClasses} mt-1`}
         >
           Users
