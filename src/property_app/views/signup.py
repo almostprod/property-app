@@ -7,8 +7,6 @@ from starlette.responses import RedirectResponse
 
 from property_app.lib.inertia import InertiaRequest, InertiaHTTPEndpoint
 
-from property_app.models.auth import AppUser
-
 
 class SignUpForm(BaseModel):
     email: EmailStr
