@@ -3,8 +3,6 @@ from __future__ import annotations
 from pydantic import BaseModel, Field, ValidationError, validator
 from pydantic import EmailStr, SecretStr
 
-from starlette.responses import RedirectResponse
-
 from property_app.lib.inertia import InertiaRequest, InertiaHTTPEndpoint
 
 
@@ -26,11 +24,7 @@ class SignUp(InertiaHTTPEndpoint):
     def get(self, request: InertiaRequest):
 
         if request.user.is_authenticated:
-            return RedirectResponse(
-                request.url_for("Dashboard"),
-                headers={"X-Inertia": "true"},
-                status_code=303,
-            )
+            return request.redirect(request.url_for("Dashboard"),)
 
         return {}
 
@@ -42,9 +36,7 @@ class SignUp(InertiaHTTPEndpoint):
         except ValidationError as e:
             return {"errors": e.errors()}
 
-        return RedirectResponse(
-            request.url_for("Dashboard"), headers={"X-Inertia": "true"}, status_code=303
-        )
+        return request.redirect(request.url_for("Dashboard"))
 
 
 class SignOut(InertiaHTTPEndpoint):
@@ -53,6 +45,4 @@ class SignOut(InertiaHTTPEndpoint):
         if "auth_token" in request.session:
             del request.session["auth_token"]
 
-        return RedirectResponse(
-            request.url_for("Index"), headers={"X-Inertia": "true"}, status_code=303
-        )
+        return request.redirect(request.url_for("Index"))

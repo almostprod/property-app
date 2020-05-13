@@ -5,9 +5,10 @@ import typing
 from starlette.concurrency import run_in_threadpool
 from starlette.exceptions import HTTPException
 from starlette.requests import Request, empty_receive, empty_send
-from starlette.responses import PlainTextResponse
+from starlette.responses import PlainTextResponse, RedirectResponse
 from starlette.types import Receive, Scope, Send
 from starlette.responses import Response, JSONResponse
+from starlette.datastructures import URL
 
 from property_app.app import templates
 
@@ -19,6 +20,16 @@ class InertiaRequest(Request):
         super().__init__(scope, receive=receive, send=send)
         self.is_inertia_request = self.headers.get("X-Inertia", False)
         self.inertia_asset_version = self.headers.get("X-Inertia-Version", None)
+
+    def redirect(
+        self, url: typing.Union[str, URL], status_code: int = 303, headers: dict = None
+    ) -> RedirectResponse:
+        if headers is None:
+            headers = {}
+
+        headers["X-Inertia"] = "true"
+
+        return RedirectResponse(url, status_code=status_code, headers=headers)
 
 
 class InertiaHTTPEndpoint:
