@@ -45,15 +45,22 @@ class InertiaHTTPEndpoint:
     async def _handle_inertia(self, request, context):
         return JSONResponse(context, headers={"X-Inertia": "true"})
 
-    def _handle(self, request) -> typing.Awaitable[dict]:
+    async def _handle(self, request) -> typing.Awaitable[dict]:
         handler_name = "get" if request.method == "HEAD" else request.method.lower()
         handler = getattr(self, handler_name, self.method_not_allowed)
 
         is_async = asyncio.iscoroutinefunction(handler)
-        if is_async:
-            return handler(request)
 
-        return run_in_threadpool(handler, request)
+        handler_args = [request]
+
+        if is_async:
+            return handler(*handler_args)
+
+        if handler_name == "post":
+            json_body = await request.json()
+            handler_args.append(json_body)
+
+        return await run_in_threadpool(handler, *handler_args)
 
     def _inertia_context(self, request, props):
         return {
@@ -65,8 +72,13 @@ class InertiaHTTPEndpoint:
 
     async def dispatch(self) -> None:
         request = InertiaRequest(self.scope, receive=self.receive)
-        props = await self._handle(request)
-        context = self._inertia_context(request, props)
+        handler_response = await self._handle(request)
+
+        if isinstance(handler_response, Response):
+            await handler_response(self.scope, self.receive, self.send)
+            return
+
+        context = self._inertia_context(request, handler_response)
 
         if request.is_inertia_request:
             response = await self._handle_inertia(request, context)

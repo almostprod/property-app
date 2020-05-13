@@ -6,8 +6,27 @@ from sqlalchemy_mixins.session import NoSessionError  # type: ignore
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import Response
+from starlette.middleware.authentication import AuthenticationMiddleware
+from starlette.middleware.sessions import SessionMiddleware
+
+from starlette.authentication import (
+    AuthenticationBackend,
+    SimpleUser,
+    UnauthenticatedUser,
+    AuthCredentials,
+)
 
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware  # type: ignore
+
+
+class PasswordAuthBackend(AuthenticationBackend):
+    async def authenticate(self, request):
+
+        session = request.session
+        if "auth_token" in session:
+            return AuthCredentials(["authenticated"]), SimpleUser(session["auth_token"])
+
+        return AuthCredentials(["unauthenticated"]), UnauthenticatedUser()
 
 
 def init_app(app: Starlette):
@@ -17,6 +36,9 @@ def init_app(app: Starlette):
     """
     from property_app.database.session import Session
     from property_app.database import AppBase
+    from property_app.config import get_config
+
+    config = get_config()
 
     @app.middleware("http")
     async def canonical_log(request: Request, call_next) -> Response:
@@ -58,21 +80,11 @@ def init_app(app: Starlette):
         _request_id_ctx_var.set(request_id)
         request.state.request_id = request_id
 
-        # bind_contextvars(
-        #     request_id=request_id, url=request.url.path, method=request.method
-        # )
-
         return await call_next(request)
 
-    # @app.middleware("http")
-    # async def clear_structlog_context(request: Request, call_next) -> Response:
-    #     from structlog.contextvars import clear_contextvars
-
-    #     clear_contextvars()
-
-    #     return await call_next(request)
-
     app.add_middleware(ProxyHeadersMiddleware)
+    app.add_middleware(AuthenticationMiddleware, backend=PasswordAuthBackend())
+    app.add_middleware(SessionMiddleware, secret_key=config.SECRET_KEY)
 
 
 _request_id_ctx_var: ContextVar[str] = ContextVar(

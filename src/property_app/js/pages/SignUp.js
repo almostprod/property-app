@@ -1,6 +1,7 @@
 import React from "react"
 
 import { Formik, Field } from "formik"
+import { Inertia } from "@inertiajs/inertia"
 
 const SignUp = () => (
   <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -15,7 +16,7 @@ const SignUp = () => (
           initialValues={{ email: "", password: "", passwordConfirm: "" }}
           onSubmit={(values, actions) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
+              Inertia.post("/signup", values)
               actions.setSubmitting(false)
             }, 1000)
           }}

@@ -37,6 +37,9 @@ psycopg2-binary = "^2.8.4"
 uvicorn = "^0.11.3"
 typing-extensions = "^3.7.4"
 python-dotenv = "^0.13.0"
+pydantic = "^1.5.1"
+email-validator = "^1.1.0"
+itsdangerous = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 
