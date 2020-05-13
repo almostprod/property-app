@@ -14,6 +14,7 @@ This is based on another project of mine based on flask so there may still be so
 - gunicorn config doesn't work yet. still setup for flask with gthread
 - update to JWT-based session https://github.com/aogier/starlette-authlib
 - replace dummy authentication with `passlib`
+- add error tracking in production https://docs.sentry.io/platforms/python/asgi/
 
 ## Setup and Run Dev
 
