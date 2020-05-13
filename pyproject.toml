@@ -2,6 +2,7 @@
 name = "property_app"
 version = "0.0.1"
 description = ""
+license = "Apache-2.0"
 authors = ["Anthony <anthony@mcclosky.dev>"]
 
 packages = [

@@ -2,6 +2,7 @@
   "name": "@property-app/client",
   "version": "1.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "dependencies": {
     "@inertiajs/inertia": "^0.1.9",
     "@inertiajs/inertia-react": "^0.1.6",
