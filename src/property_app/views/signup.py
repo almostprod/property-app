@@ -4,7 +4,6 @@ from pydantic import BaseModel, Field, ValidationError, validator
 from pydantic import EmailStr, SecretStr
 
 from starlette.responses import RedirectResponse
-from starlette.authentication import requires
 
 from property_app.lib.inertia import InertiaRequest, InertiaHTTPEndpoint
 
