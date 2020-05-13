@@ -53,6 +53,27 @@ const REACT_EXPORTS = [
   "jsxs",
 ]
 
+const REACT_SCHEDULER_EXPORTS = [
+  "unstable_ImmediatePriority",
+  "unstable_UserBlockingPriority",
+  "unstable_NormalPriority",
+  "unstable_IdlePriority",
+  "LowPriority",
+  "unstable_runWithPriority",
+  "unstable_next",
+  "unstable_scheduleCallback",
+  "unstable_cancelCallback",
+  "unstable_wrapCallback",
+  "unstable_getCurrentPriorityLevel",
+  "unstable_shouldYield",
+  "unstable_requestPaint",
+  "unstable_continueExecution",
+  "unstable_pauseExecution",
+  "unstable_getFirstCallbackNode",
+  "unstable_now",
+  "unstable_forceFrameRate",
+]
+
 const config = {
   input: matched.sync([`${SRC_ROOT}/entry.js`, `${SRC_ROOT}/pages/*.js`]),
   output: {
@@ -77,9 +98,12 @@ const config = {
       extensions: [".js", ".css"],
     }),
     commonjs({
+      dynamicRequireTargets: [],
       namedExports: {
         "node_modules/react/index.js": REACT_EXPORTS,
+        "node_modules/scheduler/index.js": REACT_SCHEDULER_EXPORTS,
       },
+      exclude: ["node_modules/lodash-es/**"],
     }),
     postcss({
       plugins: [tailwindcss, autoprefixer],
