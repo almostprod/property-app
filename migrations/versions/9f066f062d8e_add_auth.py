@@ -1,17 +1,15 @@
 """add_auth
 
 Revision ID: 9f066f062d8e
-Revises: 
+Revises:
 Create Date: 2020-05-13 23:09:05.067810
 
 """
-from alembic import op
-import sqlalchemy as sa
-from sqlalchemy import Text
-
-import sqlalchemy_utils
-
 import property_app
+import sqlalchemy as sa
+import sqlalchemy_utils
+from alembic import op
+from sqlalchemy import Text
 
 revision = "9f066f062d8e"
 down_revision = None
