@@ -32,12 +32,21 @@ class AppUser(AppBase):
 
     @scopes.setter  # type: ignore
     def scopes(self, value):
+        if not self._extra or not self._extra["auth_scopes"]:
+            self._extra = {}
+            self._extra["auth_scopes"] = []
+
         self._extra["auth_scopes"] = value
         orm.attributes.flag_modified(self, "_extra")
+
+    emails = orm.relationship("AppUserEmail", lazy="joined")
+
+    credentials = orm.relationship("AppUserCredential")
 
     primary_email = orm.relationship(
         "AppUserEmail",
         uselist=False,
+        viewonly=True,
         primaryjoin="and_(AppUser.id == AppUserEmail.user_id, AppUserEmail.is_primary.is_(True))",  # noqa: E501
     )
 
@@ -55,6 +64,10 @@ class AppUser(AppBase):
 
         return self.email
 
+    @property
+    def is_authenticated(self):
+        return True
+
 
 class AppUserCredential(AppBase):
     __tablename__ = "app_user_credential"
@@ -63,13 +76,14 @@ class AppUserCredential(AppBase):
         sa.BigInteger, sa.ForeignKey("app_user.id"), index=True, nullable=False
     )
     user = orm.relationship(
-        "AppUser",
-        foreign_keys=[user_id],
-        backref=orm.backref("user_credentials", lazy="joined"),
-        uselist=True,
+        "AppUser", foreign_keys=[user_id], uselist=True, back_populates="credentials"
     )
 
-    credential_type = sa.Column(Enum(AppAuthCredentialType), nullable=False)
+    credential_type = sa.Column(
+        Enum(AppAuthCredentialType),
+        nullable=False,
+        default=AppAuthCredentialType.PASSWORD,
+    )
     credential = sa.Column(sa.Text, nullable=False)
 
 
@@ -80,10 +94,7 @@ class AppUserEmail(AppBase):
         sa.BigInteger, sa.ForeignKey("app_user.id"), index=True, nullable=False
     )
     user = orm.relationship(
-        "AppUser",
-        foreign_keys=[user_id],
-        backref=orm.backref("user_emails", lazy="joined"),
-        uselist=False,
+        "AppUser", foreign_keys=[user_id], uselist=False, back_populates="emails"
     )
 
     email = sa.Column(EmailType, nullable=False)

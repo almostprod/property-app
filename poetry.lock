@@ -459,6 +459,20 @@ version = "0.7.0"
 testing = ["docopt", "pytest (>=3.0.7)"]
 
 [[package]]
+category = "main"
+description = "comprehensive password hashing framework supporting over 30 schemes"
+name = "passlib"
+optional = false
+python-versions = "*"
+version = "1.7.2"
+
+[package.extras]
+argon2 = ["argon2-cffi (>=18.2.0)"]
+bcrypt = ["bcrypt (>=3.1.0)"]
+build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-sptheme (>=1.10.0)"]
+totp = ["cryptography"]
+
+[[package]]
 category = "dev"
 description = "Utility library for gitignore style pattern matching of file paths."
 name = "pathspec"
@@ -725,16 +739,11 @@ description = "Active Record, Django-like queries, nested eager load and beauty 
 name = "sqlalchemy-mixins"
 optional = false
 python-versions = "*"
-version = "1.0"
+version = "1.2.1"
 
 [package.dependencies]
 SQLAlchemy = ">=1.0"
 six = "*"
-
-[package.source]
-reference = "43c0a12c686a7baa727bf47b819f9d796914fa4f"
-type = "git"
-url = "git@github.com:absent1706/sqlalchemy-mixins.git"
 
 [[package]]
 category = "dev"
@@ -931,7 +940,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "c29cf0a59de74019521b546c12d6690824f65eac4b0631aa73db71666eade9b8"
+content-hash = "31cf09026048614b7b8031dd5590cfd0e04c3ed6a2b8d09845c9f866107c64b6"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1220,6 +1229,10 @@ parso = [
     {file = "parso-0.7.0-py2.py3-none-any.whl", hash = "sha256:158c140fc04112dc45bca311633ae5033c2c2a7b732fa33d0955bad8152a8dd0"},
     {file = "parso-0.7.0.tar.gz", hash = "sha256:908e9fae2144a076d72ae4e25539143d40b8e3eafbaeae03c1bfe226f4cdf12c"},
 ]
+passlib = [
+    {file = "passlib-1.7.2-py2.py3-none-any.whl", hash = "sha256:68c35c98a7968850e17f1b6892720764cc7eed0ef2b7cb3116a89a28e43fe177"},
+    {file = "passlib-1.7.2.tar.gz", hash = "sha256:8d666cef936198bc2ab47ee9b0410c94adf2ba798e5a84bf220be079ae7ab6a8"},
+]
 pathspec = [
     {file = "pathspec-0.8.0-py2.py3-none-any.whl", hash = "sha256:7d91249d21749788d07a2d0f94147accd8f845507400749ea19c1ec9054a12b0"},
     {file = "pathspec-0.8.0.tar.gz", hash = "sha256:da45173eb3a6f2a5a487efba21f050af2b41948be6ab52b6a1e3ff22bb8b7061"},
@@ -1418,7 +1431,10 @@ sqlalchemy = [
     {file = "SQLAlchemy-1.3.16-cp38-cp38-win_amd64.whl", hash = "sha256:7d98e0785c4cd7ae30b4a451416db71f5724a1839025544b4edbd92e00b91f0f"},
     {file = "SQLAlchemy-1.3.16.tar.gz", hash = "sha256:7224e126c00b8178dfd227bc337ba5e754b197a3867d33b9f30dc0208f773d70"},
 ]
-sqlalchemy-mixins = []
+sqlalchemy-mixins = [
+    {file = "sqlalchemy_mixins-1.2.1-py3-none-any.whl", hash = "sha256:97bc52ef5e5b5f226130c8d3d667d600c083cc1627e2a1417462c7b10f8f3cd5"},
+    {file = "sqlalchemy_mixins-1.2.1.tar.gz", hash = "sha256:784a4dad4779c1acf33c4897001c1acbf35f5c37ffd537b596fbde138ca1693e"},
+]
 sqlalchemy-stubs = [
     {file = "sqlalchemy-stubs-0.3.tar.gz", hash = "sha256:a3318c810697164e8c818aa2d90bac570c1a0e752ced3ec25455b309c0bee8fd"},
     {file = "sqlalchemy_stubs-0.3-py3-none-any.whl", hash = "sha256:ca1250605a39648cc433f5c70cb1a6f9fe0b60bdda4c51e1f9a2ab3651daadc8"},

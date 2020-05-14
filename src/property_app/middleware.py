@@ -4,8 +4,8 @@ from contextvars import ContextVar
 
 from sqlalchemy_mixins.session import NoSessionError  # type: ignore
 from starlette.applications import Starlette
-from starlette.requests import Request
-from starlette.responses import Response
+from starlette.middleware import Middleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.middleware.authentication import AuthenticationMiddleware
 from starlette_authlib.middleware import AuthlibMiddleware as SessionMiddleware
 
@@ -24,35 +24,28 @@ class PasswordAuthBackend(AuthenticationBackend):
     def get_user(self, request):
         from property_app.models import auth
 
-        user_id = request.session.get("user")
-        if user_id:
+        user_email = request.session.get("email")
+        if user_email:
             try:
-                return auth.AppUser.find_or_fail(user_id)
+                user_email = auth.AppUserEmail.where(email=user_email).first()
+                if user_email:
+                    return user_email.user
             except ModelNotFoundError:
-                request.session.pop("user")
+                request.session.clear()
 
     async def authenticate(self, request):
         user = self.get_user(request)
+
         if user and user.is_authenticated:
             scopes = ["authenticated"] + sorted([str(s) for s in user.scopes])
             return AuthCredentials(scopes), user
+
         scopes = ["unauthenticated"]
         return AuthCredentials(scopes), UnauthenticatedUser()
 
 
-def init_app(app: Starlette):
-    """
-    Setup app middleware
-
-    """
-    from property_app.database.session import Session
-    from property_app.database import AppBase
-    from property_app.config import get_config
-
-    config = get_config()
-
-    @app.middleware("http")
-    async def canonical_log(request: Request, call_next) -> Response:
+class CanonicalLogMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
         from property_app.logging import get_logger
 
         log = get_logger("property_app")
@@ -68,8 +61,12 @@ def init_app(app: Starlette):
 
         return response
 
-    @app.middleware("http")
-    async def setup_database_session(request: Request, call_next) -> Response:
+
+class DatabaseSessionMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        from property_app.database.session import Session
+        from property_app.database import AppBase
+
         try:
             request_session = AppBase.session  # noqa
         except NoSessionError:
@@ -82,8 +79,9 @@ def init_app(app: Starlette):
 
         return response
 
-    @app.middleware("http")
-    async def inject_request_meta(request: Request, call_next) -> Response:
+
+class RequestMetaMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
         import uuid
 
         request_id = str(uuid.uuid4())
@@ -93,15 +91,31 @@ def init_app(app: Starlette):
 
         return await call_next(request)
 
-    app.add_middleware(ProxyHeadersMiddleware)
-    app.add_middleware(AuthenticationMiddleware, backend=PasswordAuthBackend())
-    app.add_middleware(
-        SessionMiddleware,
-        secret_key=config.SECRET_KEY,
-        session_cookie="_session",
-        https_only=True,
-        domain=config.DOMAIN,
-    )
+
+def get_middleware(config=None):
+    """
+    Setup app middleware
+
+    """
+    from property_app.config import get_config
+
+    if config is None:
+        config = get_config()
+
+    return [
+        Middleware(ProxyHeadersMiddleware),
+        Middleware(
+            SessionMiddleware,
+            secret_key=str(config.SECRET_KEY),
+            session_cookie="_session",
+            https_only=True,
+            domain=config.DOMAIN,
+        ),
+        Middleware(RequestMetaMiddleware),
+        Middleware(DatabaseSessionMiddleware),
+        Middleware(AuthenticationMiddleware, backend=PasswordAuthBackend()),
+        Middleware(CanonicalLogMiddleware),
+    ]
 
 
 _request_id_ctx_var: ContextVar[str] = ContextVar(

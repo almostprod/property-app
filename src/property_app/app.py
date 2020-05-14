@@ -19,7 +19,9 @@ def create_app(app_config=None):
 
     logging.initialize_logging(log_mode=app_config.LOG_MODE)
 
-    starlette_app = Starlette(debug=app_config.DEBUG,)
+    starlette_app = Starlette(
+        debug=app_config.DEBUG, middleware=middleware.get_middleware(app_config)
+    )
 
     local_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -33,7 +35,6 @@ def create_app(app_config=None):
         "/assets", app=StaticFiles(directory="dist/assets/"), name="assets",
     )
 
-    middleware.init_app(starlette_app)
     routes.init_app(starlette_app)
 
     return starlette_app

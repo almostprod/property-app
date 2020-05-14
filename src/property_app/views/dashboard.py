@@ -9,7 +9,7 @@ class Dashboard(InertiaHTTPEndpoint):
         user = request.user
 
         return {
-            "userProfile": {"username": user.username},
+            "userProfile": {"name": user.name},
             "indexUrl": request.url_for("Index"),
             "signUpUrl": request.url_for("SignUp"),
             "signOutUrl": request.url_for("SignOut"),
