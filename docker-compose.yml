@@ -9,18 +9,6 @@ services:
       - "80:80"
       - "443:443"
 
-  redis:
-    image: redis:5.0-alpine
-    env_file: .env
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    command: ["redis-server", "--appendonly", "yes"]
-
-volumes:
-  redis_data:
-
 networks:
   default:
     external:

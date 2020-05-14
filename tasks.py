@@ -65,3 +65,32 @@ def pg_web(c):
         env=env,
         pty=True,
     )
+
+
+@task
+def ssl_gen(c):
+    certbot_opts = [
+        "--manual",
+        "--config-dir nginx/.letsencrypt/",
+        "--work-dir nginx/.letsencrypt/work/",
+        "--logs-dir nginx/.letsencrypt/logs/",
+        "--preferred-challenges dns",
+        "-m ssl@almostproductive.com",
+        "--agree-tos",
+        "-d *.local.almostproductive.com",
+    ]
+
+    c.run(f'certbot certonly {" ".join(certbot_opts)}')
+    c.run("cp -r nginx/.letsencrypt/live/* nginx/")
+
+
+@task
+def ssl_renew(c):
+    certbot_opts = [
+        "--config-dir nginx/.letsencrypt/",
+        "--work-dir nginx/.letsencrypt/work/",
+        "--logs-dir nginx/.letsencrypt/logs/",
+    ]
+
+    c.run(f'certbot renew {" ".join(certbot_opts)}')
+    c.run("cp nginx/.letsencrypt/live/**/*.pem nginx/")

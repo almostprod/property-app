@@ -116,6 +116,7 @@ data/databank/*.csv
 *.sublime-*
 
 .letsencrypt/
+nginx/**/*.pem
 
 cdk.out/
 
