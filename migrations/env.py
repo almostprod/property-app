@@ -2,9 +2,8 @@ import logging
 from logging.config import fileConfig
 
 from alembic import context
-from sqlalchemy import engine_from_config, pool
-
 from property_app.config import get_config
+from sqlalchemy import engine_from_config, pool
 
 config = context.config
 
@@ -106,7 +105,7 @@ def run_migrations_online():
             target_metadata=AppBase.metadata,
             process_revision_directives=process_revision_directives,
             include_object=include_object,
-            include_schemas=True,  # Added so alembic introspects all schemas on autogenerate.
+            include_schemas=True,
         )
 
         try:
