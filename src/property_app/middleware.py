@@ -3,7 +3,6 @@ import time
 from contextvars import ContextVar
 
 from sqlalchemy_mixins.session import NoSessionError  # type: ignore
-from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.middleware.authentication import AuthenticationMiddleware
