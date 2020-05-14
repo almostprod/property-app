@@ -41,7 +41,9 @@ class SignUp(InertiaHTTPEndpoint):
             if not user_email:
 
                 password = auth.AppUserCredential(
-                    credential=custom_app_context.hash(str(signup_form.password))
+                    credential=custom_app_context.hash(
+                        signup_form.password.get_secret_value()
+                    )
                 )
 
                 user = auth.AppUser.create(
