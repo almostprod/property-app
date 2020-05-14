@@ -7,26 +7,37 @@ from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import Response
 from starlette.middleware.authentication import AuthenticationMiddleware
-from starlette.middleware.sessions import SessionMiddleware
+from starlette_authlib.middleware import AuthlibMiddleware as SessionMiddleware
 
 from starlette.authentication import (
     AuthenticationBackend,
-    SimpleUser,
     UnauthenticatedUser,
     AuthCredentials,
 )
 
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware  # type: ignore
 
+from sqlalchemy_mixins.activerecord import ModelNotFoundError
+
 
 class PasswordAuthBackend(AuthenticationBackend):
+    def get_user(self, request):
+        from property_app.models import auth
+
+        user_id = request.session.get("user")
+        if user_id:
+            try:
+                return auth.AppUser.find_or_fail(user_id)
+            except ModelNotFoundError:
+                request.session.pop("user")
+
     async def authenticate(self, request):
-
-        session = request.session
-        if "auth_token" in session:
-            return AuthCredentials(["authenticated"]), SimpleUser(session["auth_token"])
-
-        return AuthCredentials(["unauthenticated"]), UnauthenticatedUser()
+        user = self.get_user(request)
+        if user and user.is_authenticated:
+            scopes = ["authenticated"] + sorted([str(s) for s in user.scopes])
+            return AuthCredentials(scopes), user
+        scopes = ["unauthenticated"]
+        return AuthCredentials(scopes), UnauthenticatedUser()
 
 
 def init_app(app: Starlette):
@@ -84,7 +95,13 @@ def init_app(app: Starlette):
 
     app.add_middleware(ProxyHeadersMiddleware)
     app.add_middleware(AuthenticationMiddleware, backend=PasswordAuthBackend())
-    app.add_middleware(SessionMiddleware, secret_key=config.SECRET_KEY)
+    app.add_middleware(
+        SessionMiddleware,
+        secret_key=config.SECRET_KEY,
+        session_cookie="_session",
+        https_only=True,
+        domain=config.DOMAIN,
+    )
 
 
 _request_id_ctx_var: ContextVar[str] = ContextVar(

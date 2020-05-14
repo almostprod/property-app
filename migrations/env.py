@@ -5,7 +5,6 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from property_app.config import get_config
-from property_app.database import AppBase
 
 config = context.config
 
@@ -73,6 +72,7 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    from property_app.database.app_base import AppBase
 
     def process_revision_directives(_context, _revision, directives):
         if getattr(config.cmd_opts, "autogenerate", False):

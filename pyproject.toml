@@ -41,6 +41,7 @@ python-dotenv = "^0.13.0"
 pydantic = "^1.5.1"
 email-validator = "^1.1.0"
 itsdangerous = "^1.1.0"
+starlette-authlib = "^0.1.6"
 
 [tool.poetry.dev-dependencies]
 

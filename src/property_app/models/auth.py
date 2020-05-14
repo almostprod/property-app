@@ -2,9 +2,10 @@ import enum
 
 import sqlalchemy as sa
 from sqlalchemy import orm
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_utils import EmailType
 
-from property_app.database import AppBase
+from property_app.database.app_base import AppBase
 from property_app.database.types import Enum
 
 
@@ -16,12 +17,60 @@ class AppAuthCredentialType(enum.Enum):
 class AppUser(AppBase):
     __tablename__ = "app_user"
 
-    username = sa.Column(sa.Text, nullable=False)
-
-    first_name = sa.Column(sa.Text, nullable=False, default="")
-    last_name = sa.Column(sa.Text, nullable=False, default="")
-
     display_name = sa.Column(sa.Text)
+
+    @hybrid_property
+    def scopes(self):
+        if "auth_scopes" not in self._extra:
+            return []
+
+        return self._extra["auth_scopes"]
+
+    @scopes.expression  # type: ignore
+    def scopes(cls):
+        return cls._extra["auth_scopes"]
+
+    @scopes.setter  # type: ignore
+    def scopes(self, value):
+        self._extra["auth_scopes"] = value
+        orm.attributes.flag_modified(self, "_extra")
+
+    primary_email = orm.relationship(
+        "AppUserEmail",
+        uselist=False,
+        primaryjoin="and_(AppUser.id == AppUserEmail.user_id, AppUserEmail.is_primary.is_(True))",  # noqa: E501
+    )
+
+    @property
+    def email(self):
+        if not self.primary_email:
+            return None
+
+        return self.primary_email.email
+
+    @property
+    def name(self):
+        if self.display_name:
+            return self.display_name
+
+        return self.email
+
+
+class AppUserCredential(AppBase):
+    __tablename__ = "app_user_credential"
+
+    user_id = sa.Column(
+        sa.BigInteger, sa.ForeignKey("app_user.id"), index=True, nullable=False
+    )
+    user = orm.relationship(
+        "AppUser",
+        foreign_keys=[user_id],
+        backref=orm.backref("user_credentials", lazy="joined"),
+        uselist=True,
+    )
+
+    credential_type = sa.Column(Enum(AppAuthCredentialType), nullable=False)
+    credential = sa.Column(sa.Text, nullable=False)
 
 
 class AppUserEmail(AppBase):
@@ -39,37 +88,3 @@ class AppUserEmail(AppBase):
 
     email = sa.Column(EmailType, nullable=False)
     is_primary = sa.Column(sa.Boolean, nullable=False, default=True)
-
-
-class AppAuthAccount(AppBase):
-    __tablename__ = "app_auth_account"
-
-    user_id = sa.Column(
-        sa.BigInteger, sa.ForeignKey("app_user.id"), index=True, nullable=False
-    )
-    user = orm.relationship(
-        "AppUser",
-        foreign_keys=[user_id],
-        backref=orm.backref("auth_accounts", lazy="joined"),
-        uselist=False,
-    )
-
-    account_key = sa.Column(sa.Text, nullable=False, index=True)
-
-
-class AppAuthCredential(AppBase):
-    __tablename__ = "app_auth_credential"
-
-    auth_account_id = sa.Column(
-        sa.BigInteger, sa.ForeignKey("app_auth_account.id"), index=True, nullable=False
-    )
-    auth_account = orm.relationship(
-        "AppAuthAccount",
-        foreign_keys=[auth_account_id],
-        backref=orm.backref("auth_credentials", lazy="joined"),
-        uselist=False,
-    )
-
-    type = sa.Column(Enum(AppAuthCredentialType), nullable=False)
-
-    credential = sa.Column(sa.Text, nullable=False)
