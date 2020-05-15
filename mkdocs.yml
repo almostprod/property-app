@@ -1,0 +1,31 @@
+site_name: Property Data App
+site_description: Search and Alerts for property data.
+
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: teal
+
+repo_name: almostproductive/property-app
+repo_url: https://github.com/almostproductive/property-app
+edit_uri: ""
+
+site_dir: ".site"
+docs_dir: "docs"
+
+nav:
+  - Design: "design.md"
+  - Roadmap: "roadmap.md"
+  - Extract: "extract.md"
+
+markdown_extensions:
+  - admonition
+  - meta
+  - codehilite:
+      guess_lang: true
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true

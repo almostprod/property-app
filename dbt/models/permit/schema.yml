@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: permits_austin
+    schema: property_data
+    tables:
+      - name: permits_austin
+
+models:
+  - name: permits
+    description: "Historical and Current Building Permits"
+    columns:
+      - name: permit_id
+        description: ""
+        tests:
+          - unique
+          - not_null

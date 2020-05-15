@@ -1,0 +1,141 @@
+name: Data Pipeline
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  extract-permits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup AWS Session Manager
+        run: |
+          curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+          sudo dpkg -i session-manager-plugin.deb
+          rm session-manager-plugin.deb
+
+      - name: Setup SSH Key
+        env:
+          SSH_KEY: ${{ secrets.AP_ACTION_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${SSH_KEY}" > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+
+      - name: Setup AWS RDS Tunnel
+        env:
+          RDS_HOST: ap-property-data.cluster-c7vby0c9yxek.us-east-1.rds.amazonaws.com
+          RDS_PORT: 5432
+          BASTION_USER: ubuntu
+          BASTION_HOST: i-04c4128b7dfd5b792
+          PGHOST: 127.0.0.1
+          PGPORT: 6432
+          PGUSER: dbt_ci
+          PGPASSWORD: ${{ secrets.DBT_PASSWORD }}
+          PGDATABASE: financial_data
+          SSH_PASSPHRASE: ${{ secrets.AP_ACTION_SSH_PASSPHRASE }}
+        run: |
+          eval "$(ssh-agent -s)"
+          DISPLAY=1 SSH_PASS="${SSH_PASSPHRASE}" SSH_ASKPASS="./actions/rds-tunnel/sshpass.sh" ssh-add ~/.ssh/id_rsa
+          ssh -N -f -L ${PGPORT}:${RDS_HOST}:${RDS_PORT} ${BASTION_USER}@${BASTION_HOST} -F ./actions/rds-tunnel/ssh_config
+          echo "Waiting for ${RDS_HOST}:${RDS_PORT} @ ${PGHOST}:${PGPORT}"
+          pg_isready -t 120 || exit 1
+          echo "Successfully connected ${RDS_HOST}:${RDS_PORT} @ ${PGHOST}:${PGPORT}"
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Setup Poetry
+        run: |
+          python -m pip install poetry
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-dev
+
+      - name: Run Permit extract
+        run: |
+          poetry run extract permits
+        env:
+          SQLALCHEMY_DATABASE_URI: postgres+psycopg2://dbt_ci:${{ secrets.DBT_PASSWORD }}@localhost:6432/property_data
+
+  run-dbt:
+    runs-on: ubuntu-latest
+    needs: [extract-plaid]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup AWS Session Manager
+        run: |
+          curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+          sudo dpkg -i session-manager-plugin.deb
+          rm session-manager-plugin.deb
+
+      - name: Setup SSH Key
+        env:
+          SSH_KEY: ${{ secrets.AP_ACTION_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${SSH_KEY}" > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+
+      - name: Setup AWS RDS Tunnel
+        env:
+          RDS_HOST: ap-property-data.cluster-c7vby0c9yxek.us-east-1.rds.amazonaws.com
+          RDS_PORT: 5432
+          BASTION_USER: ubuntu
+          BASTION_HOST: i-04c4128b7dfd5b792
+          PGHOST: 127.0.0.1
+          PGPORT: 6432
+          PGUSER: dbt_ci
+          PGPASSWORD: ${{ secrets.DBT_PASSWORD }}
+          PGDATABASE: property_data
+          SSH_PASSPHRASE: ${{ secrets.AP_ACTION_SSH_PASSPHRASE }}
+        run: |
+          eval "$(ssh-agent -s)"
+          DISPLAY=1 SSH_PASS="${SSH_PASSPHRASE}" SSH_ASKPASS="./actions/rds-tunnel/sshpass.sh" ssh-add ~/.ssh/id_rsa
+          ssh -N -f -L ${PGPORT}:${RDS_HOST}:${RDS_PORT} ${BASTION_USER}@${BASTION_HOST} -F ./actions/rds-tunnel/ssh_config
+          echo "Waiting for ${RDS_HOST}:${RDS_PORT} @ ${PGHOST}:${PGPORT}"
+          pg_isready -t 120 || exit 1
+          echo "Successfully connected ${RDS_HOST}:${RDS_PORT} @ ${PGHOST}:${PGPORT}"
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: Setup Poetry
+        run: |
+          python -m pip install poetry
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-dev -E dbt
+
+      - name: Run DBT
+        run: |
+          cd dbt && poetry run dbt run -t ci
+        env:
+          DBT_PROFILES_DIR: profiles/
+          DBT_USER: dbt_ci
+          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}

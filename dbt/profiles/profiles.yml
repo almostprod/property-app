@@ -1,0 +1,21 @@
+default:
+  outputs:
+    dev:
+      type: postgres
+      threads: 1
+      host: localhost
+      port: 5432
+      user: "{{ env_var('LOCAL_DBT_USER') }}"
+      pass: ""
+      dbname: warehouse_dev
+      schema: warehouse
+    ci:
+      type: postgres
+      threads: 1
+      host: localhost
+      port: 6432
+      user: "{{ env_var('DBT_USER') }}"
+      pass: "{{ env_var('DBT_PASSWORD') }}"
+      dbname: property_app
+      schema: core
+  target: dev
