@@ -49,7 +49,10 @@ socrata2sql = {version = "^0.1.4", extras = ["data"]}
 mkdocs = {version = "^1.1.2", extras = ["docs"]}
 mkdocs-material = {version = "^5.1.6", extras = ["docs"]}
 dataset = {version = "^1.3.1", extras = ["data"]}
-pyodbc = {version = "^4.0.30", extras = ["tcad"]}
+pyodbc = {version = "^4.0.30", optional = true, extras = ["tcad"]}
+
+[tool.poetry.extras]
+tcad = ["pyodbc"]
 
 [tool.poetry.dev-dependencies]
 
