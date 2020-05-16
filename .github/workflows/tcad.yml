@@ -12,6 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install Access DB Engine
+        run: |
+          choco install made2010
+
       - name: Set up Python 3.7
         uses: actions/setup-python@v1
         with:
