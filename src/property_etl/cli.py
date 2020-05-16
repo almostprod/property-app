@@ -1,3 +1,5 @@
 import click
 
-cli = click.CommandCollection(sources=[])
+from . import tcad
+
+cli = click.CommandCollection(sources=[tcad.cli])

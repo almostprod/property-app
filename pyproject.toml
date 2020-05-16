@@ -17,6 +17,7 @@ include = [
 
 [tool.poetry.scripts]
 property = 'property_app.app:start'
+extract = 'property_etl.cli:cli'
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -44,14 +45,16 @@ itsdangerous = "^1.1.0"
 starlette-authlib = "^0.1.6"
 sqlalchemy_mixins = "^1.2.1"
 passlib = "^1.7.2"
-dbt = {version = "^0.16.1", extras = ["data"]}
-socrata2sql = {version = "^0.1.4", extras = ["data"]}
-mkdocs = {version = "^1.1.2", extras = ["docs"]}
-mkdocs-material = {version = "^5.1.6", extras = ["docs"]}
-dataset = {version = "^1.3.1", extras = ["data"]}
+dbt = {version = "^0.16.1", optional = true, extras = ["data"]}
+socrata2sql = {version = "^0.1.4", optional = true, extras = ["data"]}
+mkdocs = {version = "^1.1.2", optional = true, extras = ["docs"]}
+mkdocs-material = {version = "^5.1.6", optional = true, extras = ["docs"]}
+dataset = {version = "^1.3.1", optional = true, extras = ["data"]}
 pyodbc = {version = "^4.0.30", optional = true, extras = ["tcad"]}
 
 [tool.poetry.extras]
+data = ["dbt", "socrata2sql", "dataset"]
+docs = ["mkdocs", "mkdocs-material"]
 tcad = ["pyodbc"]
 
 [tool.poetry.dev-dependencies]

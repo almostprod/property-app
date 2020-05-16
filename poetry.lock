@@ -2,7 +2,7 @@
 category = "main"
 description = "A data analysis library that is optimized for humans instead of machines."
 name = "agate"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.6.1"
 
@@ -58,7 +58,7 @@ version = "0.1.0"
 category = "main"
 description = "Fast ASN.1 parser and serializer with definitions for private keys, public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8, PKCS#12, PKCS#5, X.509 and TSP"
 name = "asn1crypto"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.3.0"
 
@@ -103,7 +103,7 @@ client = ["requests"]
 category = "main"
 description = "Microsoft Azure Client Library for Python (Common)"
 name = "azure-common"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.25"
 
@@ -111,7 +111,7 @@ version = "1.1.25"
 category = "main"
 description = "Microsoft Azure Storage Blob Client Library for Python"
 name = "azure-storage-blob"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.1.0"
 
@@ -123,7 +123,7 @@ azure-storage-common = ">=2.1,<3.0"
 category = "main"
 description = "Microsoft Azure Storage Common Client Library for Python"
 name = "azure-storage-common"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.1.0"
 
@@ -137,7 +137,7 @@ requests = "*"
 category = "main"
 description = "Internationalization utilities"
 name = "babel"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.8.0"
 
@@ -176,7 +176,7 @@ d = ["aiohttp (>=3.3.2)", "aiohttp-cors"]
 category = "main"
 description = "The AWS SDK for Python"
 name = "boto3"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.11.17"
 
@@ -189,7 +189,7 @@ s3transfer = ">=0.3.0,<0.4.0"
 category = "main"
 description = "Low-level, data-driven core of boto 3."
 name = "botocore"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.14.17"
 
@@ -206,7 +206,7 @@ version = ">=1.20,<1.26"
 category = "main"
 description = "Extensible memoizing collections and decorators"
 name = "cachetools"
-optional = false
+optional = true
 python-versions = "~=3.5"
 version = "4.1.0"
 
@@ -214,7 +214,7 @@ version = "4.1.0"
 category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
 name = "certifi"
-optional = false
+optional = true
 python-versions = "*"
 version = "2020.4.5.1"
 
@@ -233,7 +233,7 @@ pycparser = "*"
 category = "main"
 description = "Universal encoding detector for Python 2 and 3"
 name = "chardet"
-optional = false
+optional = true
 python-versions = "*"
 version = "3.0.4"
 
@@ -276,7 +276,7 @@ test = ["pytest (>=3.6.0,<3.9.0 || >3.9.0,<3.9.1 || >3.9.1,<3.9.2 || >3.9.2)", "
 category = "main"
 description = "Toolkit for Python-based database access."
 name = "dataset"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.3.1"
 
@@ -291,7 +291,7 @@ dev = ["pip", "nose", "wheel", "flake8", "coverage", "psycopg2-binary", "pymysql
 category = "main"
 description = "With dbt, data analysts and engineers can build analytics the way engineers build applications."
 name = "dbt"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.1"
 
@@ -306,7 +306,7 @@ dbt-snowflake = "0.16.1"
 category = "main"
 description = "The bigquery adapter plugin for dbt (data build tool)"
 name = "dbt-bigquery"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.1"
 
@@ -322,7 +322,7 @@ six = ">=1.14.0"
 category = "main"
 description = "dbt (data build tool) is a command line tool that helps analysts and engineers transform data in their warehouse more effectively"
 name = "dbt-core"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.1"
 
@@ -349,7 +349,7 @@ werkzeug = ">=0.15,<0.17"
 category = "main"
 description = "The postgres adpter plugin for dbt (data build tool)"
 name = "dbt-postgres"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.1"
 
@@ -361,7 +361,7 @@ psycopg2-binary = ">=2.8,<3.0"
 category = "main"
 description = "The redshift adapter plugin for dbt (data build tool)"
 name = "dbt-redshift"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.1"
 
@@ -375,7 +375,7 @@ dbt-postgres = "0.16.1"
 category = "main"
 description = "The snowflake adapter plugin for dbt (data build tool)"
 name = "dbt-snowflake"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.1"
 
@@ -411,7 +411,7 @@ IDNA = ["idna (>=2.1)"]
 category = "main"
 description = "Pythonic argument parser, that will make you smile"
 name = "docopt"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.6.2"
 
@@ -419,7 +419,7 @@ version = "0.6.2"
 category = "main"
 description = "Docutils -- Python Documentation Utilities"
 name = "docutils"
-optional = false
+optional = true
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "0.15.2"
 
@@ -456,7 +456,7 @@ version = "*"
 category = "main"
 description = "Clean single-source support for Python 3 and 2"
 name = "future"
-optional = false
+optional = true
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "0.18.2"
 
@@ -464,7 +464,7 @@ version = "0.18.2"
 category = "main"
 description = "Using SQLAlchemy with Spatial Databases"
 name = "geoalchemy2"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.8.0"
 
@@ -475,7 +475,7 @@ SQLAlchemy = ">=0.8"
 category = "main"
 description = "Google API client core library"
 name = "google-api-core"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 version = "1.16.0"
 
@@ -497,7 +497,7 @@ grpcio-gcp = ["grpcio-gcp (>=0.2.2)"]
 category = "main"
 description = "Google Authentication Library"
 name = "google-auth"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 version = "1.14.3"
 
@@ -512,7 +512,7 @@ six = ">=1.9.0"
 category = "main"
 description = "Google BigQuery API client library"
 name = "google-cloud-bigquery"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 version = "1.24.0"
 
@@ -536,7 +536,7 @@ tqdm = ["tqdm (>=4.0.0,<5.0.0dev)"]
 category = "main"
 description = "Google Cloud API client core library"
 name = "google-cloud-core"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 version = "1.3.0"
 
@@ -550,7 +550,7 @@ grpc = ["grpcio (>=1.8.2,<2.0dev)"]
 category = "main"
 description = "Utilities for Google Media Downloads and Resumable Uploads"
 name = "google-resumable-media"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*"
 version = "0.5.0"
 
@@ -564,7 +564,7 @@ requests = ["requests (>=2.18.0,<3.0.0dev)"]
 category = "main"
 description = "Common protobufs used in Google APIs"
 name = "googleapis-common-protos"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.6.0"
 
@@ -603,7 +603,7 @@ version = "0.9.0"
 category = "main"
 description = "JSON schema generation from dataclasses"
 name = "hologram"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.0.6"
 
@@ -635,7 +635,7 @@ version = "2.8"
 category = "main"
 description = "Iterative JSON parser with a standard Python iterator interface"
 name = "ijson"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.6.1"
 
@@ -706,7 +706,7 @@ version = "0.2.0"
 category = "main"
 description = "An ISO 8601 date/time/duration parser and formatter"
 name = "isodate"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.6.0"
 
@@ -754,7 +754,7 @@ i18n = ["Babel (>=0.8)"]
 category = "main"
 description = "JSON Matching Expressions"
 name = "jmespath"
-optional = false
+optional = true
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "0.10.0"
 
@@ -763,7 +763,7 @@ category = "main"
 description = "Lightweight pipelining: using Python functions as pipeline jobs."
 marker = "python_version > \"2.7\""
 name = "joblib"
-optional = false
+optional = true
 python-versions = ">=3.6"
 version = "0.15.1"
 
@@ -771,7 +771,7 @@ version = "0.15.1"
 category = "main"
 description = "JSON-RPC transport implementation"
 name = "json-rpc"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.13.0"
 
@@ -779,7 +779,7 @@ version = "1.13.0"
 category = "main"
 description = "An implementation of JSON Schema validation for Python"
 name = "jsonschema"
-optional = false
+optional = true
 python-versions = "*"
 version = "3.1.1"
 
@@ -797,7 +797,7 @@ format = ["idna", "jsonpointer (>1.13)", "rfc3987", "strict-rfc3339", "webcolors
 category = "main"
 description = "Python charting for 80% of humans."
 name = "leather"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.3.3"
 
@@ -808,7 +808,7 @@ six = ">=1.6.1"
 category = "main"
 description = "Python LiveReload is an awesome tool for web developers"
 name = "livereload"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.6.1"
 
@@ -820,7 +820,7 @@ tornado = "*"
 category = "main"
 description = "A logging replacement for Python"
 name = "logbook"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.5.3"
 
@@ -839,7 +839,7 @@ zmq = ["pyzmq"]
 category = "main"
 description = "A Python implementation of Lunr.js"
 name = "lunr"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.5.8"
 
@@ -874,7 +874,7 @@ lingua = ["lingua"]
 category = "main"
 description = "Python implementation of Markdown."
 name = "markdown"
-optional = false
+optional = true
 python-versions = ">=3.5"
 version = "3.2.2"
 
@@ -906,7 +906,7 @@ version = "0.6.1"
 category = "main"
 description = "A minimal snowplow event tracker for Python. Add analytics to your Python and Django apps, webapps and games"
 name = "minimal-snowplow-tracker"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.0.2"
 
@@ -918,7 +918,7 @@ six = ">=1.9.0,<2.0"
 category = "main"
 description = "Project documentation with Markdown."
 name = "mkdocs"
-optional = false
+optional = true
 python-versions = ">=3.5"
 version = "1.1.2"
 
@@ -938,7 +938,7 @@ version = "0.5.8"
 category = "main"
 description = "A Material Design theme for MkDocs"
 name = "mkdocs-material"
-optional = false
+optional = true
 python-versions = "*"
 version = "5.1.7"
 
@@ -953,7 +953,7 @@ pymdown-extensions = ">=7.0"
 category = "main"
 description = "Extension pack for Python Markdown."
 name = "mkdocs-material-extensions"
-optional = false
+optional = true
 python-versions = ">=3.5"
 version = "1.0"
 
@@ -996,7 +996,7 @@ version = "0.4.3"
 category = "main"
 description = "Python package for creating and manipulating graphs and networks"
 name = "networkx"
-optional = false
+optional = true
 python-versions = ">=3.5"
 version = "2.4"
 
@@ -1021,7 +1021,7 @@ category = "main"
 description = "Natural Language Toolkit"
 marker = "python_version > \"2.7\""
 name = "nltk"
-optional = false
+optional = true
 python-versions = "*"
 version = "3.5"
 
@@ -1051,7 +1051,7 @@ version = "1.18.4"
 category = "main"
 description = "TLS (SSL) sockets, key generation, encryption, decryption, signing, verification and KDFs using the OS crypto libraries. Does not require a compiler, and relies on the OS for patching. Works on Windows, OS X and Linux/BSD."
 name = "oscrypto"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.2.0"
 
@@ -1090,7 +1090,7 @@ test = ["pytest (>=4.0.2)", "pytest-xdist", "hypothesis (>=3.58)"]
 category = "main"
 description = "Parse human-readable date/time text."
 name = "parsedatetime"
-optional = false
+optional = true
 python-versions = "*"
 version = "2.5"
 
@@ -1179,7 +1179,7 @@ dev = ["pre-commit", "tox"]
 category = "main"
 description = "Easy to use progress bars"
 name = "progress"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.5"
 
@@ -1198,7 +1198,7 @@ wcwidth = "*"
 category = "main"
 description = "Protocol Buffers"
 name = "protobuf"
-optional = false
+optional = true
 python-versions = "*"
 version = "3.12.0"
 
@@ -1235,7 +1235,7 @@ version = "1.8.1"
 category = "main"
 description = "ASN.1 types and codecs"
 name = "pyasn1"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.4.8"
 
@@ -1243,7 +1243,7 @@ version = "0.4.8"
 category = "main"
 description = "A collection of ASN.1-based protocols modules."
 name = "pyasn1-modules"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.2.8"
 
@@ -1270,7 +1270,7 @@ version = "2.20"
 category = "main"
 description = "Cryptographic library for Python"
 name = "pycryptodomex"
-optional = false
+optional = true
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "3.9.7"
 
@@ -1315,7 +1315,7 @@ version = "1.0.4"
 category = "main"
 description = "JSON Web Token implementation in Python"
 name = "pyjwt"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.7.1"
 
@@ -1328,7 +1328,7 @@ test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner
 category = "main"
 description = "Extension pack for Python Markdown."
 name = "pymdown-extensions"
-optional = false
+optional = true
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
 version = "7.1"
 
@@ -1347,7 +1347,7 @@ version = "4.0.30"
 category = "main"
 description = "Python wrapper module around the OpenSSL library"
 name = "pyopenssl"
-optional = false
+optional = true
 python-versions = "*"
 version = "19.1.0"
 
@@ -1371,7 +1371,7 @@ version = "2.4.7"
 category = "main"
 description = "Persistent/Functional/Immutable data structures"
 name = "pyrsistent"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.16.0"
 
@@ -1408,7 +1408,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 category = "main"
 description = "py.test plugin to capture logbook log messages"
 name = "pytest-logbook"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.2.0"
 
@@ -1450,7 +1450,7 @@ version = "1.0.4"
 category = "main"
 description = "A Python Slugify application that handles Unicode"
 name = "python-slugify"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "4.0.0"
 
@@ -1464,7 +1464,7 @@ unidecode = ["Unidecode (>=1.1.1)"]
 category = "main"
 description = "Time expression parser"
 name = "pytimeparse"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.1.8"
 
@@ -1488,7 +1488,7 @@ version = "2019.3"
 category = "main"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "5.3.1"
 
@@ -1504,7 +1504,7 @@ version = "2020.5.14"
 category = "main"
 description = "Python HTTP for Humans."
 name = "requests"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "2.22.0"
 
@@ -1522,7 +1522,7 @@ socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
 category = "main"
 description = "Pure-Python RSA implementation"
 name = "rsa"
-optional = false
+optional = true
 python-versions = "*"
 version = "4.0"
 
@@ -1533,7 +1533,7 @@ pyasn1 = ">=0.1.3"
 category = "main"
 description = "An Amazon S3 Transfer Manager"
 name = "s3transfer"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.3.3"
 
@@ -1552,7 +1552,7 @@ version = "1.14.0"
 category = "main"
 description = "Snowflake Connector for Python"
 name = "snowflake-connector-python"
-optional = false
+optional = true
 python-versions = ">=3.5"
 version = "2.2.1"
 
@@ -1584,7 +1584,7 @@ secure-local-storage = ["keyring (!=16.1.0)"]
 category = "main"
 description = "SQL loader for Socrata data sets"
 name = "socrata2sql"
-optional = false
+optional = true
 python-versions = ">=3"
 version = "0.1.4"
 
@@ -1600,7 +1600,7 @@ tabulate = ">=0.8,<1.0"
 category = "main"
 description = "Python library for the Socrata Open Data API"
 name = "sodapy"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.5.5"
 
@@ -1683,7 +1683,7 @@ url = ["furl (>=0.4.1)"]
 category = "main"
 description = "Non-validating SQL parser"
 name = "sqlparse"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.3.1"
 
@@ -1742,7 +1742,7 @@ tests = ["coverage", "freezegun (>=0.2.8)", "pretend", "pytest (>=3.3.0)", "simp
 category = "main"
 description = "Pretty-print tabular data"
 name = "tabulate"
-optional = false
+optional = true
 python-versions = "*"
 version = "0.8.7"
 
@@ -1753,7 +1753,7 @@ widechars = ["wcwidth"]
 category = "main"
 description = "The most basic Text::Unidecode port"
 name = "text-unidecode"
-optional = false
+optional = true
 python-versions = "*"
 version = "1.3"
 
@@ -1769,7 +1769,7 @@ version = "0.10.1"
 category = "main"
 description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
 name = "tornado"
-optional = false
+optional = true
 python-versions = ">= 3.5"
 version = "6.0.4"
 
@@ -1778,7 +1778,7 @@ category = "main"
 description = "Fast, Extensible Progress Meter"
 marker = "python_version > \"2.7\""
 name = "tqdm"
-optional = false
+optional = true
 python-versions = ">=2.6, !=3.0.*, !=3.1.*"
 version = "4.46.0"
 
@@ -1829,7 +1829,7 @@ version = "1.35"
 category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4"
 version = "1.25.9"
 
@@ -1885,7 +1885,7 @@ version = "8.1"
 category = "main"
 description = "The comprehensive WSGI web application library."
 name = "werkzeug"
-optional = false
+optional = true
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.16.1"
 
@@ -1908,10 +1908,12 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [extras]
+data = ["dbt", "socrata2sql", "dataset"]
+docs = ["mkdocs", "mkdocs-material"]
 tcad = ["pyodbc"]
 
 [metadata]
-content-hash = "7e178a33830fb5ae45f6dd68e6513e29041c0466d253617f972752817de7b263"
+content-hash = "ff12a8e4f658cf7448fb9e36f2b3ee9f7ac0cffdb3a80704575545e912317cb2"
 python-versions = "^3.7"
 
 [metadata.files]
