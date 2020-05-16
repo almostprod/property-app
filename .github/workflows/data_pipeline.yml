@@ -2,9 +2,9 @@ name: Data Pipeline
 
 on:
   push:
-    branches: [master]
+    branches: [develop]
   pull_request:
-    branches: [master]
+    branches: [develop]
 
 jobs:
   extract-permits:
