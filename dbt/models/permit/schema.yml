@@ -2,16 +2,14 @@ version: 2
 
 sources:
   - name: permits_austin
-    schema: property_data
+    schema: public
     tables:
-      - name: permits_austin
+      - name: permits_austin_20200514
 
 models:
-  - name: permits
+  - name: permit_base
     description: "Historical and Current Building Permits"
-    columns:
-      - name: permit_id
-        description: ""
-        tests:
-          - unique
-          - not_null
+  - name: permit_address
+    description: "Addresses from the Permit dataset"
+  - name: permit
+    description: "Historical and Current Building Permits"

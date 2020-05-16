@@ -4,11 +4,11 @@ default:
       type: postgres
       threads: 1
       host: localhost
-      port: 5432
+      port: 8432
       user: "{{ env_var('LOCAL_DBT_USER') }}"
-      pass: ""
-      dbname: warehouse_dev
-      schema: warehouse
+      pass: "password"
+      dbname: amcclosky
+      schema: public
     ci:
       type: postgres
       threads: 1
