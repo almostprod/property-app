@@ -1776,7 +1776,6 @@ version = "6.0.4"
 [[package]]
 category = "main"
 description = "Fast, Extensible Progress Meter"
-marker = "python_version > \"2.7\""
 name = "tqdm"
 optional = true
 python-versions = ">=2.6, !=3.0.*, !=3.1.*"
@@ -1897,7 +1896,6 @@ watchdog = ["watchdog"]
 [[package]]
 category = "main"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-marker = "python_version < \"3.8\""
 name = "zipp"
 optional = false
 python-versions = ">=3.6"
@@ -1913,7 +1911,7 @@ docs = ["mkdocs", "mkdocs-material"]
 tcad = ["pyodbc"]
 
 [metadata]
-content-hash = "ff12a8e4f658cf7448fb9e36f2b3ee9f7ac0cffdb3a80704575545e912317cb2"
+content-hash = "4ac73774b2240cbe74c6714d94f4e1a67afbdc55962f0cf07f6fdb3527e6e7d4"
 python-versions = "^3.7"
 
 [metadata.files]
