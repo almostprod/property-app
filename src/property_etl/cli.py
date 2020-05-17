@@ -2,4 +2,6 @@ import click
 
 from . import tcad
 
-cli = click.CommandCollection(sources=[tcad.cli])
+cli = click.Group()
+
+cli.add_command(tcad.cli)
