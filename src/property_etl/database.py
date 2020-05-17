@@ -1,12 +1,14 @@
-import os
-
 import dataset
 
 import sqlalchemy as sa
 
+from .config import get_config
+
+config = get_config()
+
 
 def get_db(schema=None):
-    db_uri = os.getenv("SQLALCHEMY_DATABASE_URI")
+    db_uri = config.DATABASE_URI
 
     db = dataset.connect(db_uri, schema=schema)
     db.query(f"CREATE SCHEMA IF NOT EXISTS {schema}")

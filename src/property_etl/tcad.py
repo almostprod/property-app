@@ -8,11 +8,11 @@ import pandas as pd
 
 from tqdm.contrib import tenumerate
 
+from .config import get_config
 from .database import get_db
 
+config = get_config()
 
-CSV_EXCLUDE_COLS = ["filler"]
-CSV_LOAD_CHUNKSIZE = 1000
 
 cli = click.Group(name="tcad", help="TCAD ETL Helpers")
 
@@ -30,13 +30,13 @@ def convert_to_csv(table, out):
         f"data/tcad/{table}.txt",
         widths=table_schema["length"].values,
         dtype=str,
-        chunksize=CSV_LOAD_CHUNKSIZE,
+        chunksize=config.CSV_LOAD_CHUNKSIZE,
     )
 
     cols = table_schema["column_name"].to_numpy()
 
     exluded_cols = []
-    for col in CSV_EXCLUDE_COLS:
+    for col in config.CSV_EXCLUDE_COLS:
         exluded_cols.append(np.where(cols == col))
 
     filter_indexes = np.concatenate(exluded_cols, axis=None)
@@ -51,7 +51,7 @@ def convert_to_csv(table, out):
                     csv_io,
                     index=False,
                     header=skip_header
-                    or [col for col in cols if col not in CSV_EXCLUDE_COLS],
+                    or [col for col in cols if col not in config.CSV_EXCLUDE_COLS],
                     encoding="utf-8",
                 )
 
