@@ -6,6 +6,10 @@ import typing
 from starlette.config import Config
 from starlette.datastructures import URL, CommaSeparatedStrings
 
+from rich.traceback import install
+
+install()
+
 
 def env_str(envar, default="") -> str:
     return os.environ.get(envar, str(default))
@@ -20,7 +24,7 @@ def _config_by_environment(app_environment: str):
     return environments.get(app_environment, DevelopmentConfig)
 
 
-def get_config(app_env: typing.Optional[str] = None) -> AppConfig:
+def get_config(app_env: typing.Optional[str] = None) -> typing.Type[AppConfig]:
 
     if app_env is None:
         app_env = config("APP_ENV")
@@ -42,6 +46,10 @@ class AppConfig:
     )
     CSV_LOAD_CHUNKSIZE = config("CSV_LOAD_CHUNKSIZE", cast=int, default=1000)
 
+    @staticmethod
+    def init_app(app):
+        pass
+
 
 class ProductionConfig(AppConfig):
     @staticmethod
@@ -60,8 +68,16 @@ class DevelopmentConfig(AppConfig):
     @staticmethod
     def init_app(app):
         import logging
+        from rich.logging import RichHandler
+
+        FORMAT = "%(message)s"
+        logging.basicConfig(
+            level="NOTSET", format=FORMAT, datefmt="[%X] ", handlers=[RichHandler()]
+        )
 
         app_logger = logging.getLogger(app.name)
 
         for handler in app_logger.handlers[:]:
             handler.setLevel(app.config["APP_LOG_LEVEL"])
+
+        app_logger.debug("App init complete!")
