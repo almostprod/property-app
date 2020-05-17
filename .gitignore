@@ -159,4 +159,6 @@ yarn-error.log*
 .env.production.local
 
 # local data files
-/data
+/data/archives
+/data/tcad
+/data/out

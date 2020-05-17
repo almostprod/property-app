@@ -5,6 +5,7 @@ import re
 import io
 import subprocess
 import zipfile
+import itertools
 
 import click
 import numpy as np
@@ -17,37 +18,47 @@ TABLE_RE = re.compile(r"CREATE TABLE \[(\w+)\]\s+\((.*?\));", re.MULTILINE | re.
 DEF_RE = re.compile(r"\s*\[(\w+)\]\s*(.*?),")
 TEXT_RE = re.compile(r".*\((\d+)\)\s*")
 
+CSV_EXCLUDE_COLS = ["filler"]
+CSV_LOAD_CHUNKSIZE = 1000
+
 cli = click.Group()
 
 
 @cli.command("tcad")
 @click.option("--table", type=str)
-def convert_access(table):
-    """Convert TCAD access db to Postgres"""
+@click.option("--out", type=str, default="data/out")
+def convert_access(table, out):
+    """Convert TCAD access db to csv"""
 
-    table_schema = pd.read_csv("data/tcad/prop_table_schema.csv", index_col=False)
+    table_schema = pd.read_csv(f"data/schema/{table}.csv", index_col=False)
     table_schema.columns = [col.strip() for col in table_schema.columns]
 
     tcad_data = pd.read_fwf(
         f"data/tcad/{table}.txt",
         widths=table_schema["length"].values,
         dtype=str,
-        chunksize=1000,
+        chunksize=CSV_LOAD_CHUNKSIZE,
     )
 
     cols = table_schema["column_name"].to_numpy()
-    filler_indexes = np.where(cols == "filler")
 
-    with zipfile.ZipFile("data/property.zip", "w") as property_file:
-        with property_file.open("property.csv", "w") as property_csv:
+    exluded_cols = []
+    for col in CSV_EXCLUDE_COLS:
+        exluded_cols.append(np.where(cols == col))
+
+    filter_indexes = np.concatenate(exluded_cols, axis=None)
+
+    with zipfile.ZipFile(f"{out}/{table}.zip", "w") as property_file:
+        with property_file.open(f"{table}.csv", "w") as property_csv:
             csv_io = io.TextIOWrapper(property_csv)
             for idx, df in tenumerate(tcad_data):
                 skip_header = idx != 0
-                df.drop(df.columns[filler_indexes], axis=1, inplace=True)
+                df.drop(df.columns[filter_indexes], axis=1, inplace=True)
                 df.to_csv(
                     csv_io,
                     index=False,
-                    header=skip_header or [col for col in cols if col != "filler"],
+                    header=skip_header
+                    or [col for col in cols if col not in CSV_EXCLUDE_COLS],
                     encoding="utf-8",
                 )
 
