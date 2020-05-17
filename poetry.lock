@@ -1519,6 +1519,17 @@ security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)"]
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
 
 [[package]]
+category = "dev"
+description = "a python refactoring library..."
+name = "rope"
+optional = false
+python-versions = "*"
+version = "0.17.0"
+
+[package.extras]
+dev = ["pytest"]
+
+[[package]]
 category = "main"
 description = "Pure-Python RSA implementation"
 name = "rsa"
@@ -1911,7 +1922,7 @@ docs = ["mkdocs", "mkdocs-material"]
 tcad = ["pyodbc"]
 
 [metadata]
-content-hash = "4ac73774b2240cbe74c6714d94f4e1a67afbdc55962f0cf07f6fdb3527e6e7d4"
+content-hash = "c0093f306289d5511a1ebed8a397c9d25b0c79920fd2d2fec30868271dc9305e"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -2722,6 +2733,9 @@ regex = [
 requests = [
     {file = "requests-2.22.0-py2.py3-none-any.whl", hash = "sha256:9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31"},
     {file = "requests-2.22.0.tar.gz", hash = "sha256:11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4"},
+]
+rope = [
+    {file = "rope-0.17.0.tar.gz", hash = "sha256:658ad6705f43dcf3d6df379da9486529cf30e02d9ea14c5682aa80eb33b649e1"},
 ]
 rsa = [
     {file = "rsa-4.0-py2.py3-none-any.whl", hash = "sha256:14ba45700ff1ec9eeb206a2ce76b32814958a98e372006c8fb76ba820211be66"},

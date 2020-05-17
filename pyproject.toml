@@ -70,6 +70,7 @@ sqlalchemy-stubs = "^0.3"
 colorama = "^0.4.3"
 flake8 = "^3.7.9"
 pyinvoke = "^1.0.4"
+rope = "^0.17.0"
 
 [tool.black]
 line-length = 88
