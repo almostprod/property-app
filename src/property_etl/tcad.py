@@ -1,107 +1,177 @@
 import io
-import subprocess
 import zipfile
+import logging
 
 import click
 import numpy as np
 import pandas as pd
-
-from tqdm.contrib import tenumerate
 
 from .config import get_config
 from .database import get_db
 
 config = get_config()
 
+log = logging.getLogger("tcad")
 
 cli = click.Group(name="tcad", help="TCAD ETL Helpers")
 
 
-@cli.command("csv")
-@click.option("--table", type=str)
-@click.option("--out", type=str, default="data/out")
-def convert_to_csv(table, out):
-    """Convert .mdb table export to csv"""
+def _normalize_csv_schema_columns(columns):
+    return [col.strip().lower() for col in columns]
 
-    table_schema = pd.read_csv(f"data/schema/{table}.csv", index_col=False)
-    table_schema.columns = [col.strip() for col in table_schema.columns]
+
+@cli.command("json")
+@click.option("--table", type=str, required=True)
+@click.option("--out", type=str, default="data/out")
+def convert_to_json(table, out):
+    """Convert .mdb table export to json"""
+    from rich.console import Console
+
+    console = Console()
+
+    table_schema_df = pd.read_csv(f"data/schema/{table}.csv", index_col=False)
+    table_schema_df.columns = _normalize_csv_schema_columns(table_schema_df.columns)
+
+    table_schema = table_schema_df.set_index("column_name")
+    table_schema = table_schema[~table_schema.index.isin(["filler"])]
+
+    def _column_type_map(column_type):
+        column_type = column_type.strip()
+
+        if column_type.startswith("char"):
+            return str
+
+        if column_type.startswith("int"):
+            return int
+
+        if column_type.startswith("numeric"):
+            return str
+
+        return str
+
+    table_schema["column_type"] = table_schema["column_type"].map(_column_type_map)
+
+    json_schema = table_schema[~table_schema.index.isin(["filler"])].to_dict(
+        orient="index"
+    )
+
+    col_names = []
+    col_spec = []
+    dtypes = {}
+
+    for col_name, spec in json_schema.items():
+        col_names.append(col_name)
+        col_spec.append((spec["offset_start"] - 1, spec["offset_end"]))
+
+        dtypes[col_name] = spec["column_type"]
 
     tcad_data = pd.read_fwf(
         f"data/tcad/{table}.txt",
-        widths=table_schema["length"].values,
-        dtype=str,
+        names=col_names,
+        colspecs=col_spec,
+        dtype=dtypes,
         chunksize=config.CSV_LOAD_CHUNKSIZE,
+        index_col=["prop_id", "prop_val_yr", "py_owner_id", "sup_num"],
     )
 
-    cols = table_schema["column_name"].to_numpy()
+    export_archive = f"{out}/{table}.zip"
+    with zipfile.ZipFile(export_archive, "w") as property_file:
+        total_row_count = 0
+        for idx, df in enumerate(tcad_data):
 
-    exluded_cols = []
-    for col in config.CSV_EXCLUDE_COLS:
-        exluded_cols.append(np.where(cols == col))
+            json_filename = f"{table}.{idx}.json"
+            with property_file.open(json_filename, "w") as property_json:
+                row_count = df.shape[0]
+                console.print(
+                    f"Total Exported: {total_row_count} rows Current File: {json_filename}",  # noqa
+                    end="\r",  # noqa
+                )
+                console.print("", end="\r")
 
-    filter_indexes = np.concatenate(exluded_cols, axis=None)
+                json_io = io.TextIOWrapper(property_json)
+                df.to_json(json_io, orient="table")
 
-    with zipfile.ZipFile(f"{out}/{table}.zip", "w") as property_file:
-        with property_file.open(f"{table}.csv", "w") as property_csv:
-            csv_io = io.TextIOWrapper(property_csv)
-            for idx, df in tenumerate(tcad_data):
-                skip_header = idx != 0
-                df.drop(df.columns[filter_indexes], axis=1, inplace=True)
-                df.to_csv(
-                    csv_io,
-                    index=False,
-                    header=skip_header
-                    or [col for col in cols if col not in config.CSV_EXCLUDE_COLS],
-                    encoding="utf-8",
+                total_row_count += row_count
+
+        console.print(
+            f":white_check_mark: Exported: {total_row_count} rows", emoji=True
+        )
+
+        console.print(
+            f"Export of {table} to {export_archive} complete! :tada:", emoji=True
+        )
+
+
+@cli.command("load_json")
+@click.option("--table", type=str, required=True)
+def load_json(table):
+    """
+    Import db table to db
+    """
+    from rich import print
+
+    load_json_to_db(table)
+
+    print(f"{table} import complete! :tada:")
+
+
+def load_json_to_db(
+    table_name,
+    filename=None,
+    data_path="data/out",
+    chunksize=config.CSV_LOAD_CHUNKSIZE,
+    schema="tcad",
+):
+    import pathlib
+    import sqlalchemy as sa
+    from rich.console import Console
+    from rich.progress import track
+
+    console = Console()
+
+    if not filename:
+        filename = f"{table_name}.zip"
+
+    data_zip_path = pathlib.Path(data_path) / pathlib.Path(filename)
+
+    db = get_db(schema=schema)
+
+    with zipfile.ZipFile(data_zip_path, "r") as data_file, db as transaction:
+
+        table = transaction.get_table(table_name.lower())
+
+        table.delete()
+
+        for json_file in track(
+            [f for f in data_file.namelist() if f.endswith(".json")],
+            description=f"Loading {table_name}...",
+        ):
+            with data_file.open(json_file, "r") as table_json:
+                json_io = io.TextIOWrapper(table_json)
+
+                tcad_data = pd.read_json(json_io, orient="table")
+                tcad_index = tcad_data.index.to_frame()
+
+                col_types = {}
+
+                for col, dtype in tcad_index.dtypes.to_dict().items():
+                    col_types[col] = sa.Text
+                    if dtype == np.int64:
+                        col_types[col] = sa.BigInteger
+
+                col_types["data"] = sa.dialects.postgresql.JSONB
+
+                table.insert_many(
+                    list(_yield_rows(tcad_data, tcad_index)),
+                    ensure=True,
+                    types=col_types,
                 )
 
-
-@cli.command("init_db")
-@click.option("--mdb_file", type=str, default="data/tcad/TCAD_Roll.mdb")
-@click.option("--out", type=str, default="data/out")
-def init_db(mdb_file, out):
-    """
-    Inititialize db to .mdb schema
-    """
-
-    init_db_schema(mdb_file)
+    console.print(f"Load of {table_name} table complete! :tada:", emoji=True)
 
 
-def list_tables(rdb_file):
-    """
-    :param rdb_file: The mdb file.
-    :return: A list of the tables in a given database.
-    """
-    tables = subprocess.check_output(["mdb-tables", "-t", "table", rdb_file]).decode(
-        "utf8"
-    )
-    return tables.strip().split(" ")
-
-
-def export_mdb_schema(rdb_file, db="postgres"):
-    """
-    :param rdb_file: The MS Access mdb database file.
-    :param db: Database SQL dialect to use for the schema definition.
-    """
-    output = subprocess.check_output(
-        ["mdb-schema", "--no-indexes", "--no-relations", rdb_file, db]
-    )
-
-    create_schema_definition = output.decode(encoding="utf8")
-
-    return create_schema_definition.replace(
-        "CREATE TABLE", "CREATE TABLE IF NOT EXISTS"
-    )
-
-
-def init_db_schema(rdb_file):
-    schema_definition = export_mdb_schema(rdb_file)
-    schema_tables = list_tables(rdb_file)
-
-    dataset = get_db(schema="tcad")
-
-    with dataset as transaction:
-        conn = transaction.executable()
-        conn.execute(schema_definition)
-
-    return schema_tables
+def _yield_rows(tcad_data, tcad_index):
+    for index, values in tcad_data.iterrows():
+        row = tcad_index.loc[index, :].to_dict()
+        row["data"] = values.to_dict()
+        yield row

@@ -10,7 +10,9 @@ config = get_config()
 def get_db(schema=None):
     db_uri = config.DATABASE_URI
 
-    db = dataset.connect(db_uri, schema=schema)
+    db = dataset.connect(
+        str(db_uri), schema=schema, engine_kwargs={"use_batch_mode": True}
+    )
     db.query(f"CREATE SCHEMA IF NOT EXISTS {schema}")
 
     return db
