@@ -9,6 +9,13 @@ services:
       - "80:80"
       - "443:443"
 
+  dynamodb:
+    env_file: .env
+    image: amazon/dynamodb-local
+    ports:
+      - "8000:8000"
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb"]
+
 networks:
   default:
     external:
