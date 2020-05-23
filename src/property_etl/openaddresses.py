@@ -3,7 +3,6 @@ import zipfile
 import logging
 
 import click
-import numpy as np
 import pandas as pd
 
 from .config import get_config
