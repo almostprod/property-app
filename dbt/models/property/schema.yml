@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: tcad
+    schema: tcad
+    tables:
+      - name: prop
+
+models:
+  - name: property
+    description: "Property Records"

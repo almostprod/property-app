@@ -161,4 +161,5 @@ yarn-error.log*
 # local data files
 /data/archives
 /data/tcad
+/data/openaddresses
 /data/out
