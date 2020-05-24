@@ -11,7 +11,7 @@ from .database import get_db
 
 config = get_config()
 
-log = logging.getLogger("tcad")
+log = logging.getLogger("openaddresses")
 
 cli = click.Group(name="openaddresses", help="openaddresses.io ETL")
 
