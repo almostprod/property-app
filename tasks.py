@@ -50,21 +50,17 @@ def dev_services(c):
 
 @task(dev_services)
 def dev_app(c):
-    c.run("poetry run property")
+    c.run("poetry run property", env=env, pty=True)
+
+
+@task(dev_services)
+def dev_shell(c):
+    c.run("poetry run ipython", env=env, pty=True)
 
 
 @task
 def dev_client(c):
     c.run("yarn dev", pty=True)
-
-
-@task
-def pg_web(c):
-    c.run(
-        "pgweb --url=${DATABASE_URI} --listen=8081 --bind=0.0.0.0 --prefix=pgweb",
-        env=env,
-        pty=True,
-    )
 
 
 @task

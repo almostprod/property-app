@@ -36,6 +36,9 @@ class Enum(_TypeDecorator):  # noqa
         if "create_constraint" not in kwargs:
             kwargs["create_constraint"] = False
 
+        if "values_callable" not in kwargs:
+            kwargs["values_callable"] = lambda x: [e.value for e in x]
+
         super().__init__(*args, **kwargs)
 
 

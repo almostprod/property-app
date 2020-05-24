@@ -24,6 +24,11 @@ app_config = get_config()
 engine = sa.create_engine(
     str(app_config.DATABASE_URI), pool_pre_ping=True, use_batch_mode=True
 )
+
 Session = orm.scoped_session(
     orm.sessionmaker(bind=engine, **_session_options), scopefunc=get_request_id
 )
+
+
+def get_session() -> orm.session.Session:
+    return orm.session.Session(bind=engine)
