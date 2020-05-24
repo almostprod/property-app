@@ -1,454 +1,454 @@
-column_name, column_type, offset_start, offset_end, length, description
-prop_id,int(12),1,12,12,Property ID,
-prop_type_cd,char(5),13,17,5,"Property Type Code:
+"column_name"," column_type"," offset_start"," offset_end"," length"," description"
+"prop_id","int(12)","1","12","12","Property ID"
+"prop_type_cd","char(5)","13","17","5","Property Type Code:
 R = Real
 P = Business Personal Property
 M = Mobile Home
 MN = Mineral
-A = Automobiles",
-prop_val_yr,numeric(5),18,22,5,Appraisal or Tax Year,
-sup_num,int(12),23,34,12,"Supplement Version Number - 0 = represents certified data, supplemental data otherwise",
-sup_action,char(2),35,36,2,"Supplemental Action - If sup_num > 0, indicates the action to be taken on the property:
+A = Automobiles"
+"prop_val_yr","numeric(5)","18","22","5","Appraisal or Tax Year"
+"sup_num","int(12)","23","34","12","Supplement Version Number - 0 = represents certified data, supplemental data otherwise"
+"sup_action","char(2)","35","36","2","Supplemental Action - If sup_num > 0, indicates the action to be taken on the property:
 'A' - Add
 'M' - Modify
-'D' - Delete",
-sup_cd,char(10),37,46,10,Supplement Change Code - User defined,
-sup_desc,char(500),47,546,500,Supplement Change Description,
-geo_id,char(50),547,596,50,Geographic ID,
-py_owner_id,int(12),597,608,12,Property Year Owner ID – PACS Internal ID,
-py_owner_name,char(70),609,678,70,Property Year Owner Name,
-partial_owner,char(1),679,679,1,"Partial Owner ('T' or 'F')
-This indicates if there are other owners for this property.  The additional owners will appear as separate records in this layout.",
-udi_group,int(12),680,691,12,This field indicates the UDI group that a partial owner is part of.  This is used to group multi owner properties.,
-filler,char(2),692,693,2,Not In Use,
-py_addr_line1,char(60),694,753,60,Property Year Owner Address Line 1,
-py_addr_line2,char(60),754,813,60,Property Year Owner Address Line 2,
-py_addr_line3,char(60),814,873,60,Property Year Owner Address Line 3,
-py_addr_city,char(50),874,923,50,Property Year Owner Address City,
-py_addr_state,char(50),924,973,50,Property Year Owner Address State,
-py_addr_country,char(5),974,978,5,Property Year Owner Address Country,
-py_addr_zip,char(5),979,983,5,Property Year Owner Address Zip (Zip Only),
-py_addr_zip_cass,char(4),984,987,4,Property Year Owner Address Zip Cass (Cass Only),
-py_addr_zip_rt,char(2),988,989,2,Property Year Owner Address Zip Route (Route Only),
-py_confidential_flag,char(1),990,990,1,Property Year Owner Confidential Flag ('T' or 'F'),
-py_address_suppress_flag,char(1),991,991,1,"Property Year Owner 
-Address Suppression Flag ('T' or 'F')",
-filler,char(20),992,1011,20,Not In Use,
-py_addr_ml_deliverable,char(1),1012,1012,1,"Property Year Owner Address
+'D' - Delete"
+"sup_cd","char(10)","37","46","10","Supplement Change Code - User defined"
+"sup_desc","char(500)","47","546","500","Supplement Change Description"
+"geo_id","char(50)","547","596","50","Geographic ID"
+"py_owner_id","int(12)","597","608","12","Property Year Owner ID – PACS Internal ID"
+"py_owner_name","char(70)","609","678","70","Property Year Owner Name"
+"partial_owner","char(1)","679","679","1","Partial Owner ('T' or 'F')
+This indicates if there are other owners for this property.  The additional owners will appear as separate records in this layout."
+"udi_group","int(12)","680","691","12","This field indicates the UDI group that a partial owner is part of.  This is used to group multi owner properties."
+"filler","char(2)","692","693","2","Not In Use"
+"py_addr_line1","char(60)","694","753","60","Property Year Owner Address Line 1"
+"py_addr_line2","char(60)","754","813","60","Property Year Owner Address Line 2"
+"py_addr_line3","char(60)","814","873","60","Property Year Owner Address Line 3"
+"py_addr_city","char(50)","874","923","50","Property Year Owner Address City"
+"py_addr_state","char(50)","924","973","50","Property Year Owner Address State"
+"py_addr_country","char(5)","974","978","5","Property Year Owner Address Country"
+"py_addr_zip","char(5)","979","983","5","Property Year Owner Address Zip (Zip Only)"
+"py_addr_zip_cass","char(4)","984","987","4","Property Year Owner Address Zip Cass (Cass Only)"
+"py_addr_zip_rt","char(2)","988","989","2","Property Year Owner Address Zip Route (Route Only)"
+"py_confidential_flag","char(1)","990","990","1","Property Year Owner Confidential Flag ('T' or 'F')"
+"py_address_suppress_flag","char(1)","991","991","1","Property Year Owner 
+Address Suppression Flag ('T' or 'F')"
+"filler","char(20)","992","1011","20","Not In Use"
+"py_addr_ml_deliverable","char(1)","1012","1012","1","Property Year Owner Address
 Y = deliverable address
-N = undeliverable address",
-filler,char(27),1013,1039,27,Not In Use,
-situs_street_prefx,char(10),1040,1049,10,Situs/Location Street Prefix,
-situs_street,char(50),1050,1099,50,Situs/Location Street,
-situs_street_suffix,char(10),1100,1109,10,Situs/Location Street Suffix,
-situs_city,char(30),1110,1139,30,Situs/Location City,
-situs_zip,char(10),1140,1149,10,Situs/Location Zip,
-legal_desc,char(255),1150,1404,255,Legal Description,
-legal_desc2,char(255),1405,1659,255,Additional Legal Description,
-legal_acreage,numeric(16),1660,1675,16,Legal Acreage (4 Decimals),
-abs_subdv_cd,char(10),1676,1685,10,Abstract/Subdivision code,
-hood_cd,char(10),1686,1695,10,Neighborhood code,
-block,char(50),1696,1745,50,Block,
-tract_or_lot,char(50),1746,1795,50,Tract/lot,
-land_hstd_val,numeric(15),1796,1810,15,Land Homestead Value,
-land_non_hstd_val,numeric(15),1811,1825,15,Land Non-Homestead Value,
-imprv_hstd_val,numeric(15),1826,1840,15,Improvement Homestead Value,
-imprv_non_hstd_val,numeric(15),1841,1855,15,Improvement Non-Homestead value,
-ag_use_val,numeric(15),1856,1870,15,Agriculture Use Value,
-ag_market,numeric(15),1871,1885,15,Agriculture Market Value,
-timber_use,numeric(15),1886,1900,15,Timber Use Value,
-timber_market,numeric(15),1901,1915,15,Timber Market Value,
-appraised_val,numeric(15),1916,1930,15,Appraised Value,
-ten_percent_cap,numeric(15),1931,1945,15,Ten Percent Homestead Cap Adjustment,
-assessed_val,numeric(15),1946,1960,15,Assessed Value (Appraised - Cap),
-filler,char(20),1961,1980,20,Not In Use,
-arb_protest_flag,char(1),1981,1981,1,ARB Protest Flag; indicates if a protest has been filed on behalf of this property.  (T / F),
-filler,int(12),1982,1993,12,Not In Use,
-deed_book_id,char(20),1994,2013,20,Deed Book ID,
-deed_book_page,char(20),2014,2033,20,Deed Book Page,
-deed_dt,char(25),2034,2058,25,Deed Date,
-mortgage_co_id,int(12),2059,2070,12,Mortgage Company ID,
-mortage_co_name,char(70),2071,2140,70,Name of Mortgage Company,
-mortgage_acct_id,char(50),2141,2190,50,Mortgage Loan Number,
-jan1_owner_id,int(12),2191,2202,12,January 1 Owner ID,
-jan1_owner_name,char(70),2203,2272,70,January 1 Owner Name,
-jan1_addr_line1,char(60),2273,2332,60,January 1 Address Line 1,
-jan1_addr_line2,char(60),2333,2392,60,January 1 Address Line 2,
-jan1_addr_line3,char(60),2393,2452,60,January 1 Address Line 3,
-jan1_addr_city,char(50),2453,2502,50,January 1 Address City,
-jan1_addr_state,char(50),2503,2552,50,January 1 Address State,
-jan1_addr_country,char(5),2553,2557,5,January 1 Address Country,
-jan1_addr_zip,char(5),2558,2562,5,January 1 Address Zip  (Zip Only),
-jan1_addr_zip_cass,char(4),2563,2566,4,January 1 Address Zip Cass (Cass Only),
-jan1_addr_zip_rt,char(2),2567,2568,2,January 1 Address Zip  Route (Route Only),
-jan1_confidential_flag,char(1),2569,2569,1,January 1 Owner Confidential Flag ('T' or 'F'),
-jan1_address_suppress_flag,char(1),2570,2570,1,"January 1 Owner 
-Address Suppression Flag ('T' or 'F')",
-filler,char(37),2571,2607,37,Not In Use,
-jan1_ml_deliverable,char(1),2608,2608,1,"January 1 Owner Address
+N = undeliverable address"
+"filler","char(27)","1013","1039","27","Not In Use"
+"situs_street_prefx","char(10)","1040","1049","10","Situs/Location Street Prefix"
+"situs_street","char(50)","1050","1099","50","Situs/Location Street"
+"situs_street_suffix","char(10)","1100","1109","10","Situs/Location Street Suffix"
+"situs_city","char(30)","1110","1139","30","Situs/Location City"
+"situs_zip","char(10)","1140","1149","10","Situs/Location Zip"
+"legal_desc","char(255)","1150","1404","255","Legal Description"
+"legal_desc2","char(255)","1405","1659","255","Additional Legal Description"
+"legal_acreage","numeric(16)","1660","1675","16","Legal Acreage (4 Decimals)"
+"abs_subdv_cd","char(10)","1676","1685","10","Abstract/Subdivision code"
+"hood_cd","char(10)","1686","1695","10","Neighborhood code"
+"block","char(50)","1696","1745","50","Block"
+"tract_or_lot","char(50)","1746","1795","50","Tract/lot"
+"land_hstd_val","numeric(15)","1796","1810","15","Land Homestead Value"
+"land_non_hstd_val","numeric(15)","1811","1825","15","Land Non-Homestead Value"
+"imprv_hstd_val","numeric(15)","1826","1840","15","Improvement Homestead Value"
+"imprv_non_hstd_val","numeric(15)","1841","1855","15","Improvement Non-Homestead value"
+"ag_use_val","numeric(15)","1856","1870","15","Agriculture Use Value"
+"ag_market","numeric(15)","1871","1885","15","Agriculture Market Value"
+"timber_use","numeric(15)","1886","1900","15","Timber Use Value"
+"timber_market","numeric(15)","1901","1915","15","Timber Market Value"
+"appraised_val","numeric(15)","1916","1930","15","Appraised Value"
+"ten_percent_cap","numeric(15)","1931","1945","15","Ten Percent Homestead Cap Adjustment"
+"assessed_val","numeric(15)","1946","1960","15","Assessed Value (Appraised - Cap)"
+"filler","char(20)","1961","1980","20","Not In Use"
+"arb_protest_flag","char(1)","1981","1981","1","ARB Protest Flag; indicates if a protest has been filed on behalf of this property.  (T / F)"
+"filler","int(12)","1982","1993","12","Not In Use"
+"deed_book_id","char(20)","1994","2013","20","Deed Book ID"
+"deed_book_page","char(20)","2014","2033","20","Deed Book Page"
+"deed_dt","char(25)","2034","2058","25","Deed Date"
+"mortgage_co_id","int(12)","2059","2070","12","Mortgage Company ID"
+"mortage_co_name","char(70)","2071","2140","70","Name of Mortgage Company"
+"mortgage_acct_id","char(50)","2141","2190","50","Mortgage Loan Number"
+"jan1_owner_id","int(12)","2191","2202","12","January 1 Owner ID"
+"jan1_owner_name","char(70)","2203","2272","70","January 1 Owner Name"
+"jan1_addr_line1","char(60)","2273","2332","60","January 1 Address Line 1"
+"jan1_addr_line2","char(60)","2333","2392","60","January 1 Address Line 2"
+"jan1_addr_line3","char(60)","2393","2452","60","January 1 Address Line 3"
+"jan1_addr_city","char(50)","2453","2502","50","January 1 Address City"
+"jan1_addr_state","char(50)","2503","2552","50","January 1 Address State"
+"jan1_addr_country","char(5)","2553","2557","5","January 1 Address Country"
+"jan1_addr_zip","char(5)","2558","2562","5","January 1 Address Zip  (Zip Only)"
+"jan1_addr_zip_cass","char(4)","2563","2566","4","January 1 Address Zip Cass (Cass Only)"
+"jan1_addr_zip_rt","char(2)","2567","2568","2","January 1 Address Zip  Route (Route Only)"
+"jan1_confidential_flag","char(1)","2569","2569","1","January 1 Owner Confidential Flag ('T' or 'F')"
+"jan1_address_suppress_flag","char(1)","2570","2570","1","January 1 Owner 
+Address Suppression Flag ('T' or 'F')"
+"filler","char(37)","2571","2607","37","Not In Use"
+"jan1_ml_deliverable","char(1)","2608","2608","1","January 1 Owner Address
 Y = deliverable address
-N = undeliverable address",
-hs_exempt,char(1),2609,2609,1,"Homestead Exemption    (‘T’ or ‘F’)
-‘T’ indicates that the property has the exemption",
-ov65_exempt,char(1),2610,2610,1,Over 65 Exemption (‘T’ or ‘F’),
-ov65_prorate_begin,char(25),2611,2635,25,date the exemption began – used for proration,
-ov65_prorate_end,char(25),2636,2660,25,date the exemption ended – used for proration,
-ov65s_exempt,char(1),2661,2661,1,Over 65 Surviving Spouse (‘T’ or ‘F’),
-dp_exempt,char(1),2662,2662,1,Disabled Person (‘T’ or ‘F’),
-dv1_exempt,char(1),2663,2663,1,Disabled Veteran - 10% to 30%  (‘T’ or ‘F’),
-dv1s_exempt,char(1),2664,2664,1,Disabled Veteran - 10% to 30%  Surviving Spouse,
-dv2_exempt,char(1),2665,2665,1,Disabled Veteran - 31% to 50%  (‘T’ or ‘F’),
-dv2s_exempt,char(1),2666,2666,1,Disabled Veteran - 31% to 50% Surviving Spouse,
-dv3_exempt,char(1),2667,2667,1,Disabled Veteran - 51% to 70% ('T' or 'F'),
-dv3s_exempt,char(1),2668,2668,1,Disabled Veteran - 51% to 70% Surviving Spouse,
-dv4_exempt,char(1),2669,2669,1,Disabled Veteran - 71% to 100%  (‘T’ or ‘F’),
-dv4s_exempt,char(1),2670,2670,1,Disabled Veteran - 71% to 100% Surviving Spouse,
-ex_exempt,char(1),2671,2671,1,EX (Total Exemption) (‘T’ or ‘F’),
-ex_prorate_begin,char(25),2672,2696,25,Date the exemption began – used for proration,
-ex_prorate_end,char(25),2697,2721,25,Date the exemption ended – used for proration,
-lve_exempt,char(1),2722,2722,1,Leased vehicle exemption,
-ab_exempt,char(1),2723,2723,1,Abatement (‘T’ or ‘F’),
-en_exempt,char(1),2724,2724,1,Energy  Exemption (‘T’ or ‘F’),
-fr_exempt,char(1),2725,2725,1,Freeport Exemption (‘T’ or ‘F’),
-ht_exempt,char(1),2726,2726,1,Historical Exemption (‘T’ or ‘F’),
-pro_exempt,char(1),2727,2727,1,Prorated Exemption (‘T’ or ‘F’),
-pc_exempt,char(1),2728,2728,1,Pollution Control Exemption (‘T’ or ‘F’),
-so_exempt,char(1),2729,2729,1,Solar Exemption (‘T’ or ‘F’),
-ex366_exempt,char(1),2730,2730,1,Exemption for properties under $500 ('T' or 'F'),
-ch_exempt,char(1),2731,2731,1,Charitable Exemption ('T' or 'F'),
-imprv_state_cd,char(10),2732,2741,10,State Code that is on the improvements,
-land_state_cd,char(10),2742,2751,10,State Code that is on the land,
-personal_state_cd,char(10),2752,2761,10,State Code that is on the personal property,
-mineral_state_cd,char(10),2762,2771,10,State Code that is on the mineral,
-land_acres,numeric(20),2772,2791,20,Sum of the acres based on land segments,
-entity_agent_id,int(12),2792,2803,12,"Agent for Entity Documents (I.E. Statements)
-If id <> 0, then will contain information for the agent that is to receive entity documents",
-entity_agent_name,char(70),2804,2873,70,Entity Agent Name,
-entity_agent_addr_line1,char(60),2874,2933,60,Entity Agent Address Line 1,
-entity_agent_addr_line2,char(60),2934,2993,60,Entity Agent Address Line 2,
-entity_agent_addr_line3,char(60),2994,3053,60,Entity Agent Address Line 3,
-entity_agent_city,char(50),3054,3103,50,Entity Agent Address City,
-entity_agent_state,char(50),3104,3153,50,Entity Agent Address State,
-entity_agent_country,char(5),3154,3158,5,Entity Agent Address Country,
-entity_agent_zip,char(5),3159,3163,5,Entity Agent Address Zip (Zip Only),
-entity_agent_cass,char(4),3164,3167,4,Entity Agent Address Zip Cass (Cass Only),
-entity_agent_rt,char(2),3168,3169,2,Entity Agent Address Zip Route (Route Only),
-filler,char(34),3170,3203,34,Filler,
-ca_agent_id,int(12),3204,3215,12,"Agent for Chief Appraiser Documents (I.E. Appraisal Notice)
-If id <> 0, then will contain information for the agent that is to receive chief appraiser documents",
-ca_agent_name,char(70),3216,3285,70,Chief Appraiser Agent Name,
-ca_agent_addr_line1,char(60),3286,3345,60,Chief Appraiser Address Line 1,
-ca_agent_addr_line2,char(60),3346,3405,60,Chief Appraiser Address Line 2,
-ca_agent_addr_line3,char(60),3406,3465,60,Chief Appraiser Address Line 3,
-ca_agent_city,char(50),3466,3515,50,Chief Appraiser Address City,
-ca_agent_state,char(50),3516,3565,50,Chief Appraiser Address State,
-ca_agent_country,char(5),3566,3570,5,Chief Appraiser Address Country,
-ca_agent_zip,char(5),3571,3575,5,Chief Appraiser Address Zip (Zip Only),
-ca_agent_zip_cass,char(4),3576,3579,4,Chief Appraiser Address Zip Cass (Cass Only),
-ca_agent_zip_rt,char(2),3580,3581,2,Chief Appraiser Address Zip Route (Route Only),
-filler,filler,3582,3615,34,Filler,
-arb_agent_id,int(12),3616,3627,12,"Agent for ARB Documents (I.E. ARB Notice)
-If id <> 0, then will contain information for the agent that is to receive arb documents",
-arb_agent_name,char(70),3628,3697,70,ARB Agent Name,
-arb_agent_addr_line1,char(60),3698,3757,60,ARB Agent Line 1,
-arb_agent_addr_line2,char(60),3758,3817,60,ARB Agent Line 2,
-arb_agent_addr_line3,char(60),3818,3877,60,ARB Agent Line 3,
-arb_agent_city,char(50),3878,3927,50,ARB Agent City,
-arb_agent_state,char(50),3928,3977,50,ARB Agent State,
-arb_agent_country,char(5),3978,3982,5,ARB Agent County,
-arb_agent_zip,char(5),3983,3987,5,ARB Agent Zip (Zip Only),
-arb_agent_zip_cass,char(4),3988,3991,4,ARB Agent Zip Cass (Cass Only),
-arb_agent_zip_rt,char(2),3992,3993,2,ARB Agent Zip Route (Route Only),
-filler,char(34),3994,4027,34,filler,
-mineral_type_of_int,char(5),4028,4032,5,Mineral Interest Type,
-mineral_int_pct,char(15),4033,4047,15,Mineral Interest Percent (10 Decimals),
-productivity_use_code,char(3),4048,4050,3,Productivity Use Code,
-filler,char(40),4051,4090,40,filler,
-timber_78_market,int(12),4091,4102,12,1978 timber market value,
-ag_late_loss,int(12),4103,4114,12,Late ag loss,
-late_freeport_penalty,int(12),4115,4126,12,Late freeport penalty,
-filler,char(2),4127,4128,2,Not In Use,
-filler,char(5),4129,4133,5,Not In Use,
-filler,char(2),4134,4135,2,Not In Use,
-dba,char(40),4136,4175,40,Doing business as,
-filler,char(38),4176,4213,38,Not In Use,
-market_value,numeric(14),4214,4227,14,Property market value,
-filler,char(20),4228,4247,20,Not In Use,
-filler,char(20),4248,4267,20,Not In Use,
-filler,char(20),4268,4287,20,Not In Use,
-filler,char(1),4288,4288,1,Not In Use,
-filler,char(1),4289,4289,1,Not In Use,
-filler,char(70),4290,4359,70,Not In Use,
-ov65_deferral_date,char(25),4360,4384,25,OV65 Deferral Date,
-dp_deferral_date,char(25),4385,4409,25,DP Deferral Date,
-ref_id1,char(25),4410,4434,25,Property Reference ID 1,
-ref_id2,char(25),4435,4459,25,Property Reference ID 2,
-situs_num,char(15),4460,4474,15,Situs Number,
-situs_unit,char(5),4475,4479,5,Situs Unit #,
-appr_owner_id,int(12),4480,4491,12,Current Appraisal Owner ID,
-appr_owner_name,char(70),4492,4561,70,Current Appraisal Owner Name,
-appr_addr_line1,char(60),4562,4621,60,Current Appraisal Address Line 1,
-appr_addr_line2,char(60),4622,4681,60,Current Appraisal Address Line 2,
-appr_addr_line3,char(60),4682,4741,60,Current Appraisal Address Line 3,
-appr_addr_city,char(50),4742,4791,50,Current Appraisal Address City,
-appr_addr_state,char(50),4792,4841,50,Current Appraisal Address State,
-appr_addr_country,char(5),4842,4846,5,Current Appraisal Address Country,
-appr_addr_zip,char(5),4847,4851,5,Current Appraisal Address Zip (Zip Only),
-appr_addr_zip_cass,char(4),4852,4855,4,Current Appraisal Address Zip Cass (Cass Only),
-appr_addr_zip_cass_route,char(2),4856,4857,2,Current Appraisal Address Zip Rt (Route Only),
-appr_ml_deliverable,char(1),4858,4858,1,"Current Appraisal Owner Address
+N = undeliverable address"
+"hs_exempt","char(1)","2609","2609","1","Homestead Exemption    (‘T’ or ‘F’)
+‘T’ indicates that the property has the exemption"
+"ov65_exempt","char(1)","2610","2610","1","Over 65 Exemption (‘T’ or ‘F’)"
+"ov65_prorate_begin","char(25)","2611","2635","25","date the exemption began – used for proration"
+"ov65_prorate_end","char(25)","2636","2660","25","date the exemption ended – used for proration"
+"ov65s_exempt","char(1)","2661","2661","1","Over 65 Surviving Spouse (‘T’ or ‘F’)"
+"dp_exempt","char(1)","2662","2662","1","Disabled Person (‘T’ or ‘F’)"
+"dv1_exempt","char(1)","2663","2663","1","Disabled Veteran - 10% to 30%  (‘T’ or ‘F’)"
+"dv1s_exempt","char(1)","2664","2664","1","Disabled Veteran - 10% to 30%  Surviving Spouse"
+"dv2_exempt","char(1)","2665","2665","1","Disabled Veteran - 31% to 50%  (‘T’ or ‘F’)"
+"dv2s_exempt","char(1)","2666","2666","1","Disabled Veteran - 31% to 50% Surviving Spouse"
+"dv3_exempt","char(1)","2667","2667","1","Disabled Veteran - 51% to 70% ('T' or 'F')"
+"dv3s_exempt","char(1)","2668","2668","1","Disabled Veteran - 51% to 70% Surviving Spouse"
+"dv4_exempt","char(1)","2669","2669","1","Disabled Veteran - 71% to 100%  (‘T’ or ‘F’)"
+"dv4s_exempt","char(1)","2670","2670","1","Disabled Veteran - 71% to 100% Surviving Spouse"
+"ex_exempt","char(1)","2671","2671","1","EX (Total Exemption) (‘T’ or ‘F’)"
+"ex_prorate_begin","char(25)","2672","2696","25","Date the exemption began – used for proration"
+"ex_prorate_end","char(25)","2697","2721","25","Date the exemption ended – used for proration"
+"lve_exempt","char(1)","2722","2722","1","Leased vehicle exemption"
+"ab_exempt","char(1)","2723","2723","1","Abatement (‘T’ or ‘F’)"
+"en_exempt","char(1)","2724","2724","1","Energy  Exemption (‘T’ or ‘F’)"
+"fr_exempt","char(1)","2725","2725","1","Freeport Exemption (‘T’ or ‘F’)"
+"ht_exempt","char(1)","2726","2726","1","Historical Exemption (‘T’ or ‘F’)"
+"pro_exempt","char(1)","2727","2727","1","Prorated Exemption (‘T’ or ‘F’)"
+"pc_exempt","char(1)","2728","2728","1","Pollution Control Exemption (‘T’ or ‘F’)"
+"so_exempt","char(1)","2729","2729","1","Solar Exemption (‘T’ or ‘F’)"
+"ex366_exempt","char(1)","2730","2730","1","Exemption for properties under $500 ('T' or 'F')"
+"ch_exempt","char(1)","2731","2731","1","Charitable Exemption ('T' or 'F')"
+"imprv_state_cd","char(10)","2732","2741","10","State Code that is on the improvements"
+"land_state_cd","char(10)","2742","2751","10","State Code that is on the land"
+"personal_state_cd","char(10)","2752","2761","10","State Code that is on the personal property"
+"mineral_state_cd","char(10)","2762","2771","10","State Code that is on the mineral"
+"land_acres","numeric(20)","2772","2791","20","Sum of the acres based on land segments"
+"entity_agent_id","int(12)","2792","2803","12","Agent for Entity Documents (I.E. Statements)
+If id <> 0, then will contain information for the agent that is to receive entity documents"
+"entity_agent_name","char(70)","2804","2873","70","Entity Agent Name"
+"entity_agent_addr_line1","char(60)","2874","2933","60","Entity Agent Address Line 1"
+"entity_agent_addr_line2","char(60)","2934","2993","60","Entity Agent Address Line 2"
+"entity_agent_addr_line3","char(60)","2994","3053","60","Entity Agent Address Line 3"
+"entity_agent_city","char(50)","3054","3103","50","Entity Agent Address City"
+"entity_agent_state","char(50)","3104","3153","50","Entity Agent Address State"
+"entity_agent_country","char(5)","3154","3158","5","Entity Agent Address Country"
+"entity_agent_zip","char(5)","3159","3163","5","Entity Agent Address Zip (Zip Only)"
+"entity_agent_cass","char(4)","3164","3167","4","Entity Agent Address Zip Cass (Cass Only)"
+"entity_agent_rt","char(2)","3168","3169","2","Entity Agent Address Zip Route (Route Only)"
+"filler","char(34)","3170","3203","34","Filler"
+"ca_agent_id","int(12)","3204","3215","12","Agent for Chief Appraiser Documents (I.E. Appraisal Notice)
+If id <> 0, then will contain information for the agent that is to receive chief appraiser documents"
+"ca_agent_name","char(70)","3216","3285","70","Chief Appraiser Agent Name"
+"ca_agent_addr_line1","char(60)","3286","3345","60","Chief Appraiser Address Line 1"
+"ca_agent_addr_line2","char(60)","3346","3405","60","Chief Appraiser Address Line 2"
+"ca_agent_addr_line3","char(60)","3406","3465","60","Chief Appraiser Address Line 3"
+"ca_agent_city","char(50)","3466","3515","50","Chief Appraiser Address City"
+"ca_agent_state","char(50)","3516","3565","50","Chief Appraiser Address State"
+"ca_agent_country","char(5)","3566","3570","5","Chief Appraiser Address Country"
+"ca_agent_zip","char(5)","3571","3575","5","Chief Appraiser Address Zip (Zip Only)"
+"ca_agent_zip_cass","char(4)","3576","3579","4","Chief Appraiser Address Zip Cass (Cass Only)"
+"ca_agent_zip_rt","char(2)","3580","3581","2","Chief Appraiser Address Zip Route (Route Only)"
+"filler","filler","3582","3615","34","Filler"
+"arb_agent_id","int(12)","3616","3627","12","Agent for ARB Documents (I.E. ARB Notice)
+If id <> 0, then will contain information for the agent that is to receive arb documents"
+"arb_agent_name","char(70)","3628","3697","70","ARB Agent Name"
+"arb_agent_addr_line1","char(60)","3698","3757","60","ARB Agent Line 1"
+"arb_agent_addr_line2","char(60)","3758","3817","60","ARB Agent Line 2"
+"arb_agent_addr_line3","char(60)","3818","3877","60","ARB Agent Line 3"
+"arb_agent_city","char(50)","3878","3927","50","ARB Agent City"
+"arb_agent_state","char(50)","3928","3977","50","ARB Agent State"
+"arb_agent_country","char(5)","3978","3982","5","ARB Agent County"
+"arb_agent_zip","char(5)","3983","3987","5","ARB Agent Zip (Zip Only)"
+"arb_agent_zip_cass","char(4)","3988","3991","4","ARB Agent Zip Cass (Cass Only)"
+"arb_agent_zip_rt","char(2)","3992","3993","2","ARB Agent Zip Route (Route Only)"
+"filler","char(34)","3994","4027","34","filler"
+"mineral_type_of_int","char(5)","4028","4032","5","Mineral Interest Type"
+"mineral_int_pct","char(15)","4033","4047","15","Mineral Interest Percent (10 Decimals)"
+"productivity_use_code","char(3)","4048","4050","3","Productivity Use Code"
+"filler","char(40)","4051","4090","40","filler"
+"timber_78_market","int(12)","4091","4102","12","1978 timber market value"
+"ag_late_loss","int(12)","4103","4114","12","Late ag loss"
+"late_freeport_penalty","int(12)","4115","4126","12","Late freeport penalty"
+"filler","char(2)","4127","4128","2","Not In Use"
+"filler","char(5)","4129","4133","5","Not In Use"
+"filler","char(2)","4134","4135","2","Not In Use"
+"dba","char(40)","4136","4175","40","Doing business as"
+"filler","char(38)","4176","4213","38","Not In Use"
+"market_value","numeric(14)","4214","4227","14","Property market value"
+"filler","char(20)","4228","4247","20","Not In Use"
+"filler","char(20)","4248","4267","20","Not In Use"
+"filler","char(20)","4268","4287","20","Not In Use"
+"filler","char(1)","4288","4288","1","Not In Use"
+"filler","char(1)","4289","4289","1","Not In Use"
+"filler","char(70)","4290","4359","70","Not In Use"
+"ov65_deferral_date","char(25)","4360","4384","25","OV65 Deferral Date"
+"dp_deferral_date","char(25)","4385","4409","25","DP Deferral Date"
+"ref_id1","char(25)","4410","4434","25","Property Reference ID 1"
+"ref_id2","char(25)","4435","4459","25","Property Reference ID 2"
+"situs_num","char(15)","4460","4474","15","Situs Number"
+"situs_unit","char(5)","4475","4479","5","Situs Unit #"
+"appr_owner_id","int(12)","4480","4491","12","Current Appraisal Owner ID"
+"appr_owner_name","char(70)","4492","4561","70","Current Appraisal Owner Name"
+"appr_addr_line1","char(60)","4562","4621","60","Current Appraisal Address Line 1"
+"appr_addr_line2","char(60)","4622","4681","60","Current Appraisal Address Line 2"
+"appr_addr_line3","char(60)","4682","4741","60","Current Appraisal Address Line 3"
+"appr_addr_city","char(50)","4742","4791","50","Current Appraisal Address City"
+"appr_addr_state","char(50)","4792","4841","50","Current Appraisal Address State"
+"appr_addr_country","char(5)","4842","4846","5","Current Appraisal Address Country"
+"appr_addr_zip","char(5)","4847","4851","5","Current Appraisal Address Zip (Zip Only)"
+"appr_addr_zip_cass","char(4)","4852","4855","4","Current Appraisal Address Zip Cass (Cass Only)"
+"appr_addr_zip_cass_route","char(2)","4856","4857","2","Current Appraisal Address Zip Rt (Route Only)"
+"appr_ml_deliverable","char(1)","4858","4858","1","Current Appraisal Owner Address
 Y = deliverable address
-N = undeliverable address",
-appr_confidential_flag,char(1),4859,4859,1,"Current Appraisal Owner
-Confidential Flag ('T' or 'F')",
-appr_address_suppress_flag,char(1),4860,4860,1,"Current Appraisal Owner 
-Address Suppression Flag ('T' or 'F')",
-appr_confidential_name,char(70),4861,4930,70,Current Appraisal Owner Confidential Name,
-py_confidential_name,char(70),4931,5000,70,Property Year Owner Confidential Name,
-jan1_confidential_name,char(70),5001,5070,70,Jan 1 Owner Confidential Name,
-filler,char(5),5071,5075,5,Not In Use (SIC Code moved to end of file due to length change),
-rendition_filed,char(1),5076,5076,1,Rendition Filed ('T' or 'F'),
-rendition_date,char(25),5077,5101,25,Rendition Filed Date,
-rendition_penalty,numeric(15),5102,5116,15,"If > 0, indicates that a Rendition Penalty should be calculated.",
-rendition_penalty_date_paid,char(25),5117,5141,25,Rendition 10% Penalty Date Paid,
-rendition_fraud_penalty,numeric(15),5142,5156,15,Rendition Fraud Penalty,
-rendition_fraud_penalty_date_paid,char(25),5157,5181,25,Rendition Fraud Penalty Date Paid,
-filler,char(20),5182,5201,20,Not In Use,
-entities,char(140),5202,5341,140,Entities list,
-eco_exempt,char(1),5342,5342,1,eco exemption,
-dataset_id,numeric(15),5343,5357,15,Unique number that identifies this export,
-deed_num,char(50),5358,5407,50,Deed Number,
-chodo_exempt,char(1),5408,5408,1,Exemption for charitable organizations providing low-income housing ('T' or 'F'),
-local_option_pct_only_flag_hs,char(1),5409,5409,1,Local option flag for Homesite Percentage ('T' or 'F'),
-local_option_pct_only_flag_ov65,char(1),5410,5410,1,Local option flag for OV65 exemption ('T' or 'F'),
-local_option_pct_only_flag_ov65s,char(1),5411,5411,1,Local option flag for OV65S exemption ('T' or 'F'),
-local_option_pct_only_flag_dp,char(1),5412,5412,1,Local option flag for DP exemption ('T' or 'F'),
-freeze_only_flag_ov65,char(1),5413,5413,1,Freeze only flag for OV65 exemption ('T' or 'F'),
-freeze_only_flag_ov65s,char(1),5414,5414,1,Freeze only flag for OV65S exemption ('T' or 'F'),
-freeze_only_flag_dp,char(1),5415,5415,1,Freeze only flag for DP exemption ('T' or 'F'),
-apply_percent_exemption_flag,char(1),5416,5416,1,Apply percent exemption flag ('T' or 'F'),
-exemption_percentage,numeric(15),5417,5431,15,Exemption percentage (string representing a floating point number),
-vit_flag,char(1),5432,5432,1,"VIT flag; 'T' if property is VIT, otherwise 'F'",
-lih_exempt,char(1),5433,5433,1,Exemption for charitable organizations providing low-income housing with volunteer labor ('T' or 'F'),
-git_exempt,char(1),5434,5434,1,Goods in Transit Exemption (‘T’ or ‘F’),
-dps_exempt,char(1),5435,5435,1,Disabled Person - Surviving Spouse (‘T’ or ‘F’),
-dps_deferral_date,char(25),5436,5460,25,DPS Deferral Date,
-local_option_pct_only_flag_dps,char(1),5461,5461,1,Local option flag for DPS exemption ('T' or 'F'),
-freeze_only_flag_dps,char(1),5462,5462,1,Freeze only flag for DPS exemption ('T' or 'F'),
-dvhs_exempt,char(1),5463,5463,1,Disabled Veteran Homestead - 100% ('T' or 'F'),
-hs_qualify_yr,numeric(4),5464,5467,4,Qualify Year for HS exemption,
-ov65_qualify_yr,numeric(4),5468,5471,4,Qualify Year for OV65 exemption,
-ov65s_qualify_yr,numeric(4),5472,5475,4,Qualify Year for OV65S exemption,
-dp_qualify_yr,numeric(4),5476,5479,4,Qualify Year for DP exemption,
-dps_qualify_yr,numeric(4),5480,5483,4,Qualify Year for DPS exemption,
-dv1_qualify_yr,numeric(4),5484,5487,4,Qualify Year for DV1 exemption,
-dv1s_qualify_yr,numeric(4),5488,5491,4,Qualify Year for DV1S exemption,
-dv2_qualify_yr,numeric(4),5492,5495,4,Qualify Year for DV2 exemption,
-dv2s_qualify_yr,numeric(4),5496,5499,4,Qualify Year for DV2S exemption,
-dv3_qualify_yr,numeric(4),5500,5503,4,Qualify Year for DV3 exemption,
-dv3s_qualify_yr,numeric(4),5504,5507,4,Qualify Year for DV3S exemption,
-dv4_qualify_yr,numeric(4),5508,5511,4,Qualify Year for DV4 exemption,
-dv4s_qualify_yr,numeric(4),5512,5515,4,Qualify Year for DV4S exemption,
-dvhs_qualify_yr,numeric(4),5516,5519,4,Qualify Year for DVHS exemption,
-ex_qualify_yr,numeric(4),5520,5523,4,Qualify Year for EX exemption,
-ab_qualify_yr,numeric(4),5524,5527,4,Qualify Year for AB exemption,
-en_qualify_yr,numeric(4),5528,5531,4,Qualify Year for EN exemption,
-fr_qualify_yr,numeric(4),5532,5535,4,Qualify Year for FR exemption,
-ht_qualify_yr,numeric(4),5536,5539,4,Qualify Year for HT exemption,
-pro_qualify_yr,numeric(4),5540,5543,4,Qualify Year for PRO exemption,
-pc_qualify_yr,numeric(4),5544,5547,4,Qualify Year for PC exemption,
-so_qualify_yr,numeric(4),5548,5551,4,Qualify Year for SO exemption,
-ex366_qualify_yr,numeric(4),5552,5555,4,Qualify Year for EX366 exemption,
-ch_qualify_yr,numeric(4),5556,5559,4,Qualify Year for CH exemption,
-eco_qualify_yr,numeric(4),5560,5563,4,Qualify Year for ECO exemption,
-chodo_qualify_yr,numeric(4),5564,5567,4,Qualify Year for CHODO exemption,
-lih_qualify_yr,numeric(4),5568,5571,4,Qualify Year for LIH exemption,
-git_qualify_yr,numeric(4),5572,5575,4,Qualify Year for GIT exemption,
-mortgage_addr_line1,char(60),5576,5635,60,Mortgage Company Address Line 1,
-mortgage_addr_line2,char(60),5636,5695,60,Mortgage Company Address Line 2,
-mortgage_addr_line3,char(60),5696,5755,60,Mortgage Company Address Line 3,
-mortgage_addr_city,char(50),5756,5805,50,Mortgage Company Address City,
-mortgage_addr_state,char(50),5806,5855,50,Mortgage Company Address State,
-mortgage_addr_country,char(5),5856,5860,5,Mortgage Company Address Country,
-mortgage_addr_zip,char(5),5861,5865,5,Mortgage Company Address Zip (Zip Only),
-mortgage_addr_zip_cass,char(4),5866,5869,4,Mortgage Company Address Zip Cass (Cass Only),
-mortgage_addr_zip_rt,char(2),5870,5871,2,Mortgage Company Address Zip Route (Route Only),
-mortgage_addr_ml_deliverable,char(1),5872,5872,1,"Mortgage Company Address
+N = undeliverable address"
+"appr_confidential_flag","char(1)","4859","4859","1","Current Appraisal Owner
+Confidential Flag ('T' or 'F')"
+"appr_address_suppress_flag","char(1)","4860","4860","1","Current Appraisal Owner 
+Address Suppression Flag ('T' or 'F')"
+"appr_confidential_name","char(70)","4861","4930","70","Current Appraisal Owner Confidential Name"
+"py_confidential_name","char(70)","4931","5000","70","Property Year Owner Confidential Name"
+"jan1_confidential_name","char(70)","5001","5070","70","Jan 1 Owner Confidential Name"
+"filler","char(5)","5071","5075","5","Not In Use (SIC Code moved to end of file due to length change)"
+"rendition_filed","char(1)","5076","5076","1","Rendition Filed ('T' or 'F')"
+"rendition_date","char(25)","5077","5101","25","Rendition Filed Date"
+"rendition_penalty","numeric(15)","5102","5116","15","If > 0, indicates that a Rendition Penalty should be calculated."
+"rendition_penalty_date_paid","char(25)","5117","5141","25","Rendition 10% Penalty Date Paid"
+"rendition_fraud_penalty","numeric(15)","5142","5156","15","Rendition Fraud Penalty"
+"rendition_fraud_penalty_date_paid","char(25)","5157","5181","25","Rendition Fraud Penalty Date Paid"
+"filler","char(20)","5182","5201","20","Not In Use"
+"entities","char(140)","5202","5341","140","Entities list"
+"eco_exempt","char(1)","5342","5342","1","eco exemption"
+"dataset_id","numeric(15)","5343","5357","15","Unique number that identifies this export"
+"deed_num","char(50)","5358","5407","50","Deed Number"
+"chodo_exempt","char(1)","5408","5408","1","Exemption for charitable organizations providing low-income housing ('T' or 'F')"
+"local_option_pct_only_flag_hs","char(1)","5409","5409","1","Local option flag for Homesite Percentage ('T' or 'F')"
+"local_option_pct_only_flag_ov65","char(1)","5410","5410","1","Local option flag for OV65 exemption ('T' or 'F')"
+"local_option_pct_only_flag_ov65s","char(1)","5411","5411","1","Local option flag for OV65S exemption ('T' or 'F')"
+"local_option_pct_only_flag_dp","char(1)","5412","5412","1","Local option flag for DP exemption ('T' or 'F')"
+"freeze_only_flag_ov65","char(1)","5413","5413","1","Freeze only flag for OV65 exemption ('T' or 'F')"
+"freeze_only_flag_ov65s","char(1)","5414","5414","1","Freeze only flag for OV65S exemption ('T' or 'F')"
+"freeze_only_flag_dp","char(1)","5415","5415","1","Freeze only flag for DP exemption ('T' or 'F')"
+"apply_percent_exemption_flag","char(1)","5416","5416","1","Apply percent exemption flag ('T' or 'F')"
+"exemption_percentage","numeric(15)","5417","5431","15","Exemption percentage (string representing a floating point number)"
+"vit_flag","char(1)","5432","5432","1","VIT flag; 'T' if property is VIT, otherwise 'F'"
+"lih_exempt","char(1)","5433","5433","1","Exemption for charitable organizations providing low-income housing with volunteer labor ('T' or 'F')"
+"git_exempt","char(1)","5434","5434","1","Goods in Transit Exemption (‘T’ or ‘F’)"
+"dps_exempt","char(1)","5435","5435","1","Disabled Person - Surviving Spouse (‘T’ or ‘F’)"
+"dps_deferral_date","char(25)","5436","5460","25","DPS Deferral Date"
+"local_option_pct_only_flag_dps","char(1)","5461","5461","1","Local option flag for DPS exemption ('T' or 'F')"
+"freeze_only_flag_dps","char(1)","5462","5462","1","Freeze only flag for DPS exemption ('T' or 'F')"
+"dvhs_exempt","char(1)","5463","5463","1","Disabled Veteran Homestead - 100% ('T' or 'F')"
+"hs_qualify_yr","numeric(4)","5464","5467","4","Qualify Year for HS exemption"
+"ov65_qualify_yr","numeric(4)","5468","5471","4","Qualify Year for OV65 exemption"
+"ov65s_qualify_yr","numeric(4)","5472","5475","4","Qualify Year for OV65S exemption"
+"dp_qualify_yr","numeric(4)","5476","5479","4","Qualify Year for DP exemption"
+"dps_qualify_yr","numeric(4)","5480","5483","4","Qualify Year for DPS exemption"
+"dv1_qualify_yr","numeric(4)","5484","5487","4","Qualify Year for DV1 exemption"
+"dv1s_qualify_yr","numeric(4)","5488","5491","4","Qualify Year for DV1S exemption"
+"dv2_qualify_yr","numeric(4)","5492","5495","4","Qualify Year for DV2 exemption"
+"dv2s_qualify_yr","numeric(4)","5496","5499","4","Qualify Year for DV2S exemption"
+"dv3_qualify_yr","numeric(4)","5500","5503","4","Qualify Year for DV3 exemption"
+"dv3s_qualify_yr","numeric(4)","5504","5507","4","Qualify Year for DV3S exemption"
+"dv4_qualify_yr","numeric(4)","5508","5511","4","Qualify Year for DV4 exemption"
+"dv4s_qualify_yr","numeric(4)","5512","5515","4","Qualify Year for DV4S exemption"
+"dvhs_qualify_yr","numeric(4)","5516","5519","4","Qualify Year for DVHS exemption"
+"ex_qualify_yr","numeric(4)","5520","5523","4","Qualify Year for EX exemption"
+"ab_qualify_yr","numeric(4)","5524","5527","4","Qualify Year for AB exemption"
+"en_qualify_yr","numeric(4)","5528","5531","4","Qualify Year for EN exemption"
+"fr_qualify_yr","numeric(4)","5532","5535","4","Qualify Year for FR exemption"
+"ht_qualify_yr","numeric(4)","5536","5539","4","Qualify Year for HT exemption"
+"pro_qualify_yr","numeric(4)","5540","5543","4","Qualify Year for PRO exemption"
+"pc_qualify_yr","numeric(4)","5544","5547","4","Qualify Year for PC exemption"
+"so_qualify_yr","numeric(4)","5548","5551","4","Qualify Year for SO exemption"
+"ex366_qualify_yr","numeric(4)","5552","5555","4","Qualify Year for EX366 exemption"
+"ch_qualify_yr","numeric(4)","5556","5559","4","Qualify Year for CH exemption"
+"eco_qualify_yr","numeric(4)","5560","5563","4","Qualify Year for ECO exemption"
+"chodo_qualify_yr","numeric(4)","5564","5567","4","Qualify Year for CHODO exemption"
+"lih_qualify_yr","numeric(4)","5568","5571","4","Qualify Year for LIH exemption"
+"git_qualify_yr","numeric(4)","5572","5575","4","Qualify Year for GIT exemption"
+"mortgage_addr_line1","char(60)","5576","5635","60","Mortgage Company Address Line 1"
+"mortgage_addr_line2","char(60)","5636","5695","60","Mortgage Company Address Line 2"
+"mortgage_addr_line3","char(60)","5696","5755","60","Mortgage Company Address Line 3"
+"mortgage_addr_city","char(50)","5756","5805","50","Mortgage Company Address City"
+"mortgage_addr_state","char(50)","5806","5855","50","Mortgage Company Address State"
+"mortgage_addr_country","char(5)","5856","5860","5","Mortgage Company Address Country"
+"mortgage_addr_zip","char(5)","5861","5865","5","Mortgage Company Address Zip (Zip Only)"
+"mortgage_addr_zip_cass","char(4)","5866","5869","4","Mortgage Company Address Zip Cass (Cass Only)"
+"mortgage_addr_zip_rt","char(2)","5870","5871","2","Mortgage Company Address Zip Route (Route Only)"
+"mortgage_addr_ml_deliverable","char(1)","5872","5872","1","Mortgage Company Address
 Y = deliverable address
-N = undeliverable address",
-sic_code,char(10),5873,5882,10,SIC Code (new position in file due to change in length from 5 to 10),
-omitted_property_flag,char(1),5883,5883,1,"Omitted Property
+N = undeliverable address"
+"sic_code","char(10)","5873","5882","10","SIC Code (new position in file due to change in length from 5 to 10)"
+"omitted_property_flag","char(1)","5883","5883","1","Omitted Property
 Y = Omitted
-N = Not omitted",
-hs_prorate_begin,char(25),5884,5908,25,date the exemption began - used for proration,
-hs_prorate_end,char(25),5909,5933,25,date the exemption ended - used for proration,
-ov65s_prorate_begin,char(25),5934,5958,25,date the exemption began - used for proration,
-ov65s_prorate_end,char(25),5959,5983,25,date the exemption ended - used for proration,
-dp_prorate_begin,char(25),5984,6008,25,date the exemption began - used for proration,
-dp_prorate_end,char(25),6009,6033,25,date the exemption ended - used for proration,
-dv1_prorate_begin,char(25),6034,6058,25,date the exemption began - used for proration,
-dv1_prorate_end,char(25),6059,6083,25,date the exemption ended - used for proration,
-dv1s_prorate_begin,char(25),6084,6108,25,date the exemption began - used for proration,
-dv1s_prorate_end,char(25),6109,6133,25,date the exemption ended - used for proration,
-dv2_prorate_begin,char(25),6134,6158,25,date the exemption began - used for proration,
-dv2_prorate_end,char(25),6159,6183,25,date the exemption ended - used for proration,
-dv2s_prorate_begin,char(25),6184,6208,25,date the exemption began - used for proration,
-dv2s_prorate_end,char(25),6209,6233,25,date the exemption ended - used for proration,
-dv3_prorate_begin,char(25),6234,6258,25,date the exemption began - used for proration,
-dv3_prorate_end,char(25),6259,6283,25,date the exemption ended - used for proration,
-dv3s_prorate_begin,char(25),6284,6308,25,date the exemption began - used for proration,
-dv3s_prorate_end,char(25),6309,6333,25,date the exemption ended - used for proration,
-dv4_prorate_begin,char(25),6334,6358,25,date the exemption began - used for proration,
-dv4_prorate_end,char(25),6359,6383,25,date the exemption ended - used for proration,
-dv4s_prorate_begin,char(25),6384,6408,25,date the exemption began - used for proration,
-dv4s_prorate_end,char(25),6409,6433,25,date the exemption ended - used for proration,
-lve_prorate_begin,char(25),6434,6458,25,date the exemption began - used for proration,
-lve_prorate_end,char(25),6459,6483,25,date the exemption ended - used for proration,
-ab_prorate_begin,char(25),6484,6508,25,date the exemption began - used for proration,
-ab_prorate_end,char(25),6509,6533,25,date the exemption ended - used for proration,
-en_prorate_begin,char(25),6534,6558,25,date the exemption began - used for proration,
-en_prorate_end,char(25),6559,6583,25,date the exemption ended - used for proration,
-fr_prorate_begin,char(25),6584,6608,25,date the exemption began - used for proration,
-fr_prorate_end,char(25),6609,6633,25,date the exemption ended - used for proration,
-ht_prorate_begin,char(25),6634,6658,25,date the exemption began - used for proration,
-ht_prorate_end,char(25),6659,6683,25,date the exemption ended - used for proration,
-pro_prorate_begin,char(25),6684,6708,25,date the exemption began - used for proration,
-pro_prorate_end,char(25),6709,6733,25,date the exemption ended - used for proration,
-pc_prorate_begin,char(25),6734,6758,25,date the exemption began - used for proration,
-pc_prorate_end,char(25),6759,6783,25,date the exemption ended - used for proration,
-so_prorate_begin,char(25),6784,6808,25,date the exemption began - used for proration,
-so_prorate_end,char(25),6809,6833,25,date the exemption ended - used for proration,
-ex366_prorate_begin,char(25),6834,6858,25,date the exemption began - used for proration,
-ex366_prorate_end,char(25),6859,6883,25,date the exemption ended - used for proration,
-ch_prorate_begin,char(25),6884,6908,25,date the exemption began - used for proration,
-ch_prorate_end,char(25),6909,6933,25,date the exemption ended - used for proration,
-dps_prorate_begin,char(25),6934,6958,25,date the exemption began - used for proration,
-dps_prorate_end,char(25),6959,6983,25,date the exemption ended - used for proration,
-eco_prorate_begin,char(25),6984,7008,25,date the exemption began - used for proration,
-eco_prorate_end,char(25),7009,7033,25,date the exemption ended - used for proration,
-chodo_prorate_begin,char(25),7034,7058,25,date the exemption began - used for proration,
-chodo_prorate_end,char(25),7059,7083,25,date the exemption ended - used for proration,
-lih_prorate_begin,char(25),7084,7108,25,date the exemption began - used for proration,
-lih_prorate_end,char(25),7109,7133,25,date the exemption ended - used for proration,
-git_prorate_begin,char(25),7134,7158,25,date the exemption began - used for proration,
-git_prorate_end,char(25),7159,7183,25,date the exemption ended - used for proration,
-clt_exempt,char(1),7184,7184,1,Exemption for community land trust ('T' or 'F'),
-clt_prorate_begin,char(25),7185,7209,25,date the exemption began – used for proration,
-clt_prorate_end,char(25),7210,7234,25,date the exemption ended – used for proration,
-clt_qualify_yr,numeric(4),7235,7238,4,Qualify Year for CLT exemption,
-dvhss_exempt,char(1),7239,7239,1,Exemption for DVHS Surviving Spouse ('T' or 'F'),
-dvhss_prorate_begin,char(25),7240,7264,25,date the exemption began – used for proration,
-dvhss_prorate_end,char(25),7265,7289,25,date the exemption ended – used for proration,
-dvhss_qualify_yr,numeric(4),7290,7293,4,Qualify Year for DVHS Surviving Spouse exemption,
-omitted_imprv_hstd_val,numeric(15),7294,7308,15,Omitted Improvement Homestead Value,
-omitted_imprv_non_hstd_val,numeric(15),7309,7323,15,Omitted Improvement Non-Homestead Value,
-dvhs_prorate_begin,char(25),7324,7348,25,date the exemption began – used for proration,
-dvhs_prorate_end,char(25),7349,7373,25,date the exemption ended – used for proration,
-ex_xd_exempt,char(1),7374,7374,1,EX-XD 11.181 exemption (‘T’ or ‘F’),
-ex_xd_qualify_yr,numeric(4),7375,7378,4,Qualify Year for EX-XD 11.181 exemption,
-ex_xd_prorate_begin,char(25),7379,7403,25,Proration begin date for EX-XD 11.181 exemption,
-ex_xd_prorate_end,char(25),7404,7428,25,Proration end date for EX-XD 11.181 exemption,
-ex_xf_exempt,char(1),7429,7429,1,EX-XF 11.183 exemption (‘T’ or ‘F’),
-ex_xf_qualify_yr,numeric(4),7430,7433,4,Qualify Year for EX-XF 11.183 exemption,
-ex_xf_prorate_begin,char(25),7434,7458,25,Proration begin date for EX-XF 11.183 exemption,
-ex_xf_prorate_end,char(25),7459,7483,25,Proration end date for EX-XF 11.183 exemption,
-ex_xg_exempt,char(1),7484,7484,1,EX-XG 11.184 exemption (‘T’ or ‘F’),
-ex_xg_qualify_yr,numeric(4),7485,7488,4,Qualify Year for EX-XG 11.184 exemption,
-ex_xg_prorate_begin,char(25),7489,7513,25,Proration begin date for EX-XG 11.184 exemption,
-ex_xg_prorate_end,char(25),7514,7538,25,Proration end date for EX-XG 11.184 exemption,
-ex_xh_exempt,char(1),7539,7539,1,EX-XH 11.185 exemption (‘T’ or ‘F’),
-ex_xh_qualify_yr,numeric(4),7540,7543,4,Qualify Year for EX-XH 11.185 exemption,
-ex_xh_prorate_begin,char(25),7544,7568,25,Proration begin date for EX-XH 11.185 exemption,
-ex_xh_prorate_end,char(25),7569,7593,25,Proration end date for EX-XH 11.185 exemption,
-ex_xi_exempt,char(1),7594,7594,1,EX-XI 11.19 exemption (‘T’ or ‘F’),
-ex_xi_qualify_yr,numeric(4),7595,7598,4,Qualify Year forEX-XI 11.19 exemption,
-ex_xi_prorate_begin,char(25),7599,7623,25,Proration begin date for EX-XI 11.19 exemption,
-ex_xi_prorate_end,char(25),7624,7648,25,Proration end date for EX-XI 11.19 exemption,
-ex_xj_exempt,char(1),7649,7649,1,EX-XJ 11.21 exemption (‘T’ or ‘F’),
-ex_xj_qualify_yr,numeric(4),7650,7653,4,Qualify Year for EX-XJ 11.21 exemption,
-ex_xj_prorate_begin,char(25),7654,7678,25,Proration begin date for EX-XJ 11.21 exemption,
-ex_xj_prorate_end,char(25),7679,7703,25,Proration end date for EX-XJ 11.21 exemption,
-ex_xl_exempt,char(1),7704,7704,1,EX-XL 11.231 exemption (‘T’ or ‘F’),
-ex_xl_qualify_yr,numeric(4),7705,7708,4,Qualify Year for EX-XL 11.231 exemption,
-ex_xl_prorate_begin,char(25),7709,7733,25,Proration begin date for EX-XL 11.231 exemption,
-ex_xl_prorate_end,char(25),7734,7758,25,Proration end date for EX-XL 11.231 exemption,
-ex_xm_exempt,char(1),7759,7759,1,EX-XM 11.25 exemption (‘T’ or ‘F’),
-ex_xm_qualify_yr,numeric(4),7760,7763,4,Qualify Year for EX-XM 11.25 exemption,
-ex_xm_prorate_begin,char(25),7764,7788,25,Proration begin date for EX-XM 11.25 exemption,
-ex_xm_prorate_end,char(25),7789,7813,25,Proration end date for EX-XM 11.25 exemption,
-ex_xn_exempt,char(1),7814,7814,1,EX-XN 11.252 exemption (‘T’ or ‘F’),
-ex_xn_qualify_yr,numeric(4),7815,7818,4,Qualify Year for EX-XN 11.252 exemption,
-ex_xn_prorate_begin,char(25),7819,7843,25,Proration begin date for EX-XN 11.252 exemption,
-ex_xn_prorate_end,char(25),7844,7868,25,Proration end date for EX-XN 11.252 exemption,
-ex_xo_exempt,char(1),7869,7869,1,EX-XO 11.254 exemption (‘T’ or ‘F’),
-ex_xo_qualify_yr,numeric(4),7870,7873,4,Qualify Year for EX-XO 11.254 exemption,
-ex_xo_prorate_begin,char(25),7874,7898,25,Proration begin date for EX-XO 11.254 exemption,
-ex_xo_prorate_end,char(25),7899,7923,25,Proration end date for EX-XO 11.254 exemption,
-ex_xp_exempt,char(1),7924,7924,1,EX-XP 11.271 exemption (‘T’ or ‘F’),
-ex_xp_qualify_yr,numeric(4),7925,7928,4,Qualify Year for EX-XP 11.271 exemption,
-ex_xp_prorate_begin,char(25),7929,7953,25,Proration begin date for EX-XP 11.271 exemption,
-ex_xp_prorate_end,char(25),7954,7978,25,Proration end date for EX-XP 11.271 exemption,
-ex_xq_exempt,char(1),7979,7979,1,EX-XQ 11.29 exemption (‘T’ or ‘F’),
-ex_xq_qualify_yr,numeric(4),7980,7983,4,Qualify Year for EX-XQ 11.29 exemption,
-ex_xq_prorate_begin,char(25),7984,8008,25,Proration begin date for EX-XQ 11.29 exemption,
-ex_xq_prorate_end,char(25),8009,8033,25,Proration end date for EX-XQ exemption 11.29 exemption,
-ex_xr_exempt,char(1),8034,8034,1,EX-XR 11.30 exemption (‘T’ or ‘F’),
-ex_xr_qualify_yr,numeric(4),8035,8038,4,Qualify Year for EX-XR 11.30 exemption,
-ex_xr_prorate_begin,char(25),8039,8063,25,Proration begin date for EX-XR 11.30 exemption,
-ex_xr_prorate_end,char(25),8064,8088,25,Proration end date for EX-XR 11.30 exemption,
-ex_xs_exempt,char(1),8089,8089,1,EX-XS 11.33 exemption (‘T’ or ‘F’),
-ex_xs_qualify_yr,numeric(4),8090,8093,4,Qualify Year for EX-XS 11.33 exemption,
-ex_xs_prorate_begin,char(25),8094,8118,25,Proration begin date for EX-XS 11.33 exemption,
-ex_xs_prorate_end,char(25),8119,8143,25,Proration end date for EX-XS 11.33 exemption,
-ex_xt_exempt,char(1),8144,8144,1,EX-XT 11.34 exemption (‘T’ or ‘F’),
-ex_xt_qualify_yr,numeric(4),8145,8148,4,Qualify Year for EX-XT 11.34 exemption,
-ex_xt_prorate_begin,char(25),8149,8173,25,Proration begin date for EX-XT 11.34 exemption,
-ex_xt_prorate_end,char(25),8174,8198,25,Proration end date for EX-XT 11.34 exemption,
-ex_xu_exempt,char(1),8199,8199,1,EX-XU 11.23 exemption (‘T’ or ‘F’),
-ex_xu_qualify_yr,numeric(4),8200,8203,4,Qualify Year for EX-XU 11.23 exemption,
-ex_xu_prorate_begin,char(25),8204,8228,25,Proration begin date for EX-XU 11.23 exemption,
-ex_xu_prorate_end,char(25),8229,8253,25,Proration end date for EX-XU 11.23 exemption,
-ex_xv_exempt,char(1),8254,8254,1,EX-XV  exemption (‘T’ or ‘F’),
-ex_xv_qualify_yr,numeric(4),8255,8258,4,Qualify Year for EX-XV exemption,
-ex_xv_prorate_begin,char(25),8259,8283,25,Proration begin date for EX-XV exemption,
-ex_xv_prorate_end,char(25),8284,8308,25,Proration end date for EX-XV exemption,
-ex_xa_exempt,char(1),8309,8309,1,EX-XA  exemption (‘T’ or ‘F’),
-ex_xa_qualify_yr,numeric(4),8310,8313,4,Qualify Year for EX-XA exemption,
-ex_xa_prorate_begin,char(25),8314,8338,25,Proration begin date for EX-XA exemption,
-ex_xa_prorate_end,char(25),8339,8363,25,Proration end date for EX-XA exemption,
-lve_qualify_yr,numeric(4),8364,8367,4,Qualify Year for LVE exemption,
-ppv_exempt,char(1),8368,8368,1,Personal Property Vehicle exemption,
-ppv_qualify_yr,numeric(4),8369,8372,4,Qualify Year for PPV exemption,
-ppv_prorate_begin,char(25),8373,8397,25,date PPV exemption began - used for proration,
-ppv_prorate_end,char(25),8398,8422,25,date PPV exemption ended - used for proration,
-dvch_exempt,char(1),8423,8423,1,Disabled Veteran Charity Homestead,
-dvch_qualify_yr,numeric(4),8424,8427,4,Qualify Year for DVCH exemption,
-dvch_prorate_begin,char(25),8428,8452,25,date DVCH exemption began - used for proration,
-dvch_prorate_end,char(25),8453,8477,25,date DVCH exemption ended - used for proration,
-dvchs_exempt,char(1),8478,8478,1,Disabled Veteran Charity Homestead Spouse,
-dvchs_qualify_yr,numeric(4),8479,8482,4,Qualify Year for DVCHS exemption,
-dvchs_prorate_begin,char(25),8483,8507,25,date DVCHS exemption began - used for proration,
-dvchs_prorate_end,char(25),8508,8532,25,date DVCHS exemption ended - used for proration,
-masss_exempt,char(1),8533,8533,1,Member Armed Services Surviving Spouse,
-masss_qualify_yr,numeric(4),8534,8537,4,Qualify Year for MASSS exemption,
-masss_prorate_begin,char(25),8538,8562,25,date MASSS exemption began - used for proration,
-masss_prorate_end,char(25),8563,8587,25,date MASSS exemption ended - used for proration,
-pp_late_interstate_allocation_val,numeric(15),8588,8602,15,Personal Property interstate allocation value that is subject to penalty,
-appraised_val_reflecting_productivity_loss,numeric(15),8603,8617,15,Appraised Value reflecting Productivity Loss,
-assessed_val_reflecting_productivity_loss,numeric(15),8618,8632,15,Assessed Value reflecting Productivity Loss,
-frss_exempt,char(1),8633,8633,1,First Responder Surviving Spouse,
-frss_qualify_yr,numeric(4),8634,8637,4,Qualify Year for FRSS exemption,
-frss_prorate_begin,char(25),8638,8662,25,date FRSS exemption began - used for proration,
-frss_prorate_end,char(25),8663,8687,25,date FRSS exemption ended - used for proration,
-abmno_exempt,char(1),8688,8688,1,ABMNO (Abatement-MNO) exemption,
-abmno_qualify_yr,numeric(4),8689,8692,4,Qualify Year for ABMNO exemption,
-abmno_prorate_begin,char(25),8693,8717,25,date ABMNO exemption began - used for proration,
-abmno_prorate_end,char(25),8718,8742,25,date ABMNO exemption ended - used for proration,
-dv1_deferral_date,char(25),8743,8767,25,DV1 exemption deferral date,
-dv2_deferral_date,char(25),8768,8792,25,DV2 exemption deferral date,
-dv3_deferral_date,char(25),8793,8817,25,DV3 exemption deferral date,
-dv4_deferral_date,char(25),8818,8842,25,DV4 exemption deferral date,
-dv1s_deferral_date,char(25),8843,8867,25,DV1S exemption deferral date,
-dv2s_deferral_date,char(25),8868,8892,25,DV2S exemption deferral date,
-dv3s_deferral_date,char(25),8893,8917,25,DV3S exemption deferral date,
-dv4s_deferral_date,char(25),8918,8942,25,DV4S exemption deferral date,
+N = Not omitted"
+"hs_prorate_begin","char(25)","5884","5908","25","date the exemption began - used for proration"
+"hs_prorate_end","char(25)","5909","5933","25","date the exemption ended - used for proration"
+"ov65s_prorate_begin","char(25)","5934","5958","25","date the exemption began - used for proration"
+"ov65s_prorate_end","char(25)","5959","5983","25","date the exemption ended - used for proration"
+"dp_prorate_begin","char(25)","5984","6008","25","date the exemption began - used for proration"
+"dp_prorate_end","char(25)","6009","6033","25","date the exemption ended - used for proration"
+"dv1_prorate_begin","char(25)","6034","6058","25","date the exemption began - used for proration"
+"dv1_prorate_end","char(25)","6059","6083","25","date the exemption ended - used for proration"
+"dv1s_prorate_begin","char(25)","6084","6108","25","date the exemption began - used for proration"
+"dv1s_prorate_end","char(25)","6109","6133","25","date the exemption ended - used for proration"
+"dv2_prorate_begin","char(25)","6134","6158","25","date the exemption began - used for proration"
+"dv2_prorate_end","char(25)","6159","6183","25","date the exemption ended - used for proration"
+"dv2s_prorate_begin","char(25)","6184","6208","25","date the exemption began - used for proration"
+"dv2s_prorate_end","char(25)","6209","6233","25","date the exemption ended - used for proration"
+"dv3_prorate_begin","char(25)","6234","6258","25","date the exemption began - used for proration"
+"dv3_prorate_end","char(25)","6259","6283","25","date the exemption ended - used for proration"
+"dv3s_prorate_begin","char(25)","6284","6308","25","date the exemption began - used for proration"
+"dv3s_prorate_end","char(25)","6309","6333","25","date the exemption ended - used for proration"
+"dv4_prorate_begin","char(25)","6334","6358","25","date the exemption began - used for proration"
+"dv4_prorate_end","char(25)","6359","6383","25","date the exemption ended - used for proration"
+"dv4s_prorate_begin","char(25)","6384","6408","25","date the exemption began - used for proration"
+"dv4s_prorate_end","char(25)","6409","6433","25","date the exemption ended - used for proration"
+"lve_prorate_begin","char(25)","6434","6458","25","date the exemption began - used for proration"
+"lve_prorate_end","char(25)","6459","6483","25","date the exemption ended - used for proration"
+"ab_prorate_begin","char(25)","6484","6508","25","date the exemption began - used for proration"
+"ab_prorate_end","char(25)","6509","6533","25","date the exemption ended - used for proration"
+"en_prorate_begin","char(25)","6534","6558","25","date the exemption began - used for proration"
+"en_prorate_end","char(25)","6559","6583","25","date the exemption ended - used for proration"
+"fr_prorate_begin","char(25)","6584","6608","25","date the exemption began - used for proration"
+"fr_prorate_end","char(25)","6609","6633","25","date the exemption ended - used for proration"
+"ht_prorate_begin","char(25)","6634","6658","25","date the exemption began - used for proration"
+"ht_prorate_end","char(25)","6659","6683","25","date the exemption ended - used for proration"
+"pro_prorate_begin","char(25)","6684","6708","25","date the exemption began - used for proration"
+"pro_prorate_end","char(25)","6709","6733","25","date the exemption ended - used for proration"
+"pc_prorate_begin","char(25)","6734","6758","25","date the exemption began - used for proration"
+"pc_prorate_end","char(25)","6759","6783","25","date the exemption ended - used for proration"
+"so_prorate_begin","char(25)","6784","6808","25","date the exemption began - used for proration"
+"so_prorate_end","char(25)","6809","6833","25","date the exemption ended - used for proration"
+"ex366_prorate_begin","char(25)","6834","6858","25","date the exemption began - used for proration"
+"ex366_prorate_end","char(25)","6859","6883","25","date the exemption ended - used for proration"
+"ch_prorate_begin","char(25)","6884","6908","25","date the exemption began - used for proration"
+"ch_prorate_end","char(25)","6909","6933","25","date the exemption ended - used for proration"
+"dps_prorate_begin","char(25)","6934","6958","25","date the exemption began - used for proration"
+"dps_prorate_end","char(25)","6959","6983","25","date the exemption ended - used for proration"
+"eco_prorate_begin","char(25)","6984","7008","25","date the exemption began - used for proration"
+"eco_prorate_end","char(25)","7009","7033","25","date the exemption ended - used for proration"
+"chodo_prorate_begin","char(25)","7034","7058","25","date the exemption began - used for proration"
+"chodo_prorate_end","char(25)","7059","7083","25","date the exemption ended - used for proration"
+"lih_prorate_begin","char(25)","7084","7108","25","date the exemption began - used for proration"
+"lih_prorate_end","char(25)","7109","7133","25","date the exemption ended - used for proration"
+"git_prorate_begin","char(25)","7134","7158","25","date the exemption began - used for proration"
+"git_prorate_end","char(25)","7159","7183","25","date the exemption ended - used for proration"
+"clt_exempt","char(1)","7184","7184","1","Exemption for community land trust ('T' or 'F')"
+"clt_prorate_begin","char(25)","7185","7209","25","date the exemption began – used for proration"
+"clt_prorate_end","char(25)","7210","7234","25","date the exemption ended – used for proration"
+"clt_qualify_yr","numeric(4)","7235","7238","4","Qualify Year for CLT exemption"
+"dvhss_exempt","char(1)","7239","7239","1","Exemption for DVHS Surviving Spouse ('T' or 'F')"
+"dvhss_prorate_begin","char(25)","7240","7264","25","date the exemption began – used for proration"
+"dvhss_prorate_end","char(25)","7265","7289","25","date the exemption ended – used for proration"
+"dvhss_qualify_yr","numeric(4)","7290","7293","4","Qualify Year for DVHS Surviving Spouse exemption"
+"omitted_imprv_hstd_val","numeric(15)","7294","7308","15","Omitted Improvement Homestead Value"
+"omitted_imprv_non_hstd_val","numeric(15)","7309","7323","15","Omitted Improvement Non-Homestead Value"
+"dvhs_prorate_begin","char(25)","7324","7348","25","date the exemption began – used for proration"
+"dvhs_prorate_end","char(25)","7349","7373","25","date the exemption ended – used for proration"
+"ex_xd_exempt","char(1)","7374","7374","1","EX-XD 11.181 exemption (‘T’ or ‘F’)"
+"ex_xd_qualify_yr","numeric(4)","7375","7378","4","Qualify Year for EX-XD 11.181 exemption"
+"ex_xd_prorate_begin","char(25)","7379","7403","25","Proration begin date for EX-XD 11.181 exemption"
+"ex_xd_prorate_end","char(25)","7404","7428","25","Proration end date for EX-XD 11.181 exemption"
+"ex_xf_exempt","char(1)","7429","7429","1","EX-XF 11.183 exemption (‘T’ or ‘F’)"
+"ex_xf_qualify_yr","numeric(4)","7430","7433","4","Qualify Year for EX-XF 11.183 exemption"
+"ex_xf_prorate_begin","char(25)","7434","7458","25","Proration begin date for EX-XF 11.183 exemption"
+"ex_xf_prorate_end","char(25)","7459","7483","25","Proration end date for EX-XF 11.183 exemption"
+"ex_xg_exempt","char(1)","7484","7484","1","EX-XG 11.184 exemption (‘T’ or ‘F’)"
+"ex_xg_qualify_yr","numeric(4)","7485","7488","4","Qualify Year for EX-XG 11.184 exemption"
+"ex_xg_prorate_begin","char(25)","7489","7513","25","Proration begin date for EX-XG 11.184 exemption"
+"ex_xg_prorate_end","char(25)","7514","7538","25","Proration end date for EX-XG 11.184 exemption"
+"ex_xh_exempt","char(1)","7539","7539","1","EX-XH 11.185 exemption (‘T’ or ‘F’)"
+"ex_xh_qualify_yr","numeric(4)","7540","7543","4","Qualify Year for EX-XH 11.185 exemption"
+"ex_xh_prorate_begin","char(25)","7544","7568","25","Proration begin date for EX-XH 11.185 exemption"
+"ex_xh_prorate_end","char(25)","7569","7593","25","Proration end date for EX-XH 11.185 exemption"
+"ex_xi_exempt","char(1)","7594","7594","1","EX-XI 11.19 exemption (‘T’ or ‘F’)"
+"ex_xi_qualify_yr","numeric(4)","7595","7598","4","Qualify Year forEX-XI 11.19 exemption"
+"ex_xi_prorate_begin","char(25)","7599","7623","25","Proration begin date for EX-XI 11.19 exemption"
+"ex_xi_prorate_end","char(25)","7624","7648","25","Proration end date for EX-XI 11.19 exemption"
+"ex_xj_exempt","char(1)","7649","7649","1","EX-XJ 11.21 exemption (‘T’ or ‘F’)"
+"ex_xj_qualify_yr","numeric(4)","7650","7653","4","Qualify Year for EX-XJ 11.21 exemption"
+"ex_xj_prorate_begin","char(25)","7654","7678","25","Proration begin date for EX-XJ 11.21 exemption"
+"ex_xj_prorate_end","char(25)","7679","7703","25","Proration end date for EX-XJ 11.21 exemption"
+"ex_xl_exempt","char(1)","7704","7704","1","EX-XL 11.231 exemption (‘T’ or ‘F’)"
+"ex_xl_qualify_yr","numeric(4)","7705","7708","4","Qualify Year for EX-XL 11.231 exemption"
+"ex_xl_prorate_begin","char(25)","7709","7733","25","Proration begin date for EX-XL 11.231 exemption"
+"ex_xl_prorate_end","char(25)","7734","7758","25","Proration end date for EX-XL 11.231 exemption"
+"ex_xm_exempt","char(1)","7759","7759","1","EX-XM 11.25 exemption (‘T’ or ‘F’)"
+"ex_xm_qualify_yr","numeric(4)","7760","7763","4","Qualify Year for EX-XM 11.25 exemption"
+"ex_xm_prorate_begin","char(25)","7764","7788","25","Proration begin date for EX-XM 11.25 exemption"
+"ex_xm_prorate_end","char(25)","7789","7813","25","Proration end date for EX-XM 11.25 exemption"
+"ex_xn_exempt","char(1)","7814","7814","1","EX-XN 11.252 exemption (‘T’ or ‘F’)"
+"ex_xn_qualify_yr","numeric(4)","7815","7818","4","Qualify Year for EX-XN 11.252 exemption"
+"ex_xn_prorate_begin","char(25)","7819","7843","25","Proration begin date for EX-XN 11.252 exemption"
+"ex_xn_prorate_end","char(25)","7844","7868","25","Proration end date for EX-XN 11.252 exemption"
+"ex_xo_exempt","char(1)","7869","7869","1","EX-XO 11.254 exemption (‘T’ or ‘F’)"
+"ex_xo_qualify_yr","numeric(4)","7870","7873","4","Qualify Year for EX-XO 11.254 exemption"
+"ex_xo_prorate_begin","char(25)","7874","7898","25","Proration begin date for EX-XO 11.254 exemption"
+"ex_xo_prorate_end","char(25)","7899","7923","25","Proration end date for EX-XO 11.254 exemption"
+"ex_xp_exempt","char(1)","7924","7924","1","EX-XP 11.271 exemption (‘T’ or ‘F’)"
+"ex_xp_qualify_yr","numeric(4)","7925","7928","4","Qualify Year for EX-XP 11.271 exemption"
+"ex_xp_prorate_begin","char(25)","7929","7953","25","Proration begin date for EX-XP 11.271 exemption"
+"ex_xp_prorate_end","char(25)","7954","7978","25","Proration end date for EX-XP 11.271 exemption"
+"ex_xq_exempt","char(1)","7979","7979","1","EX-XQ 11.29 exemption (‘T’ or ‘F’)"
+"ex_xq_qualify_yr","numeric(4)","7980","7983","4","Qualify Year for EX-XQ 11.29 exemption"
+"ex_xq_prorate_begin","char(25)","7984","8008","25","Proration begin date for EX-XQ 11.29 exemption"
+"ex_xq_prorate_end","char(25)","8009","8033","25","Proration end date for EX-XQ exemption 11.29 exemption"
+"ex_xr_exempt","char(1)","8034","8034","1","EX-XR 11.30 exemption (‘T’ or ‘F’)"
+"ex_xr_qualify_yr","numeric(4)","8035","8038","4","Qualify Year for EX-XR 11.30 exemption"
+"ex_xr_prorate_begin","char(25)","8039","8063","25","Proration begin date for EX-XR 11.30 exemption"
+"ex_xr_prorate_end","char(25)","8064","8088","25","Proration end date for EX-XR 11.30 exemption"
+"ex_xs_exempt","char(1)","8089","8089","1","EX-XS 11.33 exemption (‘T’ or ‘F’)"
+"ex_xs_qualify_yr","numeric(4)","8090","8093","4","Qualify Year for EX-XS 11.33 exemption"
+"ex_xs_prorate_begin","char(25)","8094","8118","25","Proration begin date for EX-XS 11.33 exemption"
+"ex_xs_prorate_end","char(25)","8119","8143","25","Proration end date for EX-XS 11.33 exemption"
+"ex_xt_exempt","char(1)","8144","8144","1","EX-XT 11.34 exemption (‘T’ or ‘F’)"
+"ex_xt_qualify_yr","numeric(4)","8145","8148","4","Qualify Year for EX-XT 11.34 exemption"
+"ex_xt_prorate_begin","char(25)","8149","8173","25","Proration begin date for EX-XT 11.34 exemption"
+"ex_xt_prorate_end","char(25)","8174","8198","25","Proration end date for EX-XT 11.34 exemption"
+"ex_xu_exempt","char(1)","8199","8199","1","EX-XU 11.23 exemption (‘T’ or ‘F’)"
+"ex_xu_qualify_yr","numeric(4)","8200","8203","4","Qualify Year for EX-XU 11.23 exemption"
+"ex_xu_prorate_begin","char(25)","8204","8228","25","Proration begin date for EX-XU 11.23 exemption"
+"ex_xu_prorate_end","char(25)","8229","8253","25","Proration end date for EX-XU 11.23 exemption"
+"ex_xv_exempt","char(1)","8254","8254","1","EX-XV  exemption (‘T’ or ‘F’)"
+"ex_xv_qualify_yr","numeric(4)","8255","8258","4","Qualify Year for EX-XV exemption"
+"ex_xv_prorate_begin","char(25)","8259","8283","25","Proration begin date for EX-XV exemption"
+"ex_xv_prorate_end","char(25)","8284","8308","25","Proration end date for EX-XV exemption"
+"ex_xa_exempt","char(1)","8309","8309","1","EX-XA  exemption (‘T’ or ‘F’)"
+"ex_xa_qualify_yr","numeric(4)","8310","8313","4","Qualify Year for EX-XA exemption"
+"ex_xa_prorate_begin","char(25)","8314","8338","25","Proration begin date for EX-XA exemption"
+"ex_xa_prorate_end","char(25)","8339","8363","25","Proration end date for EX-XA exemption"
+"lve_qualify_yr","numeric(4)","8364","8367","4","Qualify Year for LVE exemption"
+"ppv_exempt","char(1)","8368","8368","1","Personal Property Vehicle exemption"
+"ppv_qualify_yr","numeric(4)","8369","8372","4","Qualify Year for PPV exemption"
+"ppv_prorate_begin","char(25)","8373","8397","25","date PPV exemption began - used for proration"
+"ppv_prorate_end","char(25)","8398","8422","25","date PPV exemption ended - used for proration"
+"dvch_exempt","char(1)","8423","8423","1","Disabled Veteran Charity Homestead"
+"dvch_qualify_yr","numeric(4)","8424","8427","4","Qualify Year for DVCH exemption"
+"dvch_prorate_begin","char(25)","8428","8452","25","date DVCH exemption began - used for proration"
+"dvch_prorate_end","char(25)","8453","8477","25","date DVCH exemption ended - used for proration"
+"dvchs_exempt","char(1)","8478","8478","1","Disabled Veteran Charity Homestead Spouse"
+"dvchs_qualify_yr","numeric(4)","8479","8482","4","Qualify Year for DVCHS exemption"
+"dvchs_prorate_begin","char(25)","8483","8507","25","date DVCHS exemption began - used for proration"
+"dvchs_prorate_end","char(25)","8508","8532","25","date DVCHS exemption ended - used for proration"
+"masss_exempt","char(1)","8533","8533","1","Member Armed Services Surviving Spouse"
+"masss_qualify_yr","numeric(4)","8534","8537","4","Qualify Year for MASSS exemption"
+"masss_prorate_begin","char(25)","8538","8562","25","date MASSS exemption began - used for proration"
+"masss_prorate_end","char(25)","8563","8587","25","date MASSS exemption ended - used for proration"
+"pp_late_interstate_allocation_val","numeric(15)","8588","8602","15","Personal Property interstate allocation value that is subject to penalty"
+"appraised_val_reflecting_productivity_loss","numeric(15)","8603","8617","15","Appraised Value reflecting Productivity Loss"
+"assessed_val_reflecting_productivity_loss","numeric(15)","8618","8632","15","Assessed Value reflecting Productivity Loss"
+"frss_exempt","char(1)","8633","8633","1","First Responder Surviving Spouse"
+"frss_qualify_yr","numeric(4)","8634","8637","4","Qualify Year for FRSS exemption"
+"frss_prorate_begin","char(25)","8638","8662","25","date FRSS exemption began - used for proration"
+"frss_prorate_end","char(25)","8663","8687","25","date FRSS exemption ended - used for proration"
+"abmno_exempt","char(1)","8688","8688","1","ABMNO (Abatement-MNO) exemption"
+"abmno_qualify_yr","numeric(4)","8689","8692","4","Qualify Year for ABMNO exemption"
+"abmno_prorate_begin","char(25)","8693","8717","25","date ABMNO exemption began - used for proration"
+"abmno_prorate_end","char(25)","8718","8742","25","date ABMNO exemption ended - used for proration"
+"dv1_deferral_date","char(25)","8743","8767","25","DV1 exemption deferral date"
+"dv2_deferral_date","char(25)","8768","8792","25","DV2 exemption deferral date"
+"dv3_deferral_date","char(25)","8793","8817","25","DV3 exemption deferral date"
+"dv4_deferral_date","char(25)","8818","8842","25","DV4 exemption deferral date"
+"dv1s_deferral_date","char(25)","8843","8867","25","DV1S exemption deferral date"
+"dv2s_deferral_date","char(25)","8868","8892","25","DV2S exemption deferral date"
+"dv3s_deferral_date","char(25)","8893","8917","25","DV3S exemption deferral date"
+"dv4s_deferral_date","char(25)","8918","8942","25","DV4S exemption deferral date"
