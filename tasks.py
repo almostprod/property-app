@@ -64,6 +64,11 @@ def dev_client(c):
 
 
 @task
+def dbt_run(c):
+    c.run("dbt run --profiles-dir ./profiles", pty=True, env=env)
+
+
+@task
 def ssl_gen(c):
     certbot_opts = [
         "--manual",

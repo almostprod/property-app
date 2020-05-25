@@ -4,8 +4,10 @@ sources:
   - name: tcad
     schema: tcad
     tables:
-      - name: prop
+      - name: parcel
 
 models:
   - name: property
     description: "Property Records"
+  - name: property_geometry
+    description: "Property Parcel Geometries"

@@ -7,9 +7,7 @@ sources:
       - name: permits_austin_20200514
 
 models:
-  - name: permit_base
+  - name: permit_raw
     description: "Historical and Current Building Permits"
-  - name: permit_address
-    description: "Addresses from the Permit dataset"
   - name: permit
     description: "Historical and Current Building Permits"

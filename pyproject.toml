@@ -54,6 +54,13 @@ pyodbc = {version = "^4.0.30", optional = true, extras = ["tcad"]}
 tqdm = {version = "^4.46.0", optional = true}
 rich = "^1.1.6"
 pynamodb = "^4.3.2"
+postal = "^1.1.8"
+census = "^0.8.14"
+rtree = "^0.9.4"
+geopandas = {git = "https://github.com/geopandas/geopandas.git", rev = "25f6064"}
+geoalchemy2 = "^0.8.2"
+shapely = "^1.7.0"
+esridump = "^1.9.3"
 
 [tool.poetry.extras]
 data = ["dbt", "socrata2sql", "dataset"]

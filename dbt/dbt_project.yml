@@ -15,7 +15,7 @@ clean-targets:
   - "target"
   - "dbt_modules"
 
-on-run-end:
-  - "{{ grant_select_on_schemas(['core' 'property_data'], 'reporter_ro') }}"
+#on-run-end:
+#  - "{{ grant_select_on_schemas(['core' 'property_data'], 'reporter_ro') }}"
 
 models:

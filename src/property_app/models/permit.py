@@ -33,7 +33,8 @@ class PermitStatus(enum.Enum):
 
 
 building_permit = sa.Table(
-    "permit", app_metadata,
+    "permit",
+    app_metadata,
     sa.Column("permit_number", sa.Text),
     sa.Column("master_permit_number", sa.Numeric),
     sa.Column("status", Enum(PermitStatus)),
