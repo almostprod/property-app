@@ -705,6 +705,14 @@ version = "0.9.0"
 
 [[package]]
 category = "main"
+description = "Python bindings for H3, a hierarchical hexagonal geospatial indexing system developed by Uber Technologies"
+name = "h3"
+optional = false
+python-versions = "*"
+version = "3.4.3"
+
+[[package]]
+category = "main"
 description = "JSON schema generation from dataclasses"
 name = "hologram"
 optional = true
@@ -2127,7 +2135,7 @@ docs = ["mkdocs", "mkdocs-material"]
 tcad = ["pyodbc"]
 
 [metadata]
-content-hash = "09988e29372b33f21aec57168d95508cbbbf5212349e3577f801a2378b86b8ab"
+content-hash = "390f736f99a850b700cccff6344b92c7620a66a51187c98796a5c8285c784bf1"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -2397,6 +2405,9 @@ gunicorn = [
 h11 = [
     {file = "h11-0.9.0-py2.py3-none-any.whl", hash = "sha256:4bc6d6a1238b7615b266ada57e0618568066f57dd6fa967d1290ec9309b2f2f1"},
     {file = "h11-0.9.0.tar.gz", hash = "sha256:33d4bca7be0fa039f4e84d50ab00531047e53d6ee8ffbc83501ea602c169cae1"},
+]
+h3 = [
+    {file = "h3-3.4.3.tar.gz", hash = "sha256:a292a5a63bcf535f0137141019f3defd21ad2fbd258dc8de587f921cf2c5b41d"},
 ]
 hologram = [
     {file = "hologram-0.0.6.tar.gz", hash = "sha256:3f5ee16a574a0c5dd9af894924cb841cf2100503f929783a8fc6707a2e2f3746"},
