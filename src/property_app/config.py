@@ -68,6 +68,9 @@ class AppConfig:
     DIST_ROOT = config("APP_DIST_ROOT", cast=str, default="dist/")
     TEMPLATE_ROOT = config("APP_TEMPLATE_ROOT", cast=str, default=_LOCAL_DIR)
 
+    BASE_DDB_TABLE = config("APP_BASE_DDB_TABLE", cast=str, default="LocalPropertyApp")
+    DDB_ENDPOINT = config("APP_DDB_ENDPOINT", cast=URL, default="http://localhost:8000")
+
 
 class ProductionConfig(AppConfig):
     @staticmethod

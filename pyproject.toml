@@ -61,6 +61,7 @@ geopandas = {git = "https://github.com/geopandas/geopandas.git", rev = "25f6064"
 geoalchemy2 = "^0.8.2"
 shapely = "^1.7.0"
 esridump = "^1.9.3"
+pynamodb-attributes = "^0.2.7"
 
 [tool.poetry.extras]
 data = ["dbt", "socrata2sql", "dataset"]

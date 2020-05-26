@@ -43,7 +43,7 @@ property_record = sa.Table(
     sa.Column("property_id", sa.Text),
     sa.Column("geo_id", sa.Text),
     sa.Column("full_address", sa.Text),
-    sa.Column("street_number",sa.Text),
+    sa.Column("street_number", sa.Text),
     sa.Column("street", sa.Text),
     sa.Column("zipcode", sa.Text),
     sa.Column("land_type", Enum(LandType)),
