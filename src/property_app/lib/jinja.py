@@ -14,7 +14,6 @@ def asset_url(context: dict, name: str, dist_root=None):
         config = get_config()
         dist_root = config.DIST_ROOT
 
-    manifest = None
     dist_path = pathlib.Path(dist_root)
     manifest_path = dist_path / pathlib.Path("assets/manifest.json")
     with open(manifest_path, "rb") as manifest_file:

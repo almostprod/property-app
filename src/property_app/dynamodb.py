@@ -106,7 +106,7 @@ class Property(PropertyAppModel):
     zipcode_index = PropertyZipcodeIndex()
 
     class Meta(BaseMeta):
-        index = []
+        index: list = []
 
     def __init__(self, property_id, **kwargs):
         hash_key = self.get_pk(property_id)
