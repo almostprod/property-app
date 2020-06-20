@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import typing as t
+
 import pendulum
 
 from datetime import datetime
@@ -46,7 +48,7 @@ class BaseMeta:
 
 
 class PropertyAppModel(Model):
-    __model_prefix__ = None
+    __model_prefix__: t.Optional[str] = None
 
     _primary_key = UnicodeAttribute(hash_key=True)
     _sort_key = UnicodeAttribute(range_key=True, null=True)
