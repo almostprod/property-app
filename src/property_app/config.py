@@ -73,6 +73,9 @@ class AppConfig:
 
 
 class ProductionConfig(AppConfig):
+
+    APP_PORT = config("PORT", cast=int, default=5000)
+
     @staticmethod
     def init_app(app):
         import logging

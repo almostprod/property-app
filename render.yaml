@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: app-server
+    env: python
+    repo: https://github.com/almostproductive/property-app.git
+    plan: standard
+    branch: master
+    healthCheckPath: /
+    buildCommand: ./bin/build.sh
+    startCommand: ./bin/start.sh
+    envVars:
+      - key: DATABASE_URI
+        fromDatabase:
+          name: app-db
+          property: connectionString
+      - key: ASGI_APP
+        value: property_app.main:app
+      - key: APP_ENV
+        value: production
+      - key: SECRET_KEY
+        value: jfhewojcjhufewnc822kdkdksdk
+  - type: web
+    name: app-static
+    env: static
+    buildCommand: yarn build
+    staticPublishPath: ./dist
+
+databases:
+  - name: app-db
+    databaseName: property_app
+    user: propertyapp

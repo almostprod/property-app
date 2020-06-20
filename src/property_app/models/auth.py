@@ -82,7 +82,7 @@ class AppUserCredential(AppBase):
     credential_type = sa.Column(
         Enum(AppAuthCredentialType),
         nullable=False,
-        default=AppAuthCredentialType.PASSWORD,
+        default=AppAuthCredentialType.PASSWORD.value,
     )
     credential = sa.Column(sa.Text, nullable=False)
 
