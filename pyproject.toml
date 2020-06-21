@@ -62,6 +62,7 @@ geoalchemy2 = "^0.8.2"
 shapely = "^1.7.0"
 esridump = {version = "^1.9.3", optional = true, extras = ["data"]}
 pynamodb-attributes = "^0.2.7"
+aiofiles = "^0.4.0"
 
 [tool.poetry.extras]
 data = ["dbt", "socrata2sql", "dataset", "geopandas", "postal", "census", "rtree", "esridump"]
@@ -74,7 +75,6 @@ invoke = "^1.4.1"
 black = "^19.10b0"
 pytest = "^5.3.5"
 ipython = "^7.13.0"
-aiofiles = "^0.4.0"
 mypy = "^0.761"
 sqlalchemy-stubs = "^0.3"
 colorama = "^0.4.3"

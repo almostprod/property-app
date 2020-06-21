@@ -16,7 +16,7 @@ pytimeparse = ">=1.1.5"
 six = ">=1.9.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "File support for asyncio."
 name = "aiofiles"
 optional = false
@@ -2145,7 +2145,7 @@ docs = ["mkdocs", "mkdocs-material"]
 tcad = ["pyodbc"]
 
 [metadata]
-content-hash = "980170ba96e4283288c4b337dc75a16289a9ef0db78a4e80ab4398768dabd48d"
+content-hash = "1722408284b05b51c85d5ee6bfdb3dade737eb557f2df70710f4283376cbf36d"
 python-versions = "^3.7"
 
 [metadata.files]
