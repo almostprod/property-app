@@ -19,11 +19,6 @@ services:
         value: production
       - key: SECRET_KEY
         value: jfhewojcjhufewnc822kdkdksdk
-  - type: web
-    name: app-static
-    env: static
-    buildCommand: yarn build
-    staticPublishPath: ./dist
 
 databases:
   - name: app-db
