@@ -75,6 +75,7 @@ class AppConfig:
 class ProductionConfig(AppConfig):
 
     APP_PORT = config("PORT", cast=int, default=5000)
+    DOMAIN = config("RENDER_EXTERNAL_HOSTNAME", default="localhost")
 
     @staticmethod
     def init_app(app):
