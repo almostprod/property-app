@@ -2,4 +2,4 @@
 pip install poetry
 poetry install --no-dev 
 
-poetry run alembic upgrade
+poetry run alembic upgrade head
