@@ -9,6 +9,7 @@ from starlette.authentication import requires
 from property_app.lib.inertia import InertiaRequest, InertiaHTTPEndpoint
 
 from property_app.models import auth
+from property_app.lib import messages
 
 
 class LoginForm(BaseModel):
@@ -45,6 +46,8 @@ class Index(InertiaHTTPEndpoint):
                         request.session.update(
                             {"iss": "app", "email": user.email, "scopes": user.scopes}
                         )
+
+                        messages.message(request, "Welcome!")
                         break
 
         except ValidationError as e:

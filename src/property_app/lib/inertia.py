@@ -12,6 +12,8 @@ from starlette.datastructures import URL
 
 from property_app.app import templates
 
+from . import messages
+
 
 class InertiaRequest(Request):
     def __init__(
@@ -73,7 +75,12 @@ class InertiaHTTPEndpoint:
 
         return await run_in_threadpool(handler, *handler_args)
 
+    def share(self, request):
+        return {"messages": messages.get_messages(request)}
+
     def _inertia_context(self, request, props):
+        props.update(self.share(request))
+
         return {
             "component": self.component,
             "props": props,
