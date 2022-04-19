@@ -32,7 +32,9 @@ def create_app(app_config=None):
     )
 
     starlette_app.mount(
-        "/assets", app=StaticFiles(directory="dist/assets/"), name="assets",
+        "/assets",
+        app=StaticFiles(directory="dist/assets/"),
+        name="assets",
     )
 
     routes.init_app(starlette_app)

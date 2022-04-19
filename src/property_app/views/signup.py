@@ -28,7 +28,9 @@ class SignUp(InertiaHTTPEndpoint):
     def get(self, request: InertiaRequest):
 
         if request.user.is_authenticated:
-            return request.redirect(request.url_for("Dashboard"),)
+            return request.redirect(
+                request.url_for("Dashboard"),
+            )
 
         return {}
 

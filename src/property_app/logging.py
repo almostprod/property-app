@@ -6,7 +6,7 @@ import logging
 
 
 def loggers():
-    """ get list of all loggers """
+    """get list of all loggers"""
     root = logging.root
     existing = root.manager.loggerDict.keys()  # noqa
     return [logging.getLogger(name) for name in existing]

@@ -15,12 +15,7 @@ def test(c):
 
 @task
 def black(c):
-    c.run("poetry run black .", pty=True)
-
-
-@task
-def type_check(c):
-    c.run("poetry run mypy src/", pty=True)
+    c.run("black .", pty=True)
 
 
 @task(help={"message": "Description of the new migration."})
@@ -29,7 +24,7 @@ def db_migrate(c, message="replace this message"):
     Create a new alembic migration.
     """
     c.run(
-        f"poetry run alembic revision --autogenerate -m '{message}'", pty=True, env=env
+        f"alembic revision --autogenerate -m '{message}'", pty=True, env=env
     )
 
 
@@ -38,7 +33,7 @@ def db_upgrade(c, target="head"):
     """
     Upgrade the db to the target alembic revision.
     """
-    c.run(f"poetry run alembic upgrade {target}", pty=True, env=env)
+    c.run(f"alembic upgrade {target}", pty=True, env=env)
 
 
 @task
@@ -50,17 +45,17 @@ def dev_services(c):
 
 @task(dev_services)
 def dev_app(c):
-    c.run("poetry run property", env=env, pty=True)
+    c.run("property", env=env, pty=True)
 
 
 @task(dev_services)
 def dev_shell(c):
-    c.run("poetry run ipython", env=env, pty=True)
+    c.run("ipython", env=env, pty=True)
 
 
 @task
 def dev_client(c):
-    c.run("yarn dev", pty=True)
+    c.run("npm run dev", pty=True)
 
 
 @task

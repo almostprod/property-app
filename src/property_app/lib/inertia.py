@@ -52,7 +52,8 @@ class InertiaHTTPEndpoint:
 
     async def _handle_html(self, request, context):
         return templates.TemplateResponse(
-            "index.html", {"request": request, "inertia_context": json.dumps(context)},
+            "index.html",
+            {"request": request, "inertia_context": json.dumps(context)},
         )
 
     async def _handle_inertia(self, request, context):

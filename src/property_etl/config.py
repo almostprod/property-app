@@ -19,7 +19,10 @@ config = Config(env_str("ENV_FILE", default=".env"))
 
 
 def _config_by_environment(app_environment: str):
-    environments = dict(development=DevelopmentConfig, production=ProductionConfig,)
+    environments = dict(
+        development=DevelopmentConfig,
+        production=ProductionConfig,
+    )
 
     return environments.get(app_environment, DevelopmentConfig)
 

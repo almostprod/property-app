@@ -44,5 +44,3 @@ def load_properties():
             properties.append(p)
 
         prop.persist(properties)
-
-

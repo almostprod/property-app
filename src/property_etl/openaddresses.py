@@ -83,7 +83,9 @@ def load_csv_to_db(
                     }
 
                     table.insert_many(
-                        address_data.to_dict("records"), ensure=True, types=col_types,
+                        address_data.to_dict("records"),
+                        ensure=True,
+                        types=col_types,
                     )
 
                     transaction.commit()
