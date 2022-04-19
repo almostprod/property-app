@@ -1,42 +1,46 @@
+# build deps 
+pip
+wheel
+setuptools
+
 # app deps
 starlette
+uvicorn
 sqlalchemy
 alembic
 sqlalchemy-utils
 sqlalchemy-mixins
 structlog
 pandas
-gunicorn
 decorator
 starlette-context
-ujson
 jinja2
 pendulum
 psycopg2-binary
-uvicorn
 typing-extensions
 python-dotenv
 pydantic
 email-validator
 itsdangerous
-starlette-authlib
-sqlalchemy_mixins
 passlib
 tqdm
 rich
-pynamodb
 geoalchemy2
 shapely
-pynamodb-attributes
 aiofiles
 
 # data deps
-dbt
+dbt-core
+dbt-postgres
+
 socrata2sql
 dataset
+rtree
+fiona
+pyproj --no-binary pyproj
 geopandas
 postal
 census
-rtree
+
 esridump
 pyodbc

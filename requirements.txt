@@ -1,0 +1,2 @@
+-r ./requirements/local.txt
+-e .
