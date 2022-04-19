@@ -1,0 +1,10 @@
+-r base.in
+
+invoke
+black
+pytest
+ipython
+colorama
+flake8
+
+pip-compile-multi
